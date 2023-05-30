@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var matchManager = MatchManager()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ZStack {
+            MenuView(matchManager: MatchManager())
         }
-        .padding()
+        .onAppear {
+            matchManager.authenticateUser()
+        }
     }
 }
 
