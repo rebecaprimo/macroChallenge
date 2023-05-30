@@ -12,6 +12,7 @@
 		4DF22C112A252548009604B8 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF22C102A252548009604B8 /* MenuView.swift */; };
 		4DF22C132A253C6E009604B8 /* MatchManager+GKMatchmakerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF22C122A253C6E009604B8 /* MatchManager+GKMatchmakerViewControllerDelegate.swift */; };
 		4DF22C152A253F1D009604B8 /* MatchManager+GKMatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF22C142A253F1D009604B8 /* MatchManager+GKMatchDelegate.swift */; };
+		4DF22C172A263060009604B8 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF22C162A263060009604B8 /* GameView.swift */; };
 		4DFCA67B2A1BFF660087C4E1 /* macroChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA67A2A1BFF660087C4E1 /* macroChallengeApp.swift */; };
 		4DFCA67D2A1BFF660087C4E1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA67C2A1BFF660087C4E1 /* ContentView.swift */; };
 		4DFCA67F2A1BFF670087C4E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DFCA67E2A1BFF670087C4E1 /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		4DF22C102A252548009604B8 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		4DF22C122A253C6E009604B8 /* MatchManager+GKMatchmakerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MatchManager+GKMatchmakerViewControllerDelegate.swift"; sourceTree = "<group>"; };
 		4DF22C142A253F1D009604B8 /* MatchManager+GKMatchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MatchManager+GKMatchDelegate.swift"; sourceTree = "<group>"; };
+		4DF22C162A263060009604B8 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		4DFCA6772A1BFF660087C4E1 /* macroChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macroChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DFCA67A2A1BFF660087C4E1 /* macroChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macroChallengeApp.swift; sourceTree = "<group>"; };
 		4DFCA67C2A1BFF660087C4E1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				4DF22C122A253C6E009604B8 /* MatchManager+GKMatchmakerViewControllerDelegate.swift */,
 				4DFCA67C2A1BFF660087C4E1 /* ContentView.swift */,
 				4DA915BA2A1FFC790004436B /* MatchManager.swift */,
+				4DF22C162A263060009604B8 /* GameView.swift */,
 				4DF22C142A253F1D009604B8 /* MatchManager+GKMatchDelegate.swift */,
 				4DF22C102A252548009604B8 /* MenuView.swift */,
 				4DF22C0E2A251B21009604B8 /* Misc.swift */,
@@ -280,6 +283,7 @@
 				4DF22C0F2A251B21009604B8 /* Misc.swift in Sources */,
 				4DA915BB2A1FFC790004436B /* MatchManager.swift in Sources */,
 				4DFCA67B2A1BFF660087C4E1 /* macroChallengeApp.swift in Sources */,
+				4DF22C172A263060009604B8 /* GameView.swift in Sources */,
 				4DF22C152A253F1D009604B8 /* MatchManager+GKMatchDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

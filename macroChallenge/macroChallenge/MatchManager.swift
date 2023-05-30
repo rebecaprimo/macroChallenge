@@ -34,14 +34,14 @@ class MatchManager: NSObject, ObservableObject {
                 rootViewController?.present(viewController, animated: true)
                 return
             }
-            
+
             if let error = e {
                 authenticationState = .error
                 print(error.localizedDescription)
-                
+
                 return
             }
-            
+
             if localPlayer.isAuthenticated {
                 if localPlayer.isMultiplayerGamingRestricted {
                     authenticationState = .restricted
@@ -69,5 +69,7 @@ class MatchManager: NSObject, ObservableObject {
         match = newMatch
         match?.delegate = self
         otherPlayer = match?.players.first
+        
+        sendString("began: \(playerUUIDKey)")
     }
 }

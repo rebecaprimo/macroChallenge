@@ -18,15 +18,17 @@ struct MenuView: View {
                 .font(.largeTitle)
                 .bold()
         }
-        .disabled(matchManager.autheticationState != .authenticated || matchManager.inGame)
+        .disabled(matchManager.authenticationState != .authenticated || matchManager.inGame)
         .padding(.vertical, 20)
         .padding(.horizontal, 100)
         .background(
             Capsule(style: .circular)
-                .fill(matchManager.autheticationState != .authenticated || matchManager.inGame ? .gray : .black)
+                .fill(matchManager.authenticationState != .authenticated || matchManager.inGame ? .gray : .black)
         )
         
-        Text(matchManager.autheticationState.rawValue)
+        Spacer()
+        
+        //Text(matchManager.authenticationState.rawValue)
     }
 }
 
