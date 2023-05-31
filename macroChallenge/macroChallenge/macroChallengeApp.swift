@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct macroChallengeApp: App {
+    @StateObject var matchManager = Manager()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+           ContentView(matchManager: matchManager)
         }
     }
 }

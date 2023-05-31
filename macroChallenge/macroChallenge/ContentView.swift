@@ -2,25 +2,27 @@
 //  ContentView.swift
 //  macroChallenge
 //
-//  Created by rebeca primo on 22/05/23.
+//  Created by Barbara Argolo on 31/05/23.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var matchManager = Manager()
+ //   @State var inputAnswer = ""
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ZStack {
+            if matchManager.isGameOver {
+   //             GameOverView(matchManager: matchManager)
+            } else if matchManager.inGame {
+                GameView(matchManager: matchManager)
+            } else {
+                MenuView(matchManager: matchManager)
+            }
         }
-        .padding()
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+        .onAppear {
+            matchManager.authenticateUser()
+        }
     }
 }
