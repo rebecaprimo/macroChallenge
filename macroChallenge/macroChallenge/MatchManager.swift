@@ -34,7 +34,6 @@ class MatchManager: NSObject, ObservableObject {
                 rootViewController?.present(viewController, animated: true)
                 return
             }
-            
             if let error = e {
                 authenticationState = .error
                 print(error.localizedDescription)
@@ -46,28 +45,30 @@ class MatchManager: NSObject, ObservableObject {
                 } else {
                     authenticationState = .unauthenticating
                 }
+            } else {
+                authenticationState = .unauthenticating
             }
         }
-    }
-    
-    func startMatchmaking() {
-        let request = GKMatchRequest()
-        request.minPlayers = 2
-        request.maxPlayers = 8
         
-        //definir o pedido de request
-        let matchmakingVC = GKMatchmakerViewController(matchRequest: request)
-        matchmakingVC?.matchmakerDelegate = self
+        func startMatchmaking() {
+            let request = GKMatchRequest()
+            request.minPlayers = 2
+            request.maxPlayers = 8
+            
+            //definir o pedido de request
+            let matchmakingVC = GKMatchmakerViewController(matchRequest: request)
+            matchmakingVC?.matchmakerDelegate = self
+            
+            rootViewController?.present(matchmakingVC!, animated: true)
+        }
         
-        rootViewController?.present(matchmakingVC!, animated: true)
-    }
-    
-    //começar um novo jogo
-    func startMatch(newMatch: GKMatch) {
-        match = newMatch
-        match?.delegate = self
-        otherPlayer = match?.players.first
-        
-        
+        //começar um novo jogo
+        func startGame(newMatch: GKMatch) {
+            match = newMatch
+            match?.delegate = self
+            otherPlayer = match?.players.first
+            
+            sendString("began:\(playerUUIKey)")
+        }
     }
 }

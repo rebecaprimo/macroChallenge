@@ -12,7 +12,7 @@ import GameKit
 //convenção de nomenclaturas padrão para extensões
 //gerenciador de correspondência de classe existente?? MatchManager
 
-extension MatchManager: NSObject, GKMatchmakerViewControllerDelegate {
+extension MatchManager: GKMatchmakerViewControllerDelegate {
     
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
         viewController.dismiss(animated: true)

@@ -33,6 +33,7 @@ struct GameView: View {
             })
         }
     }
+    
 }
 
 //struct MenuView_Previews: PreviewProvider {
