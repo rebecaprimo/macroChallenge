@@ -6,21 +6,26 @@
 //
 
 import SwiftUI
+import AVFAudio
 
 struct ContentView: View {
+    @StateObject var matchManager = MatchManager()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ZStack {
+            if matchManager.inGame {
+                GameView(matchManager: matchManager)
+            } else {
+                MenuView(matchManager: matchManager)
+            }
+        } .onAppear {
+            matchManager.authenticateUser()
         }
-        .padding()
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}

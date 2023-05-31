@@ -14,6 +14,14 @@
 		4DFCA68C2A1BFF670087C4E1 /* macroChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA68B2A1BFF670087C4E1 /* macroChallengeTests.swift */; };
 		4DFCA6962A1BFF670087C4E1 /* macroChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA6952A1BFF670087C4E1 /* macroChallengeUITests.swift */; };
 		4DFCA6982A1BFF670087C4E1 /* macroChallengeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA6972A1BFF670087C4E1 /* macroChallengeUITestsLaunchTests.swift */; };
+		A799E8262A250A1B00F2F87A /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = A799E8252A250A1B00F2F87A /* Button.swift */; };
+		A799E8292A250E5400F2F87A /* coin.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A799E8282A250E5400F2F87A /* coin.m4a */; };
+		A799E82E2A25172000F2F87A /* MatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A799E82D2A25172000F2F87A /* MatchManager.swift */; };
+		A799E8302A25351B00F2F87A /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A799E82F2A25351B00F2F87A /* Misc.swift */; };
+		A799E8322A253FC100F2F87A /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A799E8312A253FC100F2F87A /* GameView.swift */; };
+		A799E8342A2541AC00F2F87A /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A799E8332A2541AC00F2F87A /* MenuView.swift */; };
+		A799E8362A26903C00F2F87A /* MatchManager+GKMatchmakerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A799E8352A26903C00F2F87A /* MatchManager+GKMatchmakerViewControllerDelegate.swift */; };
+		A799E8382A26963600F2F87A /* MatchManager+GKMAtchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A799E8372A26963600F2F87A /* MatchManager+GKMAtchDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +52,15 @@
 		4DFCA6912A1BFF670087C4E1 /* macroChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = macroChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DFCA6952A1BFF670087C4E1 /* macroChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macroChallengeUITests.swift; sourceTree = "<group>"; };
 		4DFCA6972A1BFF670087C4E1 /* macroChallengeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macroChallengeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A7573C042A1FDF300083C3D4 /* macroChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macroChallenge.entitlements; sourceTree = "<group>"; };
+		A799E8252A250A1B00F2F87A /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		A799E8282A250E5400F2F87A /* coin.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = coin.m4a; sourceTree = "<group>"; };
+		A799E82D2A25172000F2F87A /* MatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchManager.swift; sourceTree = "<group>"; };
+		A799E82F2A25351B00F2F87A /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
+		A799E8312A253FC100F2F87A /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		A799E8332A2541AC00F2F87A /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		A799E8352A26903C00F2F87A /* MatchManager+GKMatchmakerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MatchManager+GKMatchmakerViewControllerDelegate.swift"; sourceTree = "<group>"; };
+		A799E8372A26963600F2F87A /* MatchManager+GKMAtchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MatchManager+GKMAtchDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +91,7 @@
 		4DFCA66E2A1BFF660087C4E1 = {
 			isa = PBXGroup;
 			children = (
+				A799E8272A250E2F00F2F87A /* audio */,
 				4DFCA6792A1BFF660087C4E1 /* macroChallenge */,
 				4DFCA68A2A1BFF670087C4E1 /* macroChallengeTests */,
 				4DFCA6942A1BFF670087C4E1 /* macroChallengeUITests */,
@@ -94,10 +112,18 @@
 		4DFCA6792A1BFF660087C4E1 /* macroChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				A7573C042A1FDF300083C3D4 /* macroChallenge.entitlements */,
 				4DFCA67A2A1BFF660087C4E1 /* macroChallengeApp.swift */,
 				4DFCA67C2A1BFF660087C4E1 /* ContentView.swift */,
+				A799E8252A250A1B00F2F87A /* Button.swift */,
+				A799E82D2A25172000F2F87A /* MatchManager.swift */,
+				A799E8312A253FC100F2F87A /* GameView.swift */,
+				A799E82F2A25351B00F2F87A /* Misc.swift */,
+				A799E8332A2541AC00F2F87A /* MenuView.swift */,
 				4DFCA67E2A1BFF670087C4E1 /* Assets.xcassets */,
 				4DFCA6802A1BFF670087C4E1 /* Preview Content */,
+				A799E8352A26903C00F2F87A /* MatchManager+GKMatchmakerViewControllerDelegate.swift */,
+				A799E8372A26963600F2F87A /* MatchManager+GKMAtchDelegate.swift */,
 			);
 			path = macroChallenge;
 			sourceTree = "<group>";
@@ -125,6 +151,14 @@
 				4DFCA6972A1BFF670087C4E1 /* macroChallengeUITestsLaunchTests.swift */,
 			);
 			path = macroChallengeUITests;
+			sourceTree = "<group>";
+		};
+		A799E8272A250E2F00F2F87A /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				A799E8282A250E5400F2F87A /* coin.m4a */,
+			);
+			path = audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DFCA6822A1BFF670087C4E1 /* Preview Assets.xcassets in Resources */,
+				A799E8292A250E5400F2F87A /* coin.m4a in Resources */,
 				4DFCA67F2A1BFF670087C4E1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,8 +292,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A799E8342A2541AC00F2F87A /* MenuView.swift in Sources */,
+				A799E8302A25351B00F2F87A /* Misc.swift in Sources */,
+				A799E8322A253FC100F2F87A /* GameView.swift in Sources */,
 				4DFCA67D2A1BFF660087C4E1 /* ContentView.swift in Sources */,
+				A799E8362A26903C00F2F87A /* MatchManager+GKMatchmakerViewControllerDelegate.swift in Sources */,
+				A799E82E2A25172000F2F87A /* MatchManager.swift in Sources */,
+				A799E8262A250A1B00F2F87A /* Button.swift in Sources */,
 				4DFCA67B2A1BFF660087C4E1 /* macroChallengeApp.swift in Sources */,
+				A799E8382A26963600F2F87A /* MatchManager+GKMAtchDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,10 +456,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macroChallenge/macroChallenge.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"macroChallenge/Preview Content\"";
-				DEVELOPMENT_TEAM = PHVL4RZ8Z5;
+				DEVELOPMENT_TEAM = 7NPP9SCGSB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -430,7 +473,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = rebeca.macroChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = macroChallenge23;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -443,10 +486,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macroChallenge/macroChallenge.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"macroChallenge/Preview Content\"";
-				DEVELOPMENT_TEAM = PHVL4RZ8Z5;
+				DEVELOPMENT_TEAM = 7NPP9SCGSB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -459,7 +503,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = rebeca.macroChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = macroChallenge23;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
