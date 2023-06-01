@@ -9,7 +9,7 @@ import Foundation
 import GameKit
 
 //Classe que gerencia os dados das partidas multiplayers
-class MatchManager: NSObject, ObservableObject {
+class MatchManager: NSObject, ObservableObject, GKLocalPlayerListener {
     @Published var authenticationState = PlayerAuthState.authenticating
     @Published var inGame = false
     @Published var isGameOver = false
@@ -22,6 +22,11 @@ class MatchManager: NSObject, ObservableObject {
     
     var playerUUIKey = UUID().uuidString  //definindo id exclusivo para definir quem começa a partida
     
+    override init() {
+        super.init()
+        GKLocalPlayer.local.register(self)
+    }
+
     //vai trazer as views de match, de authentications   ??NÃO ENTENDI MUITO BEM, mas tudo se completou
     var rootViewController: UIViewController? {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene

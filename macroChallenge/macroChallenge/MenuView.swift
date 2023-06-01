@@ -18,14 +18,15 @@ struct MenuView: View {
         
         VStack {
             Spacer()
-            Button {
-                matchManager.startMatchmaking()
-            } label: {
+
+            Button (
+                action: $matchManager.startMatchmaking,
+                label: {
                 Text("Online")
                     .foregroundColor(.white)
                     .font(.largeTitle)
                     .bold()
-            }
+            })
             .disabled(matchManager.authenticationState != .authenticated || matchManager.inGame)
             .padding(.vertical, 20)
             .padding(.horizontal, 100)
