@@ -7,7 +7,9 @@
 
 import Foundation
 
-let themes = ["Fruit", "Country"]
+
+let everydayObjects = ["carol", "barbara", "rebeca", "duda"]
+
 
 enum PlayerAuthState: String {
     case authenticating = "Logging in to Game Center..."

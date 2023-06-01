@@ -5,6 +5,7 @@
 //  Created by Barbara Argolo on 31/05/23.
 //
 
+import Foundation
 import SwiftUI
 
 struct ContentView: View {
@@ -14,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if matchManager.isGameOver {
-   //             GameOverView(matchManager: matchManager)
+              //  GameOverView(matchManager: matchManager)
             } else if matchManager.inGame {
                 GameView(matchManager: matchManager)
             } else {

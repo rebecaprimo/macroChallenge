@@ -10,6 +10,8 @@ import SwiftUI
 struct MenuView: View {
     //objeto observavel da classe Manager que gerencia o Gamekit
     @ObservedObject var matchManager: Manager
+  //  @Binding var inputAnswer: String
+
 
     
     var body: some View {
@@ -42,7 +44,7 @@ struct MenuView: View {
             
             Spacer()
         }.sheet(isPresented: $matchManager.inGame) {
-                   GameView(matchManager: matchManager)
+            GameView(matchManager: matchManager)
                }
         
     }

@@ -14,8 +14,8 @@
             filePath = "Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "authenticateUser()"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,58 +30,10 @@
             filePath = "Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "authenticateUser()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "415C5EF7-D04D-49E4-8FE4-6BFB5F1440A1"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "macroChallenge/ContentView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "415C5EF7-D04D-49E4-8FE4-6BFB5F1440A1 - b99cdc09d1eb8ec"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; () in macroChallenge.ContentView.body.getter : some"
-                  moduleName = "macroChallenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  uuid = "415C5EF7-D04D-49E4-8FE4-6BFB5F1440A1 - b99cdc09d1eb8ec"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; () in macroChallenge.ContentView.body.getter : some"
-                  moduleName = "macroChallenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -94,8 +46,8 @@
             filePath = "Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "authenticateUser()"
             landmarkType = "7">
             <Locations>
@@ -157,8 +109,8 @@
             filePath = "Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "authenticateUser()"
             landmarkType = "7">
          </BreakpointContent>
@@ -173,8 +125,8 @@
             filePath = "macroChallenge/MenuView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -189,8 +141,8 @@
             filePath = "Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "startMatchmaking()"
             landmarkType = "7">
          </BreakpointContent>
@@ -199,16 +151,700 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "9E84AF0F-A5F8-4A30-B724-38C7973814F7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "startMatchmaking()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9E84AF0F-A5F8-4A30-B724-38C7973814F7 - f4d961a633f081c3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.startMatchmaking() -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "544">
+               </Location>
+               <Location
+                  uuid = "9E84AF0F-A5F8-4A30-B724-38C7973814F7 - f4d961a633f081c3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.startMatchmaking() -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "284">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "449CCC02-8E2F-4E30-94C8-0E031E52B087"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "matchmakerViewController(_:didFind:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6F8B6354-CF64-4439-9D23-4E6A739B0A68"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "match(_:player:didChange:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1706B33C-F5AE-4BF4-9085-86B37041829E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "match(_:player:didChange:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "684ECBC4-C948-435B-A24E-024E44FA6641"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "startGame(newMatch:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F689749B-F36B-4B46-B909-31236D2C7116"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "match(_:didReceive:fromRemotePlayer:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FD51CDA9-FD3C-4D1F-843C-3DF7F8562A79"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "startGame(newMatch:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9FD82D0A-B0CF-4943-98DF-17783BAE613E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "matchmakerViewController(_:didFind:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E959B5FE-88EF-4EA2-85F5-37EAB557E4B5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "startMatchmaking()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "61498E94-6B83-493C-9A0C-8C68EE175344"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "sendString(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "61498E94-6B83-493C-9A0C-8C68EE175344 - 5071533a3c4dcd0d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.receivedString(Swift.String) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
+                  offsetFromSymbolStart = "2360">
+               </Location>
+               <Location
+                  uuid = "61498E94-6B83-493C-9A0C-8C68EE175344 - 79348eb2e91f16ae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.sendString(Swift.String) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
+                  offsetFromSymbolStart = "256">
+               </Location>
+               <Location
+                  uuid = "61498E94-6B83-493C-9A0C-8C68EE175344 - 79348eb2e91f16ae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.sendString(Swift.String) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
+                  offsetFromSymbolStart = "284">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "45233A0D-A96E-483C-B4D3-7616A7B6D662"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "receivedString(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "065E591C-0A61-4C05-B08C-EE175072F005"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "receivedString(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "11E11D91-560E-4A26-B7D8-FAA15ECDD883"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "receivedString(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91E502EC-EB64-401C-A158-88314277B829"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "receivedString(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "91E502EC-EB64-401C-A158-88314277B829 - 5071533a3c4dcbe5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.receivedString(Swift.String) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "1652">
+               </Location>
+               <Location
+                  uuid = "91E502EC-EB64-401C-A158-88314277B829 - 5071533a3c4dcbe5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.receivedString(Swift.String) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "1712">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9C055672-CEA8-408A-83C9-709391C903F2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "match(_:didReceive:fromRemotePlayer:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9C055672-CEA8-408A-83C9-709391C903F2 - 1bb08f18a0e9f683"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.generateAndSendQuestion() -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "624">
+               </Location>
+               <Location
+                  uuid = "9C055672-CEA8-408A-83C9-709391C903F2 - a4e1c367c5d504e7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.match(_: __C.GKMatch, didReceive: Foundation.Data, fromRemotePlayer: __C.GKPlayer) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "141"
+                  endingLineNumber = "141"
+                  offsetFromSymbolStart = "268">
+               </Location>
+               <Location
+                  uuid = "9C055672-CEA8-408A-83C9-709391C903F2 - a4e1c367c5d504e7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.match(_: __C.GKMatch, didReceive: Foundation.Data, fromRemotePlayer: __C.GKPlayer) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "141"
+                  endingLineNumber = "141"
+                  offsetFromSymbolStart = "296">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EF7A02E5-1F33-4424-9BE8-3D70C083A80A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
+            landmarkName = "matchmakerViewController(_:didFind:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "03ABDC17-5777-4008-B2A9-0184CDC17233"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "matchmakerViewController(_:didFind:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7678159F-CF7A-4CBA-91E2-EAA1F486651B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "Manager"
+            landmarkType = "21">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "341487A4-302D-47E4-B934-07C85693A47C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "matchmakerViewController(_:didFind:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "461790D2-1F29-4268-A169-09ACD7D3B23C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
+            landmarkName = "Manager"
+            landmarkType = "21">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F0080935-A713-4767-851F-8ED17488B16C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "startGame(newMatch:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F0080935-A713-4767-851F-8ED17488B16C - e8d7f7c980412291"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.startGame(newMatch: __C.GKMatch) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  uuid = "F0080935-A713-4767-851F-8ED17488B16C - e8d7f7c9804122b0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.startGame(newMatch: __C.GKMatch) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1B74EF75-83A1-407B-BF7A-CD890618FE19"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "player(_:didAccept:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1B74EF75-83A1-407B-BF7A-CD890618FE19 - 726f3a594f352705"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.sendData(_: Foundation.Data, mode: __C.GKMatchSendDataMode) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "197"
+                  endingLineNumber = "197"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "1B74EF75-83A1-407B-BF7A-CD890618FE19 - b4fd10d25a723cd4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.player(_: __C.GKPlayer, didAccept: __C.GKInvite) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "288">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "125A0903-8CBE-4175-ADDC-F46109CE0B0A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "player(_:didAccept:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "125A0903-8CBE-4175-ADDC-F46109CE0B0A - 79348eb2e91eeba1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.sendString(Swift.String) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "191"
+                  endingLineNumber = "191"
+                  offsetFromSymbolStart = "180">
+               </Location>
+               <Location
+                  uuid = "125A0903-8CBE-4175-ADDC-F46109CE0B0A - 79348eb2e91eeba1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.sendString(Swift.String) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "191"
+                  endingLineNumber = "191"
+                  offsetFromSymbolStart = "616">
+               </Location>
+               <Location
+                  uuid = "125A0903-8CBE-4175-ADDC-F46109CE0B0A - b4fd10d25a723c96"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.player(_: __C.GKPlayer, didAccept: __C.GKInvite) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "192"
+                  endingLineNumber = "192"
+                  offsetFromSymbolStart = "124">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B985BE0A-6ECD-41F7-9330-4B66A0998967"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "macroChallenge/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "matchmakerViewController(_:didFind:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B985BE0A-6ECD-41F7-9330-4B66A0998967 - 548e230c8f7ac3c8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.match(_: __C.GKMatch, player: __C.GKPlayer, didChange: __C.GKPlayerConnectionState) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "207"
+                  endingLineNumber = "207"
+                  offsetFromSymbolStart = "556">
+               </Location>
+               <Location
+                  uuid = "B985BE0A-6ECD-41F7-9330-4B66A0998967 - e65cbe0caf03b0d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UIAlertAction) -&gt; () in macroChallenge.Manager.match(_: __C.GKMatch, player: __C.GKPlayer, didChange: __C.GKPlayerConnectionState) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "208"
+                  endingLineNumber = "208"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "B985BE0A-6ECD-41F7-9330-4B66A0998967 - 46fcfb0822e6bb8e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "macroChallenge.Manager.matchmakerViewController(_: __C.GKMatchmakerViewController, didFind: __C.GKMatch) -&gt; ()"
+                  moduleName = "macroChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/macroChallenge/Manager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "206"
+                  endingLineNumber = "206"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
