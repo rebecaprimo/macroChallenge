@@ -17,7 +17,7 @@ struct ContentView: View {
             if matchManager.isGameOver {
               //  GameOverView(matchManager: matchManager)
             } else if matchManager.inGame {
-                GameView(matchManager: matchManager)
+                GameView().environmentObject(matchManager)
             } else {
                 MenuView(matchManager: matchManager)
             }

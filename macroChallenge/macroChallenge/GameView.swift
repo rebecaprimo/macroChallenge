@@ -11,8 +11,12 @@ import AVFAudio
 
 struct GameView: View {
     
-    @ObservedObject var matchManager: Manager
+    
+    //MARK: OS USUARIOS TEM QUE VER A MESMA VIEW
+    
+    @EnvironmentObject private var matchManager: Manager
     @State var audioPlayer: AVAudioPlayer?
+    @State var isButtonOn = false
     @State var isPlaying: Bool = true
     
     func buttonAction(nomeAudio: String){
@@ -21,17 +25,26 @@ struct GameView: View {
         self.audioPlayer?.play()
     }
     
+    
     var body: some View {
         HStack {
+            Text(matchManager.dataA.data ? "true" : "false")
+            
+            
             Button(action: {
+            
                 buttonAction(nomeAudio: "coin")
                 self.isPlaying.toggle()
+                matchManager.sendData()
                 
             }, label: {
-                Image(self.isPlaying == true ? "swift" : "swift2")
-                  .resizable()
-                  .frame(width: 100, height: 100)
+                
+                Image(matchManager.dataA.data ? "swift" : "swift2")
+                    .resizable()
+                    .frame(width: 100, height: 100)
             })
+            
+            
         }
     }
 }

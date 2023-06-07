@@ -6,22 +6,28 @@
 //
 
 import Foundation
+import UIKit
 import GameKit
+
+struct DataTest: Codable {
+    var data: Bool
+}
 
 class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
 
     @Published var inGame = false
     @Published var isGameOver = false
     @Published var authenticationState = PlayerAuthState.authenticating
-    private var hasSentQuestion = false
-    @Published var pastGuesses = [PastGuess]()
-  //  @Published var isHost = false
-    var match: GKMatch?
+    @Published var alphabetData = Alphabet(letters: ["A", "B", "C"])
+    @Published var match: GKMatch?
+    
+    @Published var dataA = DataTest(data: false)
+
+
     var myGame: GKMatchDelegate?
-    var corePlayer: GKPlayer?
     var otherPlayer: GKPlayer?
-    var ma: GKMatch?
     var localPlayer = GKLocalPlayer.local
+    var isButtonOn = false
     
     var playerUUIDKey = UUID().uuidString
     
@@ -38,10 +44,13 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     //autenticando usuario
     
+    //MARK: AUTENTICANDO USUARIO
+    
     func authenticateUser() {
         GKLocalPlayer.local.authenticateHandler = { [self] vc, e in
             if let viewController = vc {
                 rootViewController?.present(viewController, animated: true)
+                print("rootAuth")
                 return
             }
             
@@ -66,18 +75,18 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     
     
-    //para achar jogadores
+    //MARK: PARA ACHAR JOGADORES
     func startMatchmaking() {
         let request = GKMatchRequest()
         request.minPlayers = 2
         request.maxPlayers = 2
-        request.inviteMessage = "Playzinha?"
+       // request.inviteMessage = "Playzinha?"
         
         let matchmakingVC = GKMatchmakerViewController(matchRequest: request)
         matchmakingVC?.matchmakerDelegate = self
         
         rootViewController?.present(matchmakingVC!, animated: true)
-        print("chega aq")
+        print("cheguei")
     }
     
     func gameOver() {
@@ -91,64 +100,81 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             inGame = false
         }
         
-        hasSentQuestion = false
         match?.delegate = nil
         match = nil
         otherPlayer = nil
-        pastGuesses.removeAll()
         playerUUIDKey = UUID().uuidString
         currentQuestion = nil
         playerResponses.removeAll()
     }
 
+    
+    //MARK: INICIO DO JOGO
     //fazer logica para ver quem vai ser o antagonista
     func startGame(newMatch: GKMatch) {
         match = newMatch
         match?.delegate = self
         otherPlayer = match?.players.first
         inGame = true
-        sendString("began \(playerUUIDKey)")
+       // sendString("began \(playerUUIDKey)")
         
     }
     
-    func receivedString(_ message: String) {
-        let messageSplit = message.split(separator: ":")
-        guard let messagePrefix = messageSplit.first?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        
-        let parameter = String(messageSplit.last?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
-        
-        switch messagePrefix {
-        case "began":
-            if playerUUIDKey == parameter {
-                playerUUIDKey = UUID().uuidString
-                sendString("began:\(playerUUIDKey)")
-            } else {
-                inGame = true
-            }
-        default:
-            break
+    func sendData() {
+        do {
+            
+            dataA.data.toggle()
+            let data = try JSONEncoder().encode(dataA)
+            try match?.sendData(toAllPlayers: data, with: .reliable)
+        } catch {
+            print("SEND DATA FAILED")
         }
     }
+    
+    //MARK: ******* AQUI *********
+    
+    
+    //aqui vc chama a send string pois vc esta recebendo uma string
+//
+//    func receivedString(_ message: String) {
+//
+//        let messageSplit = message.split(separator: ":")
+//        guard let messagePrefix = messageSplit.first?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+//
+//        let parameter = String(messageSplit.last?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
+//
+//        switch messagePrefix {
+//        case "began":
+//            if playerUUIDKey == parameter {
+//                playerUUIDKey = UUID().uuidString
+//            //    sendString("began:\(playerUUIDKey)")
+//            } else {
+//                inGame = true
+//            }
+//
+//
+//        case "changeButtonState":
+//            // Atualizar o estado do botão com base no parâmetro recebido
+//            if parameter == "ON" {
+//                // Definir o estado do botão como ON
+//                isButtonOn = true
+//            } else if parameter == "OFF" {
+//                // Definir o estado do botão como OFF
+//                isButtonOn = false
+//            }
+//        default:
+//            break
+//        }
+//    }
 }
 
 
+//MARK: EVENTOS DA PARTIDA EM ANDAMENTO
 
 extension Manager: GKMatchDelegate {
     
     
-    func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
-//        match = match
-        match.delegate = self
-        let decoded = String(data: data, encoding: String.Encoding.utf8)
-        print("recebi \(String(describing: decoded))", "\(player)")
-        
-//        if let message = String(data: data, encoding: .utf8) {
-//            if message.hasPrefix("strData:") {
-//                let messageContent = message.replacingOccurrences(of: "strData:", with: "")
-//            }
-//        }
-    }
-    
+
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         guard state == .disconnected && !isGameOver else { return }
         let alert = UIAlertController(title: "Player disconnected", message: "The other player disconnected from the game.", preferredStyle: .alert)
@@ -163,28 +189,38 @@ extension Manager: GKMatchDelegate {
         }
     }
     
-    //
-    func sendString(_ message: String) {
-         let encoded = "strData:\(message)".data(using: .utf8)
-        if corePlayer != nil {
-            try? ma?.sendData(toAllPlayers: encoded!, with: GKMatch.SendDataMode.reliable)
-        }
-            
-        
-//        { return }
-//        sendData(encoded, mode: .reliable)
-    }
-    
-    
-    func sendData(_ data: Data, mode: GKMatch.SendDataMode) {
+    func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         do {
-            try match?.sendData(toAllPlayers: data, with: mode)
+            let newData = try JSONDecoder().decode(DataTest.self, from: data)
+            dataA = newData
         } catch {
-            print(error)
+            print("GAME DATA ERROR")
         }
     }
+    
+    //MARK: ******* AQUI *********
+    
+//    //aqui vc envia uma string na received string
+//        func sendString(_ str: String) {
+//            guard let encoded = "changeButtonState".data(using: .utf8) else { return }
+//            sendData(encoded, mode: .reliable)
+//        }
+//
+    
+    //MARK: ******* AQUI *********
+    
+//        do {
+//            try match?.sendData(toAllPlayers: data, with: mode)
+//        } catch {
+//            print(error)
+//        }
+//    }
+    
 }
 
+
+
+//MARK: EVENTO PARA BUSCAR A PARTIDA
 
 extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerViewControllerDelegate {
     
@@ -221,7 +257,3 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         viewController.dismiss(animated: true)
     }
 }
-
-                       
-                            
-

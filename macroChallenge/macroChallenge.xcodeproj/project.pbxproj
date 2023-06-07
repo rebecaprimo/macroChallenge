@@ -14,7 +14,6 @@
 		4DFCA68C2A1BFF670087C4E1 /* macroChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA68B2A1BFF670087C4E1 /* macroChallengeTests.swift */; };
 		4DFCA6962A1BFF670087C4E1 /* macroChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA6952A1BFF670087C4E1 /* macroChallengeUITests.swift */; };
 		4DFCA6982A1BFF670087C4E1 /* macroChallengeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA6972A1BFF670087C4E1 /* macroChallengeUITestsLaunchTests.swift */; };
-		6BDD4CE62A267C8200D8CE6D /* AlphabetLetterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CE52A267C8200D8CE6D /* AlphabetLetterModel.swift */; };
 		6BDD4CEA2A26824E00D8CE6D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CE92A26824E00D8CE6D /* Model.swift */; };
 		6BDD4CEC2A2693BA00D8CE6D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CEB2A2693BA00D8CE6D /* GameView.swift */; };
 		6BDD4CEF2A269ADC00D8CE6D /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CEE2A269ADC00D8CE6D /* Manager.swift */; };
@@ -22,6 +21,7 @@
 		6BDD4CF32A27B3D300D8CE6D /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CF22A27B3D300D8CE6D /* Button.swift */; };
 		6BDD4CF62A27B47C00D8CE6D /* coin.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BDD4CF52A27B47C00D8CE6D /* coin.m4a */; };
 		6BDD4CF82A28FFE300D8CE6D /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CF72A28FFE300D8CE6D /* ResultsView.swift */; };
+		6BDD4CFA2A292C3800D8CE6D /* Alphabet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CF92A292C3800D8CE6D /* Alphabet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,6 @@
 		4DFCA6912A1BFF670087C4E1 /* macroChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = macroChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DFCA6952A1BFF670087C4E1 /* macroChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macroChallengeUITests.swift; sourceTree = "<group>"; };
 		4DFCA6972A1BFF670087C4E1 /* macroChallengeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macroChallengeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		6BDD4CE52A267C8200D8CE6D /* AlphabetLetterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabetLetterModel.swift; sourceTree = "<group>"; };
 		6BDD4CE92A26824E00D8CE6D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		6BDD4CEB2A2693BA00D8CE6D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		6BDD4CED2A269A9D00D8CE6D /* macroChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macroChallenge.entitlements; sourceTree = "<group>"; };
@@ -61,6 +60,7 @@
 		6BDD4CF22A27B3D300D8CE6D /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		6BDD4CF52A27B47C00D8CE6D /* coin.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = coin.m4a; sourceTree = "<group>"; };
 		6BDD4CF72A28FFE300D8CE6D /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		6BDD4CF92A292C3800D8CE6D /* Alphabet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alphabet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				6BDD4CED2A269A9D00D8CE6D /* macroChallenge.entitlements */,
-				6BDD4CE52A267C8200D8CE6D /* AlphabetLetterModel.swift */,
 				6BDD4CF22A27B3D300D8CE6D /* Button.swift */,
 				6BDD4CE92A26824E00D8CE6D /* Model.swift */,
 				6BDD4CEE2A269ADC00D8CE6D /* Manager.swift */,
@@ -123,6 +122,7 @@
 				6BDD4CF72A28FFE300D8CE6D /* ResultsView.swift */,
 				4DFCA6802A1BFF670087C4E1 /* Preview Content */,
 				4DFCA67E2A1BFF670087C4E1 /* Assets.xcassets */,
+				6BDD4CF92A292C3800D8CE6D /* Alphabet.swift */,
 			);
 			path = macroChallenge;
 			sourceTree = "<group>";
@@ -298,8 +298,8 @@
 				6BDD4CF12A27A6EA00D8CE6D /* ContentView.swift in Sources */,
 				6BDD4CF32A27B3D300D8CE6D /* Button.swift in Sources */,
 				4DFCA67D2A1BFF660087C4E1 /* MenuView.swift in Sources */,
+				6BDD4CFA2A292C3800D8CE6D /* Alphabet.swift in Sources */,
 				4DFCA67B2A1BFF660087C4E1 /* macroChallengeApp.swift in Sources */,
-				6BDD4CE62A267C8200D8CE6D /* AlphabetLetterModel.swift in Sources */,
 				6BDD4CEC2A2693BA00D8CE6D /* GameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

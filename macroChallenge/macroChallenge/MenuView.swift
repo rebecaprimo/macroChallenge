@@ -44,7 +44,7 @@ struct MenuView: View {
             
             Spacer()
         }.sheet(isPresented: $matchManager.inGame) {
-            GameView(matchManager: matchManager)
+            GameView().environmentObject(matchManager)
                }
         
     }
