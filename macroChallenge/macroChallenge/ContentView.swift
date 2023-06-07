@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var matchManager = MatchManager()
+    @StateObject var matchManager = Manager()
     
     var body: some View {
+        //GameView()
         ZStack {
-            MenuView(matchManager: MatchManager())
+            MenuView(matchManager: Manager())
         }
         .onAppear {
             matchManager.authenticateUser()

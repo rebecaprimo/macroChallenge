@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct GameView: View {
+    @State var background = Color.black
+    
     var body: some View {
-        Button {
-            
-        } label: {
-            
+        HStack {
+            Button {
+                print("tappled button")
+                self.background = Color.blue
+            } label: {
+                Text("PRESS ME")
+                    .fontWeight(.heavy)
+                    .foregroundColor(.black)
+                    .background(background)
+            }
+            .buttonStyle(.borderedProminent)
         }
     }
 }

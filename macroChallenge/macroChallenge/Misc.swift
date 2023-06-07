@@ -7,7 +7,7 @@
 
 import Foundation
 
-let themes = ["Coisas que tem em casa"]
+let everydayObjects = ["Coisas que tem em casa", "a", "b"]
 
 enum PlayerAuthState: String {
     case authenticating = "Entrando no Game Center..."
@@ -19,3 +19,8 @@ enum PlayerAuthState: String {
 }
 
 let maxTimeRemaining = 150
+
+struct PastGuess: Identifiable {
+    let id = UUID()
+    var message: String
+}
