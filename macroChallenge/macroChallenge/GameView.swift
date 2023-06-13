@@ -28,7 +28,7 @@ struct GameView: View {
     
     var body: some View {
         HStack {
-            Text(matchManager.dataA.data ? "true" : "false")
+            //Text(matchManager.dataA.data ? "true" : "false")
             
             
             Button(action: {

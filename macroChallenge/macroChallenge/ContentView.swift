@@ -13,17 +13,18 @@ struct ContentView: View {
  //   @State var inputAnswer = ""
     
     var body: some View {
-        ZStack {
-            if matchManager.isGameOver {
-              //  GameOverView(matchManager: matchManager)
-            } else if matchManager.inGame {
-                GameView().environmentObject(matchManager)
-            } else {
-                MenuView(matchManager: matchManager)
-            }
-        }
-        .onAppear {
-            matchManager.authenticateUser()
-        }
+//        ZStack {
+//            if matchManager.isGameOver {
+//              //  GameOverView(matchManager: matchManager)
+//            } else if matchManager.inGame {
+//                GameView().environmentObject(matchManager)
+//            } else {
+//                MenuView(matchManager: matchManager)
+//            }
+//        }
+//        .onAppear {
+//            matchManager.authenticateUser()
+//        }
+        ConfigView()
     }
 }
