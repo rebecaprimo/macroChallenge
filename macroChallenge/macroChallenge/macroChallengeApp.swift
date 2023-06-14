@@ -14,7 +14,7 @@ struct macroChallengeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ThemeView(themes: randomThemes)
+            MenuView(matchManager: matchManager)
         }
     }
 }
