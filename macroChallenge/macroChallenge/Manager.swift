@@ -122,7 +122,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     func sendData() {
         do {
-            
             dataA.data.toggle()
             let data = try JSONEncoder().encode(dataA)
             try match?.sendData(toAllPlayers: data, with: .reliable)
