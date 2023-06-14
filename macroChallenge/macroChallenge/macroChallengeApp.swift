@@ -10,11 +10,9 @@ import SwiftUI
 @main
 struct macroChallengeApp: App {
     @StateObject var matchManager = Manager()
-    var randomThemes = Theme.themes
-    
     var body: some Scene {
         WindowGroup {
-            ThemeView(themes: randomThemes)
+           ContentView(matchManager: matchManager)
         }
     }
 }
