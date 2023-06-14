@@ -7,16 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4DAC6E272A37A25800F7BC72 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E262A37A25800F7BC72 /* ConfigView.swift */; };
-		4DAC6E292A37A3C000F7BC72 /* RectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E282A37A3C000F7BC72 /* RectangleButton.swift */; };
-		4DAC6E2B2A38E56B00F7BC72 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E2A2A38E56B00F7BC72 /* TutorialView.swift */; };
-		4DAC6E302A38E89400F7BC72 /* SomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E2F2A38E89400F7BC72 /* SomView.swift */; };
-		4DAC6E322A38E8A000F7BC72 /* TermosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E312A38E8A000F7BC72 /* TermosView.swift */; };
-		4DAC6E342A38E8A900F7BC72 /* RegrasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E332A38E8A900F7BC72 /* RegrasView.swift */; };
-		4DAC6E362A38E8B100F7BC72 /* PoliticaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E352A38E8B100F7BC72 /* PoliticaView.swift */; };
-		4DAC6E382A38E8B900F7BC72 /* FaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E372A38E8B900F7BC72 /* FaleView.swift */; };
-		4DAC6E3B2A39F26A00F7BC72 /* InicialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E3A2A39F26A00F7BC72 /* InicialView.swift */; };
-		4DAC6E3D2A39F27900F7BC72 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E3C2A39F27900F7BC72 /* SplashView.swift */; };
 		4DFCA67B2A1BFF660087C4E1 /* macroChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA67A2A1BFF660087C4E1 /* macroChallengeApp.swift */; };
 		4DFCA67D2A1BFF660087C4E1 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA67C2A1BFF660087C4E1 /* MenuView.swift */; };
 		4DFCA67F2A1BFF670087C4E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DFCA67E2A1BFF670087C4E1 /* Assets.xcassets */; };
@@ -31,11 +21,8 @@
 		6BAE7B342A311D8500F0F0D2 /* Unused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE7B332A311D8500F0F0D2 /* Unused.swift */; };
 		6BAE7B362A311E3100F0F0D2 /* ManagerGKMatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE7B352A311E3100F0F0D2 /* ManagerGKMatchDelegate.swift */; };
 		6BAE7B3A2A311E9B00F0F0D2 /* ManagerGKMatchVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE7B392A311E9B00F0F0D2 /* ManagerGKMatchVCDelegate.swift */; };
-		6BDD4CEA2A26824E00D8CE6D /* AuthenticateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CE92A26824E00D8CE6D /* AuthenticateModel.swift */; };
 		6BDD4CEC2A2693BA00D8CE6D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CEB2A2693BA00D8CE6D /* GameView.swift */; };
-		6BDD4CEF2A269ADC00D8CE6D /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CEE2A269ADC00D8CE6D /* Manager.swift */; };
 		6BDD4CF12A27A6EA00D8CE6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CF02A27A6EA00D8CE6D /* ContentView.swift */; };
-		6BDD4CF32A27B3D300D8CE6D /* ButtonsGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CF22A27B3D300D8CE6D /* ButtonsGame.swift */; };
 		6BDD4CF62A27B47C00D8CE6D /* coin.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BDD4CF52A27B47C00D8CE6D /* coin.m4a */; };
 /* End PBXBuildFile section */
 
@@ -57,24 +44,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4DAC6E262A37A25800F7BC72 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
-		4DAC6E282A37A3C000F7BC72 /* RectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleButton.swift; sourceTree = "<group>"; };
-		4DAC6E2A2A38E56B00F7BC72 /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
-		4DAC6E2F2A38E89400F7BC72 /* SomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomView.swift; sourceTree = "<group>"; };
-		4DAC6E312A38E8A000F7BC72 /* TermosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermosView.swift; sourceTree = "<group>"; };
-		4DAC6E332A38E8A900F7BC72 /* RegrasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegrasView.swift; sourceTree = "<group>"; };
-		4DAC6E352A38E8B100F7BC72 /* PoliticaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoliticaView.swift; sourceTree = "<group>"; };
-		4DAC6E372A38E8B900F7BC72 /* FaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaleView.swift; sourceTree = "<group>"; };
-		4DAC6E3A2A39F26A00F7BC72 /* InicialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InicialView.swift; sourceTree = "<group>"; };
-		4DAC6E3C2A39F27900F7BC72 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		4DFCA6772A1BFF660087C4E1 /* macroChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macroChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DFCA6772A1BFF660087C4E1 /* macroChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = macroChallenge.app; path = "/Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/build/Debug-iphoneos/macroChallenge.app"; sourceTree = "<absolute>"; };
 		4DFCA67A2A1BFF660087C4E1 /* macroChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macroChallengeApp.swift; sourceTree = "<group>"; };
 		4DFCA67C2A1BFF660087C4E1 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		4DFCA67E2A1BFF670087C4E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DFCA6812A1BFF670087C4E1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		4DFCA6872A1BFF670087C4E1 /* macroChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = macroChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DFCA6872A1BFF670087C4E1 /* macroChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = macroChallengeTests.xctest; path = "/Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/build/Debug-iphoneos/macroChallengeTests.xctest"; sourceTree = "<absolute>"; };
 		4DFCA68B2A1BFF670087C4E1 /* macroChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macroChallengeTests.swift; sourceTree = "<group>"; };
-		4DFCA6912A1BFF670087C4E1 /* macroChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = macroChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DFCA6912A1BFF670087C4E1 /* macroChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = macroChallengeUITests.xctest; path = "/Users/barbaraargolo/Documents/GitHub/macroChallenge/macroChallenge/build/Debug-iphoneos/macroChallengeUITests.xctest"; sourceTree = "<absolute>"; };
 		4DFCA6952A1BFF670087C4E1 /* macroChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macroChallengeUITests.swift; sourceTree = "<group>"; };
 		4DFCA6972A1BFF670087C4E1 /* macroChallengeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macroChallengeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6B06AB322A327B7800B778B9 /* AlphabetLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabetLetter.swift; sourceTree = "<group>"; };
@@ -84,12 +61,9 @@
 		6BAE7B332A311D8500F0F0D2 /* Unused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unused.swift; sourceTree = "<group>"; };
 		6BAE7B352A311E3100F0F0D2 /* ManagerGKMatchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerGKMatchDelegate.swift; sourceTree = "<group>"; };
 		6BAE7B392A311E9B00F0F0D2 /* ManagerGKMatchVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerGKMatchVCDelegate.swift; sourceTree = "<group>"; };
-		6BDD4CE92A26824E00D8CE6D /* AuthenticateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateModel.swift; sourceTree = "<group>"; };
 		6BDD4CEB2A2693BA00D8CE6D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		6BDD4CED2A269A9D00D8CE6D /* macroChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macroChallenge.entitlements; sourceTree = "<group>"; };
-		6BDD4CEE2A269ADC00D8CE6D /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		6BDD4CF02A27A6EA00D8CE6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		6BDD4CF22A27B3D300D8CE6D /* ButtonsGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsGame.swift; sourceTree = "<group>"; };
 		6BDD4CF52A27B47C00D8CE6D /* coin.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = coin.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,72 +92,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4DAC6E2C2A38E57800F7BC72 /* components */ = {
-			isa = PBXGroup;
-			children = (
-				4DAC6E282A37A3C000F7BC72 /* RectangleButton.swift */,
-			);
-			path = components;
-			sourceTree = "<group>";
-		};
-		4DAC6E2D2A38E59100F7BC72 /* view */ = {
-			isa = PBXGroup;
-			children = (
-				4DAC6E392A39F25500F7BC72 /* inicial */,
-				4DAC6E2E2A38E59F00F7BC72 /* config */,
-			);
-			path = view;
-			sourceTree = "<group>";
-		};
-		4DAC6E2E2A38E59F00F7BC72 /* config */ = {
-			isa = PBXGroup;
-			children = (
-				4DAC6E2F2A38E89400F7BC72 /* SomView.swift */,
-				4DAC6E2A2A38E56B00F7BC72 /* TutorialView.swift */,
-				4DAC6E312A38E8A000F7BC72 /* TermosView.swift */,
-				4DAC6E352A38E8B100F7BC72 /* PoliticaView.swift */,
-				4DAC6E372A38E8B900F7BC72 /* FaleView.swift */,
-				4DAC6E332A38E8A900F7BC72 /* RegrasView.swift */,
-				4DAC6E262A37A25800F7BC72 /* ConfigView.swift */,
-			);
-			path = config;
-			sourceTree = "<group>";
-		};
-		4DAC6E392A39F25500F7BC72 /* inicial */ = {
-			isa = PBXGroup;
-			children = (
-				4DAC6E3A2A39F26A00F7BC72 /* InicialView.swift */,
-				4DAC6E3C2A39F27900F7BC72 /* SplashView.swift */,
-			);
-			path = inicial;
-			sourceTree = "<group>";
-		};
 		4DFCA66E2A1BFF660087C4E1 = {
 			isa = PBXGroup;
 			children = (
 				4DFCA6792A1BFF660087C4E1 /* macroChallenge */,
 				4DFCA68A2A1BFF670087C4E1 /* macroChallengeTests */,
 				4DFCA6942A1BFF670087C4E1 /* macroChallengeUITests */,
-				4DFCA6782A1BFF660087C4E1 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		4DFCA6782A1BFF660087C4E1 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4DFCA6772A1BFF660087C4E1 /* macroChallenge.app */,
-				4DFCA6872A1BFF670087C4E1 /* macroChallengeTests.xctest */,
-				4DFCA6912A1BFF670087C4E1 /* macroChallengeUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		4DFCA6792A1BFF660087C4E1 /* macroChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				6BDD4CF22A27B3D300D8CE6D /* Button.swift */,
-				6BDD4CE92A26824E00D8CE6D /* Model.swift */,
-				6BDD4CEE2A269ADC00D8CE6D /* Manager.swift */,
 				4DFCA67A2A1BFF660087C4E1 /* macroChallengeApp.swift */,
 				6BDD4CED2A269A9D00D8CE6D /* macroChallenge.entitlements */,
 				6BAE7B2F2A311BA600F0F0D2 /* MModel */,
@@ -225,7 +145,6 @@
 		6BAE7B2F2A311BA600F0F0D2 /* MModel */ = {
 			isa = PBXGroup;
 			children = (
-				6BDD4CE92A26824E00D8CE6D /* AuthenticateModel.swift */,
 				6B06AB322A327B7800B778B9 /* AlphabetLetter.swift */,
 				6B06AB3A2A379B0B00B778B9 /* Themes.swift */,
 			);
@@ -247,7 +166,6 @@
 		6BAE7B312A311C5800F0F0D2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				6BDD4CF22A27B3D300D8CE6D /* ButtonsGame.swift */,
 				6B06AB382A37985800B778B9 /* ButtonsOthersViews.swift */,
 			);
 			path = Components;
@@ -256,7 +174,6 @@
 		6BAE7B322A311C8700F0F0D2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				6BDD4CEE2A269ADC00D8CE6D /* Manager.swift */,
 				6BAE7B352A311E3100F0F0D2 /* ManagerGKMatchDelegate.swift */,
 				6BAE7B392A311E9B00F0F0D2 /* ManagerGKMatchVCDelegate.swift */,
 			);
@@ -359,7 +276,7 @@
 				Base,
 			);
 			mainGroup = 4DFCA66E2A1BFF660087C4E1;
-			productRefGroup = 4DFCA6782A1BFF660087C4E1 /* Products */;
+			productRefGroup = 4DFCA66E2A1BFF660087C4E1;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -403,35 +320,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BAE7B362A311E3100F0F0D2 /* ManagerGKMatchDelegate.swift in Sources */,
-				6BDD4CEA2A26824E00D8CE6D /* AuthenticateModel.swift in Sources */,
 				6B06AB332A327B7800B778B9 /* AlphabetLetter.swift in Sources */,
-				6BDD4CEF2A269ADC00D8CE6D /* Manager.swift in Sources */,
 				6B06AB352A37961900B778B9 /* ThemeView.swift in Sources */,
 				6BDD4CF12A27A6EA00D8CE6D /* ContentView.swift in Sources */,
-
 				6BAE7B342A311D8500F0F0D2 /* Unused.swift in Sources */,
 				6B06AB3B2A379B0B00B778B9 /* Themes.swift in Sources */,
-				6BDD4CF32A27B3D300D8CE6D /* ButtonsGame.swift in Sources */,
 				4DFCA67D2A1BFF660087C4E1 /* MenuView.swift in Sources */,
 				6BAE7B3A2A311E9B00F0F0D2 /* ManagerGKMatchVCDelegate.swift in Sources */,
 				6B06AB392A37985800B778B9 /* ButtonsOthersViews.swift in Sources */,
-
-				4DAC6E342A38E8A900F7BC72 /* RegrasView.swift in Sources */,
-				4DAC6E322A38E8A000F7BC72 /* TermosView.swift in Sources */,
-				6BDD4CF32A27B3D300D8CE6D /* Button.swift in Sources */,
-				4DAC6E382A38E8B900F7BC72 /* FaleView.swift in Sources */,
-				4DAC6E292A37A3C000F7BC72 /* RectangleButton.swift in Sources */,
 				4DFCA67D2A1BFF660087C4E1 /* MenuView.swift in Sources */,
-				4DAC6E272A37A25800F7BC72 /* ConfigView.swift in Sources */,
-				4DAC6E2B2A38E56B00F7BC72 /* TutorialView.swift in Sources */,
-				6BDD4CFA2A292C3800D8CE6D /* Alphabet.swift in Sources */,
-				4DAC6E3D2A39F27900F7BC72 /* SplashView.swift in Sources */,
 				4DFCA67B2A1BFF660087C4E1 /* macroChallengeApp.swift in Sources */,
-				4DAC6E3B2A39F26A00F7BC72 /* InicialView.swift in Sources */,
-				4DAC6E362A38E8B100F7BC72 /* PoliticaView.swift in Sources */,
-
 				6BDD4CEC2A2693BA00D8CE6D /* GameView.swift in Sources */,
-				4DAC6E302A38E89400F7BC72 /* SomView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
