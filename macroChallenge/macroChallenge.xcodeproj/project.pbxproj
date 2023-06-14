@@ -24,14 +24,19 @@
 		4DFCA68C2A1BFF670087C4E1 /* macroChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA68B2A1BFF670087C4E1 /* macroChallengeTests.swift */; };
 		4DFCA6962A1BFF670087C4E1 /* macroChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA6952A1BFF670087C4E1 /* macroChallengeUITests.swift */; };
 		4DFCA6982A1BFF670087C4E1 /* macroChallengeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA6972A1BFF670087C4E1 /* macroChallengeUITestsLaunchTests.swift */; };
-		6BDD4CEA2A26824E00D8CE6D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CE92A26824E00D8CE6D /* Model.swift */; };
+		6B06AB332A327B7800B778B9 /* AlphabetLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B06AB322A327B7800B778B9 /* AlphabetLetter.swift */; };
+		6B06AB352A37961900B778B9 /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B06AB342A37961900B778B9 /* ThemeView.swift */; };
+		6B06AB392A37985800B778B9 /* ButtonsOthersViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B06AB382A37985800B778B9 /* ButtonsOthersViews.swift */; };
+		6B06AB3B2A379B0B00B778B9 /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B06AB3A2A379B0B00B778B9 /* Themes.swift */; };
+		6BAE7B342A311D8500F0F0D2 /* Unused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE7B332A311D8500F0F0D2 /* Unused.swift */; };
+		6BAE7B362A311E3100F0F0D2 /* ManagerGKMatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE7B352A311E3100F0F0D2 /* ManagerGKMatchDelegate.swift */; };
+		6BAE7B3A2A311E9B00F0F0D2 /* ManagerGKMatchVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE7B392A311E9B00F0F0D2 /* ManagerGKMatchVCDelegate.swift */; };
+		6BDD4CEA2A26824E00D8CE6D /* AuthenticateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CE92A26824E00D8CE6D /* AuthenticateModel.swift */; };
 		6BDD4CEC2A2693BA00D8CE6D /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CEB2A2693BA00D8CE6D /* GameView.swift */; };
 		6BDD4CEF2A269ADC00D8CE6D /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CEE2A269ADC00D8CE6D /* Manager.swift */; };
 		6BDD4CF12A27A6EA00D8CE6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CF02A27A6EA00D8CE6D /* ContentView.swift */; };
-		6BDD4CF32A27B3D300D8CE6D /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CF22A27B3D300D8CE6D /* Button.swift */; };
+		6BDD4CF32A27B3D300D8CE6D /* ButtonsGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CF22A27B3D300D8CE6D /* ButtonsGame.swift */; };
 		6BDD4CF62A27B47C00D8CE6D /* coin.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BDD4CF52A27B47C00D8CE6D /* coin.m4a */; };
-		6BDD4CF82A28FFE300D8CE6D /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CF72A28FFE300D8CE6D /* ResultsView.swift */; };
-		6BDD4CFA2A292C3800D8CE6D /* Alphabet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDD4CF92A292C3800D8CE6D /* Alphabet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,15 +77,20 @@
 		4DFCA6912A1BFF670087C4E1 /* macroChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = macroChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DFCA6952A1BFF670087C4E1 /* macroChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macroChallengeUITests.swift; sourceTree = "<group>"; };
 		4DFCA6972A1BFF670087C4E1 /* macroChallengeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macroChallengeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		6BDD4CE92A26824E00D8CE6D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		6B06AB322A327B7800B778B9 /* AlphabetLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabetLetter.swift; sourceTree = "<group>"; };
+		6B06AB342A37961900B778B9 /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
+		6B06AB382A37985800B778B9 /* ButtonsOthersViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsOthersViews.swift; sourceTree = "<group>"; };
+		6B06AB3A2A379B0B00B778B9 /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
+		6BAE7B332A311D8500F0F0D2 /* Unused.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unused.swift; sourceTree = "<group>"; };
+		6BAE7B352A311E3100F0F0D2 /* ManagerGKMatchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerGKMatchDelegate.swift; sourceTree = "<group>"; };
+		6BAE7B392A311E9B00F0F0D2 /* ManagerGKMatchVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerGKMatchVCDelegate.swift; sourceTree = "<group>"; };
+		6BDD4CE92A26824E00D8CE6D /* AuthenticateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateModel.swift; sourceTree = "<group>"; };
 		6BDD4CEB2A2693BA00D8CE6D /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		6BDD4CED2A269A9D00D8CE6D /* macroChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macroChallenge.entitlements; sourceTree = "<group>"; };
 		6BDD4CEE2A269ADC00D8CE6D /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		6BDD4CF02A27A6EA00D8CE6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		6BDD4CF22A27B3D300D8CE6D /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		6BDD4CF22A27B3D300D8CE6D /* ButtonsGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsGame.swift; sourceTree = "<group>"; };
 		6BDD4CF52A27B47C00D8CE6D /* coin.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = coin.m4a; sourceTree = "<group>"; };
-		6BDD4CF72A28FFE300D8CE6D /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
-		6BDD4CF92A292C3800D8CE6D /* Alphabet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alphabet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,20 +181,18 @@
 		4DFCA6792A1BFF660087C4E1 /* macroChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				4DAC6E2D2A38E59100F7BC72 /* view */,
-				4DAC6E2C2A38E57800F7BC72 /* components */,
-				6BDD4CED2A269A9D00D8CE6D /* macroChallenge.entitlements */,
 				6BDD4CF22A27B3D300D8CE6D /* Button.swift */,
 				6BDD4CE92A26824E00D8CE6D /* Model.swift */,
 				6BDD4CEE2A269ADC00D8CE6D /* Manager.swift */,
 				4DFCA67A2A1BFF660087C4E1 /* macroChallengeApp.swift */,
-				6BDD4CF02A27A6EA00D8CE6D /* ContentView.swift */,
-				6BDD4CEB2A2693BA00D8CE6D /* GameView.swift */,
-				4DFCA67C2A1BFF660087C4E1 /* MenuView.swift */,
-				6BDD4CF72A28FFE300D8CE6D /* ResultsView.swift */,
+				6BDD4CED2A269A9D00D8CE6D /* macroChallenge.entitlements */,
+				6BAE7B2F2A311BA600F0F0D2 /* MModel */,
+				6BAE7B302A311C4000F0F0D2 /* View */,
+				6BAE7B322A311C8700F0F0D2 /* ViewModel */,
 				4DFCA6802A1BFF670087C4E1 /* Preview Content */,
+				6BDD4CF42A27B45900D8CE6D /* Audio */,
 				4DFCA67E2A1BFF670087C4E1 /* Assets.xcassets */,
-				6BDD4CF92A292C3800D8CE6D /* Alphabet.swift */,
+				6BAE7B332A311D8500F0F0D2 /* Unused.swift */,
 			);
 			path = macroChallenge;
 			sourceTree = "<group>";
@@ -210,9 +218,49 @@
 			children = (
 				4DFCA6952A1BFF670087C4E1 /* macroChallengeUITests.swift */,
 				4DFCA6972A1BFF670087C4E1 /* macroChallengeUITestsLaunchTests.swift */,
-				6BDD4CF42A27B45900D8CE6D /* Audio */,
 			);
 			path = macroChallengeUITests;
+			sourceTree = "<group>";
+		};
+		6BAE7B2F2A311BA600F0F0D2 /* MModel */ = {
+			isa = PBXGroup;
+			children = (
+				6BDD4CE92A26824E00D8CE6D /* AuthenticateModel.swift */,
+				6B06AB322A327B7800B778B9 /* AlphabetLetter.swift */,
+				6B06AB3A2A379B0B00B778B9 /* Themes.swift */,
+			);
+			path = MModel;
+			sourceTree = "<group>";
+		};
+		6BAE7B302A311C4000F0F0D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6BAE7B312A311C5800F0F0D2 /* Components */,
+				4DFCA67C2A1BFF660087C4E1 /* MenuView.swift */,
+				6BDD4CEB2A2693BA00D8CE6D /* GameView.swift */,
+				6BDD4CF02A27A6EA00D8CE6D /* ContentView.swift */,
+				6B06AB342A37961900B778B9 /* ThemeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6BAE7B312A311C5800F0F0D2 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				6BDD4CF22A27B3D300D8CE6D /* ButtonsGame.swift */,
+				6B06AB382A37985800B778B9 /* ButtonsOthersViews.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		6BAE7B322A311C8700F0F0D2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6BDD4CEE2A269ADC00D8CE6D /* Manager.swift */,
+				6BAE7B352A311E3100F0F0D2 /* ManagerGKMatchDelegate.swift */,
+				6BAE7B392A311E9B00F0F0D2 /* ManagerGKMatchVCDelegate.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		6BDD4CF42A27B45900D8CE6D /* Audio */ = {
@@ -354,10 +402,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BDD4CEA2A26824E00D8CE6D /* Model.swift in Sources */,
-				6BDD4CF82A28FFE300D8CE6D /* ResultsView.swift in Sources */,
+				6BAE7B362A311E3100F0F0D2 /* ManagerGKMatchDelegate.swift in Sources */,
+				6BDD4CEA2A26824E00D8CE6D /* AuthenticateModel.swift in Sources */,
+				6B06AB332A327B7800B778B9 /* AlphabetLetter.swift in Sources */,
 				6BDD4CEF2A269ADC00D8CE6D /* Manager.swift in Sources */,
+				6B06AB352A37961900B778B9 /* ThemeView.swift in Sources */,
 				6BDD4CF12A27A6EA00D8CE6D /* ContentView.swift in Sources */,
+
+				6BAE7B342A311D8500F0F0D2 /* Unused.swift in Sources */,
+				6B06AB3B2A379B0B00B778B9 /* Themes.swift in Sources */,
+				6BDD4CF32A27B3D300D8CE6D /* ButtonsGame.swift in Sources */,
+				4DFCA67D2A1BFF660087C4E1 /* MenuView.swift in Sources */,
+				6BAE7B3A2A311E9B00F0F0D2 /* ManagerGKMatchVCDelegate.swift in Sources */,
+				6B06AB392A37985800B778B9 /* ButtonsOthersViews.swift in Sources */,
+
 				4DAC6E342A38E8A900F7BC72 /* RegrasView.swift in Sources */,
 				4DAC6E322A38E8A000F7BC72 /* TermosView.swift in Sources */,
 				6BDD4CF32A27B3D300D8CE6D /* Button.swift in Sources */,
@@ -371,6 +429,7 @@
 				4DFCA67B2A1BFF660087C4E1 /* macroChallengeApp.swift in Sources */,
 				4DAC6E3B2A39F26A00F7BC72 /* InicialView.swift in Sources */,
 				4DAC6E362A38E8B100F7BC72 /* PoliticaView.swift in Sources */,
+
 				6BDD4CEC2A2693BA00D8CE6D /* GameView.swift in Sources */,
 				4DAC6E302A38E89400F7BC72 /* SomView.swift in Sources */,
 			);
