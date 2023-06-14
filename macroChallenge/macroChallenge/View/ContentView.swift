@@ -10,12 +10,12 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var matchManager = Manager()
- //   @State var inputAnswer = ""
+    //   @State var inputAnswer = ""
     
     var body: some View {
         ZStack {
             if matchManager.isGameOver {
-              //  GameOverView(matchManager: matchManager)
+                //  GameOverView(matchManager: matchManager)
             } else if matchManager.inGame {
                 GameView().environmentObject(matchManager)
             } else {
