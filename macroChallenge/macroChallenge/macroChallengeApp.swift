@@ -12,6 +12,7 @@ struct macroChallengeApp: App {
     @StateObject var matchManager = Manager()
     var body: some Scene {
         WindowGroup {
+            MenuView(matchManager: matchManager)
            ContentView(matchManager: matchManager)
         }
     }
