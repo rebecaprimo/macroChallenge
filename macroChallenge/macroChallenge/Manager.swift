@@ -20,8 +20,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     @Published var authenticationState = PlayerAuthState.authenticating
     @Published var alphabetData = Alphabet(letters: ["A", "B", "C"])
     @Published var match: GKMatch?
-    
-    @Published var dataA = DataTest(data: false)
+    @Published var buttonStates: [Int: Bool] = [:]
+    @Published var dataEncoded = DataTest(data: false)
 
 
     var myGame: GKMatchDelegate?
@@ -120,10 +120,11 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         
     }
     
-    func sendData() {
+    func sendData(buttonId: Int) {
+        buttonStates[buttonId, default: false].toggle()
         do {
-            dataA.data.toggle()
-            let data = try JSONEncoder().encode(dataA)
+            let data = try JSONEncoder().encode(buttonStates)
+            print(buttonStates)
             try match?.sendData(toAllPlayers: data, with: .reliable)
         } catch {
             print("SEND DATA FAILED")
@@ -190,8 +191,8 @@ extension Manager: GKMatchDelegate {
     
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         do {
-            let newData = try JSONDecoder().decode(DataTest.self, from: data)
-            dataA = newData
+            let newData = try JSONDecoder().decode([Int: Bool].self, from: data)
+            buttonStates = newData
         } catch {
             print("GAME DATA ERROR")
         }

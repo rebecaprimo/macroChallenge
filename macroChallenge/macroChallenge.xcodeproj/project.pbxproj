@@ -15,8 +15,8 @@
 		4DAC6E342A38E8A900F7BC72 /* RegrasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E332A38E8A900F7BC72 /* RegrasView.swift */; };
 		4DAC6E362A38E8B100F7BC72 /* PoliticaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E352A38E8B100F7BC72 /* PoliticaView.swift */; };
 		4DAC6E382A38E8B900F7BC72 /* FaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E372A38E8B900F7BC72 /* FaleView.swift */; };
-		4DAC6E3B2A39F26A00F7BC72 /* InicialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E3A2A39F26A00F7BC72 /* InicialView.swift */; };
 		4DAC6E3D2A39F27900F7BC72 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E3C2A39F27900F7BC72 /* SplashView.swift */; };
+		4DAC6E572A3A483600F7BC72 /* ButtonGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E562A3A483600F7BC72 /* ButtonGame.swift */; };
 		4DFCA67B2A1BFF660087C4E1 /* macroChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA67A2A1BFF660087C4E1 /* macroChallengeApp.swift */; };
 		4DFCA67D2A1BFF660087C4E1 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFCA67C2A1BFF660087C4E1 /* MenuView.swift */; };
 		4DFCA67F2A1BFF670087C4E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DFCA67E2A1BFF670087C4E1 /* Assets.xcassets */; };
@@ -60,8 +60,8 @@
 		4DAC6E332A38E8A900F7BC72 /* RegrasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegrasView.swift; sourceTree = "<group>"; };
 		4DAC6E352A38E8B100F7BC72 /* PoliticaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoliticaView.swift; sourceTree = "<group>"; };
 		4DAC6E372A38E8B900F7BC72 /* FaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaleView.swift; sourceTree = "<group>"; };
-		4DAC6E3A2A39F26A00F7BC72 /* InicialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InicialView.swift; sourceTree = "<group>"; };
 		4DAC6E3C2A39F27900F7BC72 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		4DAC6E562A3A483600F7BC72 /* ButtonGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonGame.swift; sourceTree = "<group>"; };
 		4DFCA6772A1BFF660087C4E1 /* macroChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macroChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DFCA67A2A1BFF660087C4E1 /* macroChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macroChallengeApp.swift; sourceTree = "<group>"; };
 		4DFCA67C2A1BFF660087C4E1 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
@@ -112,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				4DAC6E282A37A3C000F7BC72 /* RectangleButton.swift */,
+				4DAC6E562A3A483600F7BC72 /* ButtonGame.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -119,6 +120,7 @@
 		4DAC6E2D2A38E59100F7BC72 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				6BDD4CEB2A2693BA00D8CE6D /* GameView.swift */,
 				4DAC6E392A39F25500F7BC72 /* inicial */,
 				4DAC6E2E2A38E59F00F7BC72 /* config */,
 			);
@@ -142,7 +144,8 @@
 		4DAC6E392A39F25500F7BC72 /* inicial */ = {
 			isa = PBXGroup;
 			children = (
-				4DAC6E3A2A39F26A00F7BC72 /* InicialView.swift */,
+				6BDD4CF02A27A6EA00D8CE6D /* ContentView.swift */,
+				4DFCA67C2A1BFF660087C4E1 /* MenuView.swift */,
 				4DAC6E3C2A39F27900F7BC72 /* SplashView.swift */,
 			);
 			path = inicial;
@@ -178,9 +181,6 @@
 				6BDD4CE92A26824E00D8CE6D /* Model.swift */,
 				6BDD4CEE2A269ADC00D8CE6D /* Manager.swift */,
 				4DFCA67A2A1BFF660087C4E1 /* macroChallengeApp.swift */,
-				6BDD4CF02A27A6EA00D8CE6D /* ContentView.swift */,
-				6BDD4CEB2A2693BA00D8CE6D /* GameView.swift */,
-				4DFCA67C2A1BFF660087C4E1 /* MenuView.swift */,
 				6BDD4CF72A28FFE300D8CE6D /* ResultsView.swift */,
 				4DFCA6802A1BFF670087C4E1 /* Preview Content */,
 				4DFCA67E2A1BFF670087C4E1 /* Assets.xcassets */,
@@ -369,8 +369,8 @@
 				6BDD4CFA2A292C3800D8CE6D /* Alphabet.swift in Sources */,
 				4DAC6E3D2A39F27900F7BC72 /* SplashView.swift in Sources */,
 				4DFCA67B2A1BFF660087C4E1 /* macroChallengeApp.swift in Sources */,
-				4DAC6E3B2A39F26A00F7BC72 /* InicialView.swift in Sources */,
 				4DAC6E362A38E8B100F7BC72 /* PoliticaView.swift in Sources */,
+				4DAC6E572A3A483600F7BC72 /* ButtonGame.swift in Sources */,
 				6BDD4CEC2A2693BA00D8CE6D /* GameView.swift in Sources */,
 				4DAC6E302A38E89400F7BC72 /* SomView.swift in Sources */,
 			);
@@ -532,7 +532,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"macroChallenge/Preview Content\"";
-				DEVELOPMENT_TEAM = DWZ7HM73F4;
+				DEVELOPMENT_TEAM = PHVL4RZ8Z5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -563,7 +563,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"macroChallenge/Preview Content\"";
-				DEVELOPMENT_TEAM = DWZ7HM73F4;
+				DEVELOPMENT_TEAM = PHVL4RZ8Z5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
