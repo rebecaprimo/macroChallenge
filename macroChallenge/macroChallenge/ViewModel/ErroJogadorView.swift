@@ -38,7 +38,7 @@ struct ErroJogadorView: View {
                             .padding(.leading, 10)
 //                            .background(.gray)
                         
-                        Text("DETONADA")
+                        Text("\(resultado.statusBomba)")
                             .frame(maxWidth: .infinity, alignment: .center)
                             .bold()
                     }
