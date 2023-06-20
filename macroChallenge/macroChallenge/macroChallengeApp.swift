@@ -12,7 +12,10 @@ struct macroChallengeApp: App {
     @StateObject var matchManager = Manager()
     var body: some Scene {
         WindowGroup {
-           ContentView(matchManager: matchManager)
+//            ErroJogadorView()
+            let resultadoJogo = ResultadoJogo(vitoriaGrupo: false)
+            ErroJogadorView(resultado: resultadoJogo)
+//           ContentView(matchManager: matchManager)
         }
     }
 }

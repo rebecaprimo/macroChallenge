@@ -5,7 +5,7 @@
 //  Created by Barbara Argolo on 30/05/23.
 //
 
-import Foundation
+import SwiftUI
 import UIKit
 import GameKit
 
@@ -18,7 +18,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     @Published var inGame = false
     @Published var isGameOver = false
     @Published var authenticationState = PlayerAuthState.authenticating
-    @Published var alphabetData = Alphabet(letters: ["A", "B", "C"])
+//    @Published var alphabetData = Alphabet(letters: ["A", "B", "C"])
     @Published var match: GKMatch?
     
     @Published var dataA = DataTest(data: false)
