@@ -79,7 +79,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     func startMatchmaking() {
         let request = GKMatchRequest()
         request.minPlayers = 2
-        request.maxPlayers = 2
+        request.maxPlayers = 3
        // request.inviteMessage = "Playzinha?"
         
         let matchmakingVC = GKMatchmakerViewController(matchRequest: request)

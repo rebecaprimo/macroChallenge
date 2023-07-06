@@ -35,10 +35,10 @@ struct ButtonGame: View {
                 matchManager.sendData(buttonId: idButton)
                 self.isButtonOn.toggle() // Altere o estado individual do botão
             }, label: {
-                Text(letter)
-                //.resizable()
+                Image(matchManager.buttonStates[idButton, default: false] ? "swift" : letter)
+                    .resizable()
                     .frame(width: 60, height: 60)
-                    .background(matchManager.buttonStates[idButton, default: false] ? Color.red : Color.blue)
+                    //.background(matchManager.buttonStates[idButton, default: false] ? Color.red : Color.blue)
             })
             .foregroundColor(.black)
         }
