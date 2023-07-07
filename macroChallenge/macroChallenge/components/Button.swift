@@ -7,6 +7,9 @@
 
 import SwiftUI
 import AVFAudio
+
+//MARK: BOTÃO GERAL
+
 struct ButtonFile: View {
     let screenWidth: CGFloat
     let screenHeight: CGFloat

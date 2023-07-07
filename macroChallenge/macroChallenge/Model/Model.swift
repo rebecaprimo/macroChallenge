@@ -8,7 +8,7 @@
 import Foundation
 
 
-let everydayObjects = ["carol", "barbara", "rebeca", "duda"]
+//let everydayObjects = ["carol", "barbara", "rebeca", "duda"]  //apagar depois
 
 
 enum PlayerAuthState: String {

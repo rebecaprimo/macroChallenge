@@ -23,8 +23,12 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     @Published var buttonStates: [Int: Bool] = [:]
     @Published var dataEncoded = DataTest(data: false)
 
-
+    @Published var chooseTheme = false
+    @Published var isHost = false
+    var randomThemes = Theme.themes
+        
     var myGame: GKMatchDelegate?
+    var otherPlayers: [GKPlayer]?
     var otherPlayer: GKPlayer?
     var localPlayer = GKLocalPlayer.local
     var isButtonOn = false
@@ -36,13 +40,11 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         return windowScene?.windows.first?.rootViewController
     }
     
-    @Published var currentQuestion: String?
-    
-    @Published var playerResponses: [GKPlayer: String] = [:]
+    //VERIFICAR SE TÁ USANDO!!!!!
+//    @Published var currentQuestion: String?
+//    @Published var playerResponses: [GKPlayer: String] = [:]
     
 
-    
-    //autenticando usuario
     
     //MARK: AUTENTICANDO USUARIO
     
@@ -79,7 +81,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     func startMatchmaking() {
         let request = GKMatchRequest()
         request.minPlayers = 2
-        request.maxPlayers = 3
+        request.maxPlayers = 2
        // request.inviteMessage = "Playzinha?"
         
         let matchmakingVC = GKMatchmakerViewController(matchRequest: request)
@@ -94,6 +96,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         match?.disconnect()
     }
     
+    
     func resetGame() {
         DispatchQueue.main.async { [self] in
             isGameOver = false
@@ -104,22 +107,66 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         match = nil
         otherPlayer = nil
         playerUUIDKey = UUID().uuidString
-        currentQuestion = nil
-        playerResponses.removeAll()
+//        currentQuestion = nil
+//        playerResponses.removeAll()
     }
 
     
     //MARK: INICIO DO JOGO
     //fazer logica para ver quem vai ser o antagonista
-    func startGame(newMatch: GKMatch) {
-        match = newMatch
-        match?.delegate = self
-        otherPlayer = match?.players.first
-        inGame = true
-       // sendString("began \(playerUUIDKey)")
-        
-    }
     
+       func startGame(newMatch: GKMatch) -> AnyView {
+           match = newMatch
+           match?.delegate = self
+           otherPlayer = match?.players.first
+           otherPlayers = match?.players
+           inGame = true
+           // sendString("began \(playerUUIDKey)")
+           
+           
+           let isLocalAntagonist = otherPlayers?.contains { localPlayer.alias > $0.alias } == true
+           
+           if isLocalAntagonist {
+               print("local: \(localPlayer.alias)")
+               print("sou o antagonista")
+               return AnyView(ThemeView(themes: randomThemes))
+           } else {
+               print("other do indice: \(String(describing: otherPlayers))")
+               print("sou o agente")
+               return AnyView(Text("Erro"))
+           }
+       }
+    
+    //    func startGame(newMatch: GKMatch) -> AnyView {
+    //        match = newMatch
+    //        match?.delegate = self
+    //        otherPlayers = match?.players
+    //        inGame = true
+    //
+    //        //pegar o id dos jogadores
+    //        for i in 0..<(otherPlayers?.count ?? 0) {
+    //            // se o id do local for maior que o id de algum outro, ele é um agente, ou seja, sai do loop
+    //            //display name para mostrar  na tela
+    //            if localPlayer.alias > otherPlayers![i].alias {
+    //                print("local: \(localPlayer.alias)")
+    //                print("other do indice \(i): \(otherPlayers![i].alias)")
+    //                break
+    //            }
+    //
+    //            // se for o ultimo elemento do vetor no loop, fala que o local é o antagonista
+    //            if i == otherPlayers!.count - 1 {
+    //                isHost = true
+    //                print("sou o host")
+    //                return AnyView(ThemeView(themes: randomThemes))
+    //            }
+    //        }
+    //
+    //       // return AnyView(GameView())
+    //        return AnyView(Text("Erro"))
+    //    }
+    
+    
+    //MARK: ENVIA O DADO PARA OS OUTROS JOGADORES
     func sendData(buttonId: Int) {
         buttonStates[buttonId, default: false].toggle()
         do {
@@ -130,10 +177,12 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             print("SEND DATA FAILED")
         }
     }
+   }
+    
+    
+    
     
     //MARK: ******* AQUI *********
-    
-    
     //aqui vc chama a send string pois vc esta recebendo uma string
 //
 //    func receivedString(_ message: String) {
@@ -166,15 +215,12 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
 //            break
 //        }
 //    }
-}
 
 
 //MARK: EVENTOS DA PARTIDA EM ANDAMENTO
 
 extension Manager: GKMatchDelegate {
     
-    
-
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         guard state == .disconnected && !isGameOver else { return }
         let alert = UIAlertController(title: "Player disconnected", message: "The other player disconnected from the game.", preferredStyle: .alert)
@@ -197,6 +243,7 @@ extension Manager: GKMatchDelegate {
             print("GAME DATA ERROR")
         }
     }
+    
     
     //MARK: ******* AQUI *********
     
