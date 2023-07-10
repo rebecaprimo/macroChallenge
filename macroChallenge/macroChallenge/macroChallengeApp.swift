@@ -14,11 +14,10 @@ struct macroChallengeApp: App {
     
     var body: some Scene {
         WindowGroup {
-//            ErroJogadorView()
-//            let resultadoJogo = ResultadoJogo(vitoriaGrupo: false)
-//            ErroJogadorView(resultado: resultadoJogo)
+            let resultadoJogo = ResultadoJogo(vitoriaGrupo: true)
+            ErroJogadorView(resultado: resultadoJogo)
 //           ContentView(matchManager: matchManager)
-            ThemeView(themes: randomThemes)
+//            ThemeView(themes: randomThemes)
         }
     }
 }
