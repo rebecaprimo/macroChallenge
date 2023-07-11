@@ -14,19 +14,19 @@ struct DataTest: Codable {
 }
 
 class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
-
+    
     @Published var inGame = false
     @Published var isGameOver = false
     @Published var authenticationState = PlayerAuthState.authenticating
-//    @Published var alphabetData = Alphabet(letters: ["A", "B", "C"])
+    //    @Published var alphabetData = Alphabet(letters: ["A", "B", "C"])
     @Published var match: GKMatch?
     @Published var buttonStates: [Int: Bool] = [:]
     @Published var dataEncoded = DataTest(data: false)
-
+    
     @Published var chooseTheme = false
     @Published var isHost = false
     var randomThemes = Theme.themes
-        
+    
     var myGame: GKMatchDelegate?
     var otherPlayers: [GKPlayer]?
     var otherPlayer: GKPlayer?
@@ -40,10 +40,10 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     
     //VERIFICAR SE TÁ USANDO!!!!!
-//    @Published var currentQuestion: String?
-//    @Published var playerResponses: [GKPlayer: String] = [:]
+    //    @Published var currentQuestion: String?
+    //    @Published var playerResponses: [GKPlayer: String] = [:]
     
-
+    
     
     //MARK: AUTENTICANDO USUARIO
     
@@ -61,7 +61,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
                 
                 return
             }
-                                                                                               
+            
             
             if localPlayer.isAuthenticated {
                 if localPlayer.isMultiplayerGamingRestricted {
@@ -81,7 +81,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         let request = GKMatchRequest()
         request.minPlayers = 2
         request.maxPlayers = 2
-       // request.inviteMessage = "Playzinha?"
+        // request.inviteMessage = "Playzinha?"
         
         let matchmakingVC = GKMatchmakerViewController(matchRequest: request)
         matchmakingVC?.matchmakerDelegate = self
@@ -107,35 +107,35 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         match = nil
         otherPlayer = nil
         playerUUIDKey = UUID().uuidString
-//        currentQuestion = nil
-//        playerResponses.removeAll()
+        //        currentQuestion = nil
+        //        playerResponses.removeAll()
     }
-
+    
     
     //MARK: INICIO DO JOGO
     //fazer logica para ver quem vai ser o antagonista
     
-       func startGame(newMatch: GKMatch) -> AnyView {
-           match = newMatch
-           match?.delegate = self
-           otherPlayer = match?.players.first
-           otherPlayers = match?.players
-           inGame = true
-           // sendString("began \(playerUUIDKey)")
-           
-           
-           let isLocalAntagonist = otherPlayers?.contains { localPlayer.alias > $0.alias } == true
-           
-           if isLocalAntagonist {
-               print("local: \(localPlayer.alias)")
-               print("sou o antagonista")
-               return AnyView(ThemeView(themes: randomThemes))
-           } else {
-               print("other do indice: \(String(describing: otherPlayers))")
-               print("sou o agente")
-               return AnyView(Text("Erro"))
-           }
-       }
+    func startGame(newMatch: GKMatch) -> AnyView {
+        match = newMatch
+        match?.delegate = self
+        otherPlayer = match?.players.first
+        otherPlayers = match?.players
+        inGame = true
+        // sendString("began \(playerUUIDKey)")
+        
+        
+        let isLocalAntagonist = otherPlayers?.contains { localPlayer.alias > $0.alias } == true
+        
+        if isLocalAntagonist {
+            print("local: \(localPlayer.alias)")
+            print("sou o antagonista")
+            return AnyView(ThemeView(themes: randomThemes))
+        } else {
+            print("other do indice: \(String(describing: otherPlayers))")
+            print("sou o agente")
+            return AnyView(Text("Erro"))
+        }
+    }
     
     //    func startGame(newMatch: GKMatch) -> AnyView {
     //        match = newMatch
@@ -177,9 +177,21 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             print("SEND DATA FAILED")
         }
     }
-   }
     
     
+    //MARK: Verifica se todos os botões foram pressionados e se são true (vitóriaGrupo = true)
+    func verifyAllButtonsArePressed() {
+        let allButtonsAreTrue = buttonStates.allSatisfy({ (key: Int, value: Bool) in
+            value == true
+        })
+        if(buttonStates.count == 21 && allButtonsAreTrue) {
+            var resultadoJogo = ResultadoJogo(vitoriaGrupo: true)
+            ErroJogadorView(resultado: resultadoJogo)
+//            self.present(ErroJogadorView, animated: true, completion: nil) NÃO FUNCIONA. não seria na view??
+//            NavigationLink(destination: ErroJogadorView(resultado: resultadoJogo)){EmptyView()} NÃO FUNCIONA. não seria na view??
+        }
+    }
+}
     
     
     //MARK: ******* AQUI *********

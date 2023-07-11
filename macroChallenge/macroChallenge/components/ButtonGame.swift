@@ -35,6 +35,7 @@ struct ButtonGame: View {
                 buttonAction(nomeAudio: "coin")
                 self.isPlaying.toggle()
                 matchManager.sendData(buttonId: idButton)
+                matchManager.verifyAllButtonsArePressed()
             }, label: {
                 Image(isPressed ? "swift" : letter)
                     .resizable()
