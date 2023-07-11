@@ -31,7 +31,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     var otherPlayers: [GKPlayer]?
     var otherPlayer: GKPlayer?
     var localPlayer = GKLocalPlayer.local
-    var isButtonOn = false
     
     var playerUUIDKey = UUID().uuidString
     
@@ -101,6 +100,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         DispatchQueue.main.async { [self] in
             isGameOver = false
             inGame = false
+            buttonStates = [:]
         }
         
         match?.delegate = nil
@@ -221,6 +221,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
 
 extension Manager: GKMatchDelegate {
     
+    //MARK: essa fç executa quando o estado de um dos player muda. 
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         guard state == .disconnected && !isGameOver else { return }
         let alert = UIAlertController(title: "Player disconnected", message: "The other player disconnected from the game.", preferredStyle: .alert)

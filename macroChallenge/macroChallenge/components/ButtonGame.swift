@@ -11,8 +11,7 @@ import AVFAudio
 struct ButtonGame: View {
     @EnvironmentObject private var matchManager: Manager
     @State var audioPlayer: AVAudioPlayer?
-    @State var isPlaying: Bool = true
-    @State var isButtonOn = false // Estado individual para cada botão
+    @State var isPlaying = true
     @State var letter: String
     private let idButton: Int
 
@@ -28,14 +27,16 @@ struct ButtonGame: View {
     }
 
     var body: some View {
+        let isPressed = matchManager.buttonStates[idButton, default: false]
+        
         HStack {
             Button(action: {
+                guard !isPressed else { return }      //to verificando se o botao já foi pressionado. Se não pressionado, prossegue a action
                 buttonAction(nomeAudio: "coin")
                 self.isPlaying.toggle()
                 matchManager.sendData(buttonId: idButton)
-                self.isButtonOn.toggle() // Altere o estado individual do botão
             }, label: {
-                Image(matchManager.buttonStates[idButton, default: false] ? "swift" : letter)
+                Image(isPressed ? "swift" : letter)
                     .resizable()
                     .frame(width: 60, height: 60)
                     //.background(matchManager.buttonStates[idButton, default: false] ? Color.red : Color.blue)
