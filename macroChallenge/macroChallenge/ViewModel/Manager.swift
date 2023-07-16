@@ -32,6 +32,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     var otherPlayer: GKPlayer?
     var localPlayer = GKLocalPlayer.local
     
+    var currentMatchmakerVC: GKTurnBasedMatchmakerViewController?
+    
     var playerUUIDKey = UUID().uuidString
     
     var rootViewController: UIViewController? {
@@ -46,7 +48,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     
     //MARK: AUTENTICANDO USUARIO
-    
     func authenticateUser() {
         GKLocalPlayer.local.authenticateHandler = { [self] vc, e in
             if let viewController = vc {
@@ -81,14 +82,16 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         let request = GKMatchRequest()
         request.minPlayers = 2
         request.maxPlayers = 2
-        // request.inviteMessage = "Playzinha?"
+        request.inviteMessage = "Playzinha, bora?"
         
-        let matchmakingVC = GKMatchmakerViewController(matchRequest: request)
-        matchmakingVC?.matchmakerDelegate = self
+        let matchmakingVC = GKTurnBasedMatchmakerViewController(matchRequest: request)
+        matchmakingVC.turnBasedMatchmakerDelegate = self
         
-        rootViewController?.present(matchmakingVC!, animated: true)
-        print("cheguei")
+        currentMatchmakerVC = matchmakingVC
+        
+        rootViewController?.present(matchmakingVC, animated: true)
     }
+    
     
     func gameOver() {
         isGameOver = true
@@ -185,6 +188,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             value == true
         })
         if(buttonStates.count == 21 && allButtonsAreTrue) {
+            print("resultado")
             var resultadoJogo = ResultadoJogo(vitoriaGrupo: true)
             ErroJogadorView(resultado: resultadoJogo)
 //            self.present(ErroJogadorView, animated: true, completion: nil) NÃO FUNCIONA. não seria na view??
@@ -232,7 +236,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
 //MARK: EVENTOS DA PARTIDA EM ANDAMENTO
 
 extension Manager: GKMatchDelegate {
-    
+
     //MARK: essa fç executa quando o estado de um dos player muda. 
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         guard state == .disconnected && !isGameOver else { return }
@@ -280,20 +284,38 @@ extension Manager: GKMatchDelegate {
 
 
 
+
 //MARK: EVENTO PARA BUSCAR A PARTIDA
 
-extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerViewControllerDelegate {
+extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKTurnBasedMatchmakerViewControllerDelegate {
     
     func player(_ player: GKPlayer, didAccept invite: GKInvite) {
         print("chegaaq")
 
         otherPlayer = invite.sender
-        let vc = GKMatchmakerViewController(invite: invite)
-        vc?.matchmakerDelegate = self
-        vc?.delegate = self
+        let vc = GKTurnBasedMatchmakerViewController()
+        vc.turnBasedMatchmakerDelegate = self
+        vc.delegate = self
         let rootViewController = UIApplication.shared.delegate?.window?!.rootViewController
-        rootViewController?.present(vc!, animated: true)
+        rootViewController?.present(vc, animated: true)
     }
+    
+    func player(_ player: GKPlayer, wantsToQuitMatch match: GKTurnBasedMatch) {
+        match.currentParticipant?.matchOutcome = .lost
+    }
+    
+    func player(_ player: GKPlayer, receivedTurnEventFor match: GKTurnBasedMatch, didBecomeActive: Bool) {
+        if let vc = currentMatchmakerVC {
+            currentMatchmakerVC = nil
+            vc.dismiss(animated: true)
+        }
+        
+        guard didBecomeActive else {
+            return
+        }
+        print("receivedTurnEventFor")
+    }
+    
     
     //AQUI MOSTRA OS JOGADORES QUE RECEBERAM OU ACEITARAM O CONVITE
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
@@ -305,15 +327,28 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         otherPlayer = match.players.first
            print("Match found, starting game...")
         
-           viewController.dismiss(animated: true)
-           startGame(newMatch: match)
+//        MARK: entrando direto na tela do jogo:
+        viewController.dismiss(animated: true)
+        startGame(newMatch: match)
+        
+//        MARK: entrando na tela do antagonista antes:
+//        viewController.dismiss(animated: true)
+//        let gameView = manager.startGame(newMatch: match)
+//
+//           DispatchQueue.main.async {
+//               if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//                  let delegate = windowScene.delegate as? UIWindowSceneDelegate,
+//                  let window = delegate.window {
+//                   window?.rootViewController = UIHostingController(rootView: gameView)
+//               }
+//           }
        }
     
-    func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFailWithError error: Error) {
+    func turnBasedMatchmakerViewControllerWasCancelled(_ viewController: GKTurnBasedMatchmakerViewController) {
         viewController.dismiss(animated: true)
     }
     
-    func matchmakerViewControllerWasCancelled(_ viewController: GKMatchmakerViewController) {
-        viewController.dismiss(animated: true)
+    func turnBasedMatchmakerViewController(_ viewController: GKTurnBasedMatchmakerViewController, didFailWithError error: Error) {
+        print("Matchmaker vc did fail with error: \(error.localizedDescription).")
     }
 }
