@@ -18,7 +18,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     @Published var inGame = false
     @Published var isGameOver = false
     @Published var authenticationState = PlayerAuthState.authenticating
-//    @Published var alphabetData = Alphabet(letters: ["A", "B", "C"])
     @Published var match: GKMatch?
     @Published var buttonStates: [Int: Bool] = [:]
     @Published var dataEncoded = DataTest(data: false)
@@ -115,27 +114,51 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     //MARK: INICIO DO JOGO
     //fazer logica para ver quem vai ser o antagonista
     
-       func startGame(newMatch: GKMatch) -> AnyView {
-           match = newMatch
-           match?.delegate = self
-           otherPlayer = match?.players.first
-           otherPlayers = match?.players
-           inGame = true
-           // sendString("began \(playerUUIDKey)")
-           
-           
-           let isLocalAntagonist = otherPlayers?.contains { localPlayer.alias > $0.alias } == true
-           
-           if isLocalAntagonist {
-               print("local: \(localPlayer.alias)")
-               print("sou o antagonista")
-               return AnyView(ThemeView(themes: randomThemes))
-           } else {
-               print("other do indice: \(String(describing: otherPlayers))")
-               print("sou o agente")
-               return AnyView(Text("Erro"))
-           }
-       }
+//       func startGame(newMatch: GKMatch) -> AnyView {
+//           match = newMatch
+//           match?.delegate = self
+//           otherPlayer = match?.players.first
+//           otherPlayers = match?.players
+//           inGame = true
+//           // sendString("began \(playerUUIDKey)")
+//
+//
+//           let isLocalAntagonist = otherPlayers?.contains { localPlayer.alias > $0.alias } == true
+//
+//           if isLocalAntagonist {
+//               print("local: \(localPlayer.alias)")
+//               print("sou o antagonista")
+//               //return AnyView(ThemeView(themes: [Theme], viewState: $viewState))
+//
+//
+//           } else {
+//               print("other do indice: \(String(describing: otherPlayers))")
+//               print("sou o agente")
+//               //return AnyView(Text("Erro"))
+//           }
+//       }
+    func startGame(newMatch: GKMatch) {
+        match = newMatch
+        match?.delegate = self
+        otherPlayer = match?.players.first
+        otherPlayers = match?.players
+        inGame = true
+        // sendString("began \(playerUUIDKey)")
+       
+        let isLocalAntagonist = otherPlayers?.contains { localPlayer.alias > $0.alias } == true
+        
+        if isLocalAntagonist {
+            print("local: \(localPlayer.alias)")
+            print("sou o antagonista")
+            // Seu código para o antagonista aqui
+        } else {
+            print("other do indice: \(String(describing: otherPlayers))")
+            print("sou o agente")
+            // Seu código para o agente aqui
+        }
+    }
+    // ...
+
     
     //    func startGame(newMatch: GKMatch) -> AnyView {
     //        match = newMatch

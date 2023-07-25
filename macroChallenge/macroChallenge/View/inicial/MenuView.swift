@@ -10,7 +10,8 @@ import SwiftUI
 struct MenuView: View {
     //objeto observavel da classe Manager que gerencia o Gamekit
     @ObservedObject var matchManager: Manager
-  //  @Binding var inputAnswer: String
+    @Binding var viewState: ViewState
+    var themes: [Theme]
 
     var body: some View {
         
@@ -21,6 +22,7 @@ struct MenuView: View {
                     Spacer()
                     Button {
                         matchManager.startMatchmaking()
+                        viewState = .themeSelection
                     } label: {
                         Text("Online")
                             .foregroundColor(.blue)
@@ -43,7 +45,7 @@ struct MenuView: View {
                     
                     Spacer()
                 }.sheet(isPresented: $matchManager.inGame) {
-                    GameView().environmentObject(matchManager)
+                    ThemeView(themes: themes, viewState: $viewState).environmentObject(matchManager)
                 }
             }
             .navigationTitle("Voltar")

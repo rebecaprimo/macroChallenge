@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D3D40F02A7022F100A83261 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3D40EF2A7022F100A83261 /* ViewState.swift */; };
 		4DAC6E272A37A25800F7BC72 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E262A37A25800F7BC72 /* ConfigView.swift */; };
 		4DAC6E292A37A3C000F7BC72 /* RectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E282A37A3C000F7BC72 /* RectangleButton.swift */; };
 		4DAC6E2B2A38E56B00F7BC72 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAC6E2A2A38E56B00F7BC72 /* TutorialView.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D3D40EF2A7022F100A83261 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		4DAC6E262A37A25800F7BC72 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
 		4DAC6E282A37A3C000F7BC72 /* RectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleButton.swift; sourceTree = "<group>"; };
 		4DAC6E2A2A38E56B00F7BC72 /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				6BDD4CF02A27A6EA00D8CE6D /* ContentView.swift */,
+				4D3D40EF2A7022F100A83261 /* ViewState.swift */,
 				4DFCA67C2A1BFF660087C4E1 /* MenuView.swift */,
 				4DAC6E3C2A39F27900F7BC72 /* SplashView.swift */,
 			);
@@ -401,6 +404,7 @@
 				4DAC6E592A3BB1D000F7BC72 /* CountTimer.swift in Sources */,
 				A726010B2A58974200A9308E /* Theme.swift in Sources */,
 				6BDD4CF12A27A6EA00D8CE6D /* ContentView.swift in Sources */,
+				4D3D40F02A7022F100A83261 /* ViewState.swift in Sources */,
 				4DAC6E342A38E8A900F7BC72 /* RegrasView.swift in Sources */,
 				4DAC6E322A38E8A000F7BC72 /* TermosView.swift in Sources */,
 				6BDD4CF32A27B3D300D8CE6D /* Button.swift in Sources */,

@@ -10,16 +10,20 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var matchManager = Manager()
- //   @State var inputAnswer = ""
-    
+    @State private var viewState: ViewState = .menu
+
+    var themes: [Theme] = Theme.themes // Crie uma instância real do array de temas
+
     var body: some View {
         ZStack {
-            if matchManager.isGameOver {
-              //  GameOverView(matchManager: matchManager)
-            } else if matchManager.inGame {
+            if viewState == .menu {
+                MenuView(matchManager: matchManager, viewState: $viewState, themes: themes)
+            } else if viewState == .game {
                 GameView().environmentObject(matchManager)
+            } else if viewState == .themeSelection {
+                ThemeView(themes: themes, viewState: $viewState) // Passe a instância real aqui
             } else {
-                MenuView(matchManager: matchManager)
+                //ErroJogadorView
             }
         }
         .onAppear {
