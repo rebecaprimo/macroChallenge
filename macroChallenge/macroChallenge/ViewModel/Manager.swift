@@ -15,11 +15,13 @@ struct DataTest: Codable {
 
 class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
+    let minPlayers = 2
+    let maxPlayers = 2
+    
     @Published var inGame = false
     @Published var isGameOver = false
     @Published var authenticationState = PlayerAuthState.authenticating
-    //    @Published var alphabetData = Alphabet(letters: ["A", "B", "C"])
-    @Published var match: GKMatch?
+    @Published var match: GKTurnBasedMatch?
     @Published var buttonStates: [Int: Bool] = [:]
     @Published var dataEncoded = DataTest(data: false)
     
@@ -32,6 +34,28 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     var otherPlayer: GKPlayer?
     var localPlayer = GKLocalPlayer.local
     
+    // Pegar participantes da partida
+    private var localParticipant: GKTurnBasedParticipant? {
+        match?.participants.first{ $0.player == GKLocalPlayer.local }
+    }
+    
+    private var otherParticipant: GKTurnBasedParticipant? {
+        guard let localParticipant = localParticipant else { return nil }
+        return match?.participants.first{ $0 != localParticipant }
+    }
+    
+    private var localPlayerIsCurrentParticipant: Bool {
+        guard let localParticipant = localParticipant else { return false }
+        return match?.currentParticipant == localParticipant
+    }
+    
+    @Published var isCurrentPlayerTurn: Bool = false
+    
+    private var nextParticipant: GKTurnBasedParticipant? {
+        guard let localParticipant = localParticipant else { return nil }
+        return localPlayerIsCurrentParticipant ? otherParticipant : localParticipant
+    }
+    
     var currentMatchmakerVC: GKTurnBasedMatchmakerViewController?
     
     var playerUUIDKey = UUID().uuidString
@@ -40,12 +64,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         return windowScene?.windows.first?.rootViewController
     }
-    
-    //VERIFICAR SE TÁ USANDO!!!!!
-    //    @Published var currentQuestion: String?
-    //    @Published var playerResponses: [GKPlayer: String] = [:]
-    
-    
     
     //MARK: AUTENTICANDO USUARIO
     func authenticateUser() {
@@ -80,8 +98,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     //MARK: PARA ACHAR JOGADORES
     func startMatchmaking() {
         let request = GKMatchRequest()
-        request.minPlayers = 2
-        request.maxPlayers = 2
+        request.minPlayers = self.minPlayers
+        request.maxPlayers = self.maxPlayers
         request.inviteMessage = "Playzinha, bora?"
         
         let matchmakingVC = GKTurnBasedMatchmakerViewController(matchRequest: request)
@@ -93,9 +111,31 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     
     
+    // método para ser invocado quando o timer se esgotar
     func gameOver() {
         isGameOver = true
-        match?.disconnect()
+        
+        // Verificar se é assim que se termina uma partida definindo que todos perderam.
+        // TODO: Excluir o host desse forEach. O host deve ganhar a partida.
+        match?.participants.forEach {participant in
+            participant.matchOutcome = GKTurnBasedMatch.Outcome.lost
+        }
+        match?.endMatchInTurn(withMatch: getData()!) { error in
+            print(error ?? "Error ending match")
+        }
+        
+        // TODO: Chamar a tela de resultado. Verificar se é melhor escutar o valor de isGameOver ao invés de chamar aqui.
+    }
+    
+    func quitGameDisconnected() {
+        print("quitGameDisconnected")
+        match?.participants.first { p in
+            p.player?.gamePlayerID == localPlayer.gamePlayerID
+        }?.matchOutcome = GKTurnBasedMatch.Outcome.quit
+        
+        match?.endMatchInTurn(withMatch: getData()!) { error in
+            print(error ?? "Error ending match")
+        }
     }
     
     
@@ -106,7 +146,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             buttonStates = [:]
         }
         
-        match?.delegate = nil
+//        match?.delegate = nil
         match = nil
         otherPlayer = nil
         playerUUIDKey = UUID().uuidString
@@ -118,14 +158,16 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     //MARK: INICIO DO JOGO
     //fazer logica para ver quem vai ser o antagonista
     
-    func startGame(newMatch: GKMatch) -> AnyView {
+    func startGame(newMatch: GKTurnBasedMatch) -> AnyView {
         match = newMatch
-        match?.delegate = self
-        otherPlayer = match?.players.first
-        otherPlayers = match?.players
+//        match?.delegate = self
+//        otherPlayer = match?.players.first
+//        otherPlayers = match?.players
         inGame = true
         // sendString("began \(playerUUIDKey)")
         
+        print("isCurrentPlayerTurn: \(self.localPlayerIsCurrentParticipant)")
+        isCurrentPlayerTurn = self.localPlayerIsCurrentParticipant
         
         let isLocalAntagonist = otherPlayers?.contains { localPlayer.alias > $0.alias } == true
         
@@ -140,44 +182,42 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         }
     }
     
-    //    func startGame(newMatch: GKMatch) -> AnyView {
-    //        match = newMatch
-    //        match?.delegate = self
-    //        otherPlayers = match?.players
-    //        inGame = true
-    //
-    //        //pegar o id dos jogadores
-    //        for i in 0..<(otherPlayers?.count ?? 0) {
-    //            // se o id do local for maior que o id de algum outro, ele é um agente, ou seja, sai do loop
-    //            //display name para mostrar  na tela
-    //            if localPlayer.alias > otherPlayers![i].alias {
-    //                print("local: \(localPlayer.alias)")
-    //                print("other do indice \(i): \(otherPlayers![i].alias)")
-    //                break
-    //            }
-    //
-    //            // se for o ultimo elemento do vetor no loop, fala que o local é o antagonista
-    //            if i == otherPlayers!.count - 1 {
-    //                isHost = true
-    //                print("sou o host")
-    //                return AnyView(ThemeView(themes: randomThemes))
-    //            }
-    //        }
-    //
-    //       // return AnyView(GameView())
-    //        return AnyView(Text("Erro"))
-    //    }
+    private func endTurn(_ gameBoardData: Data, _ originalState: [Int: Bool]) {
+        guard let match = match, let nextParticipant = nextParticipant else { return }
+        match.endTurn(withNextParticipants: [nextParticipant], turnTimeout: GKTurnTimeoutDefault, match: gameBoardData) {
+            error in
+            
+            print(error ?? "Unknown error while sending data.")
+            self.buttonStates = originalState
+            
+            // "A operação solicitada não pôde ser completada porque o participante especificado não é válido."
+            let userInfo = error?._userInfo as? [String:Any]
+            if (userInfo?["GKServerStatusCode"] as? Int == 5097) {
+                self.quitGameDisconnected()
+            }
+        }
+    }
+    
+    func getData() -> Data? {
+        do {
+            print(buttonStates)
+            return try JSONEncoder().encode(buttonStates)
+        } catch {
+            print("SEND DATA FAILED")
+            return nil
+        }
+    }
     
     
     //MARK: ENVIA O DADO PARA OS OUTROS JOGADORES
     func sendData(buttonId: Int) {
+        // Salvar estado original pra caso dê erro no envio
+        let originalState = buttonStates
+        
         buttonStates[buttonId, default: false].toggle()
-        do {
-            let data = try JSONEncoder().encode(buttonStates)
-            print(buttonStates)
-            try match?.sendData(toAllPlayers: data, with: .reliable)
-        } catch {
-            print("SEND DATA FAILED")
+        let data = getData()
+        if (data != nil) {
+            endTurn(data!, originalState)
         }
     }
     
@@ -240,10 +280,20 @@ extension Manager: GKMatchDelegate {
     //MARK: essa fç executa quando o estado de um dos player muda. 
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         guard state == .disconnected && !isGameOver else { return }
-        let alert = UIAlertController(title: "Player disconnected", message: "The other player disconnected from the game.", preferredStyle: .alert)
+        
+        let countActivePlayers = match.players.filter { p in
+            // TODO: filtrar somente players ativos
+            !p.displayName.isEmpty
+        }.count
+        
+        if (countActivePlayers >= self.minPlayers) { return }
+
+        // Caso número de jogadores ativos for menor que o mínimo permitido
+        // Desconectar também os jogadores ativos restantes na partida
+        let alert = UIAlertController(title: "Players disconnected", message: "The other players disconnected from the game.", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-            self.match?.disconnect()
+            self.quitGameDisconnected()
         })
         
         DispatchQueue.main.async {
@@ -290,7 +340,7 @@ extension Manager: GKMatchDelegate {
 extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKTurnBasedMatchmakerViewControllerDelegate {
     
     func player(_ player: GKPlayer, didAccept invite: GKInvite) {
-        print("chegaaq")
+        print("player didAccept")
 
         otherPlayer = invite.sender
         let vc = GKTurnBasedMatchmakerViewController()
@@ -301,33 +351,34 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKTurnBasedMatc
     }
     
     func player(_ player: GKPlayer, wantsToQuitMatch match: GKTurnBasedMatch) {
-        match.currentParticipant?.matchOutcome = .lost
+        print("player wantsToQuitMatch")
+        
+        match.currentParticipant?.matchOutcome = .quit
     }
     
     func player(_ player: GKPlayer, receivedTurnEventFor match: GKTurnBasedMatch, didBecomeActive: Bool) {
+        print("player receivedTurnEventFor")
+        print("didBecomeActive: \(didBecomeActive)")
+        
         if let vc = currentMatchmakerVC {
             currentMatchmakerVC = nil
             vc.dismiss(animated: true)
         }
         
-        guard didBecomeActive else {
-            return
-        }
-        print("receivedTurnEventFor")
+        guard didBecomeActive else { return }
+        print("isCurrentPlayerTurn: true")
+        isCurrentPlayerTurn = true
     }
     
     
     //AQUI MOSTRA OS JOGADORES QUE RECEBERAM OU ACEITARAM O CONVITE
-    func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
+    func turnBasedMatchmakerViewController(_ viewController: GKTurnBasedMatchmakerViewController, didFind match: GKTurnBasedMatch) {
         
         //instanciando a classe do GKManagerDelegate
         let manager = Manager()
-        print("chegaaq")
-        match.delegate = manager
-        otherPlayer = match.players.first
-           print("Match found, starting game...")
+        print("Match found, starting game...")
         
-//        MARK: entrando direto na tela do jogo:
+//      MARK: entrando direto na tela do jogo:
         viewController.dismiss(animated: true)
         startGame(newMatch: match)
         
