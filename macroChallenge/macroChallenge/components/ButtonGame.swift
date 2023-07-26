@@ -13,11 +13,13 @@ struct ButtonGame: View {
     @State var audioPlayer: AVAudioPlayer?
     @State var isPlaying = true
     @State var letter: String
+    @State var isEnabled: Bool
     private let idButton: Int
 
-    init(letter: String, idButton: Int) {
+    init(letter: String, idButton: Int, isEnabled: Bool) {
         self.letter = letter
         self.idButton = idButton
+        self.isEnabled = isEnabled
     }
 
     func buttonAction(nomeAudio: String){
@@ -31,7 +33,8 @@ struct ButtonGame: View {
         
         HStack {
             Button(action: {
-                guard !isPressed else { return }      //to verificando se o botao já foi pressionado. Se não pressionado, prossegue a action
+                guard isEnabled else { return }  // Verifica se o jogador pode pressionar (ex. é a vez do jogador)
+                guard !isPressed else { return } // Verifica se o botão já foi pressionado. Se não pressionado, prossegue a action
                 buttonAction(nomeAudio: "coin")
                 self.isPlaying.toggle()
                 matchManager.sendData(buttonId: idButton)

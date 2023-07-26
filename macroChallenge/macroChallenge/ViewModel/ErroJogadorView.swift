@@ -18,8 +18,8 @@ struct ErroJogadorView: View {
             let gHeight = g.size.height
             
             let contentPadding = 38.0
-            var contentWidth = gWidth - (contentPadding*2)
-            var contentHeight = gHeight - 200 - 200
+            let contentWidth = gWidth - (contentPadding*2)
+            let contentHeight = gHeight - 200 - 200
             
             VStack(alignment: HorizontalAlignment.center, spacing: 0) {
                 ScrollView(){  //ACERTAR ESSE SCROLL PRA TELAS MENORES E TIRAR NO GRANDE
