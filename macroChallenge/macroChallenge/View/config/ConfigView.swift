@@ -11,26 +11,26 @@ struct ConfigView: View {
     var body: some View {
         NavigationView {
             ZStack {
+                Image("fundoC")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
                 VStack {
-                    RectangleButton(title: "Tutorial", view: AnyView(TutorialView()))
-                    RectangleButton(title: "Regras", view: AnyView(RegrasView()))
-                    RectangleButton(title: "Som", view: AnyView(SomView()))
-                    RectangleButton(title: "Política de privacidade", view: AnyView(PoliticaView()))
-                    RectangleButton(title: "Termos de uso", view: AnyView(TermosView()))
-                    RectangleButton(title: "Fale conosco", view: AnyView(FaleView()))
-                    
-                    Spacer()
+                    RectangleButton(title: "Tutorial", view: TutorialView())
+                    Divider()
+                    RectangleButton(title: "Regras", view: RegrasView())
+                    Divider()
+                    RectangleButton(title: "Som", view: SomView())
+                    Divider()
+                    RectangleButton(title: "Política de privacidade", view: PoliticaView())
+                    Divider()
+                    RectangleButton(title: "Termos de uso", view: TermosView())
+                    Divider()
+                    //RectangleButton(title: "Fale conosco", view: FaleView())
                 }
                 .navigationTitle("Configurações")
                 .navigationBarTitleDisplayMode(.inline)
             }
         }
-    }
-}
-
-
-struct ConfigView_Previews: PreviewProvider {
-    static var previews: some View {
-        ConfigView()
     }
 }

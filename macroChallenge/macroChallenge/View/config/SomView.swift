@@ -9,7 +9,12 @@ import SwiftUI
 
 struct SomView: View {
     var body: some View {
-        Text("")
+        ZStack {
+            Image("fundoC")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .edgesIgnoringSafeArea(.all)
+        }
             .navigationTitle("Som")
             .navigationBarTitleDisplayMode(.inline)
     }
