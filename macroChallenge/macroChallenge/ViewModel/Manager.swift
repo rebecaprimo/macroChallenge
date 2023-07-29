@@ -56,6 +56,9 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         return localPlayerIsCurrentParticipant ? otherParticipant : localParticipant
     }
     
+    //VERIFICAR
+//    var currentMatch: GKTurnBasedMatch?
+    
     var currentMatchmakerVC: GKTurnBasedMatchmakerViewController?
     
     var playerUUIDKey = UUID().uuidString
@@ -187,7 +190,12 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         match.endTurn(withNextParticipants: [nextParticipant], turnTimeout: GKTurnTimeoutDefault, match: gameBoardData) {
             error in
             
-            print(error ?? "Unknown error while sending data.")
+            if (error == nil) {
+                // deu certo
+                return
+            }
+            
+            print(error!)
             self.buttonStates = originalState
             
             // "A operação solicitada não pôde ser completada porque o participante especificado não é válido."
@@ -214,14 +222,14 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         // Salvar estado original pra caso dê erro no envio
         let originalState = buttonStates
         
-        buttonStates[buttonId, default: false].toggle()
-        let data = getData()
+        buttonStates[buttonId, default: false].toggle()  // Atualiza o estado local do botão.
+        let data = getData() // Codifica os dados atualizados em formato JSON.
         if (data != nil) {
             endTurn(data!, originalState)
         }
     }
     
-    
+
     //MARK: Verifica se todos os botões foram pressionados e se são true (vitóriaGrupo = true)
     func verifyAllButtonsArePressed() {
         let allButtonsAreTrue = buttonStates.allSatisfy({ (key: Int, value: Bool) in
@@ -360,15 +368,42 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKTurnBasedMatc
         print("player receivedTurnEventFor")
         print("didBecomeActive: \(didBecomeActive)")
         
+//        if didBecomeActive {
+//            // É o turno do jogador atual.
+//            isCurrentPlayerTurn = true
+//        } else {
+//            // É o turno de outro jogador, então o jogador atual não pode interagir com os botões.
+//            isCurrentPlayerTurn = false
+//        }
+        
         if let vc = currentMatchmakerVC {
             currentMatchmakerVC = nil
             vc.dismiss(animated: true)
         }
         
-        guard didBecomeActive else { return }
-        print("isCurrentPlayerTurn: true")
-        isCurrentPlayerTurn = true
+//        guard didBecomeActive else { return }
+        print("isCurrentPlayerTurn: \(didBecomeActive)")
+        isCurrentPlayerTurn = didBecomeActive
     }
+    
+    
+    
+//    func player(_ player: GKPlayer, receivedTurnEventFor match: GKTurnBasedMatch, didBecomeActive: Bool) {
+//        if didBecomeActive {
+//            // É o turno do jogador atual.
+//            isCurrentPlayerTurn = true
+//        } else {
+//            // É o turno de outro jogador, então o jogador atual não pode interagir com os botões.
+//            isCurrentPlayerTurn = false
+//        }
+//
+//        // Aqui, você pode atualizar a interface do usuário para refletir o turno atual.
+//        // Por exemplo: habilitar/desabilitar os botões de acordo com a variável isCurrentPlayerTurn.
+//        // Se for o turno do jogador atual, os botões devem estar habilitados; caso contrário, desabilitados.
+//
+//        // Além disso, você pode chamar a função que atualiza a exibição dos botões de acordo com o estado atual.
+//        // Por exemplo: updateButtonStatesUI()
+//    }
     
     
     //AQUI MOSTRA OS JOGADORES QUE RECEBERAM OU ACEITARAM O CONVITE
