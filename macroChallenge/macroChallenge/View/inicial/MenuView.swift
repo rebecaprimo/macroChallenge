@@ -8,51 +8,51 @@
 import SwiftUI
 
 struct MenuView: View {
-    //objeto observavel da classe Manager que gerencia o Gamekit
+    // objeto observável da classe Manager que gerencia o Gamekit
     @ObservedObject var matchManager: Manager
     @Binding var viewState: ViewState
     var themes: [Theme]
 
     var body: some View {
-        
-        Color.white.edgesIgnoringSafeArea(.all)
         NavigationView {
-            VStack {
+            ZStack {
+                Image("fundoHome") // Substitua "background" pelo nome da sua imagem de fundo
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
+
                 VStack {
                     Spacer()
-                    Button {
-                        matchManager.startMatchmaking()
-                        viewState = .themeSelection
-                    } label: {
-                        Text("Online")
-                            .foregroundColor(.blue)
-                            .font(.largeTitle)
-                            .bold()
+                    GeometryReader { geometry in
+                        Button {
+                            matchManager.startMatchmaking()
+                            viewState = .themeSelection
+                        } label: {
+                            Image("jogarHome")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: geometry.size.width * 0.3) // 30% da largura disponível
+                                .opacity(matchManager.authenticationState != .authenticated || matchManager.inGame ? 0.5 : 1.0)
+                        }
+                        .disabled(matchManager.authenticationState != .authenticated || matchManager.inGame)
+                        .padding(.vertical, geometry.size.height * 0.2) // 20% da altura disponível
+                        .padding(.horizontal, geometry.size.width * 0.2) // 20% da largura disponível
                     }
-                    .disabled(matchManager.authenticationState != .authenticated || matchManager.inGame)
-                    .padding(.vertical, 20)
-                    .padding(.horizontal, 100)
-                    .background(
-                        //se for authenticado, cai aqui
-                        Capsule(style: .circular)
-                            .fill(matchManager.authenticationState != .authenticated || matchManager.inGame ? .gray : Color(.systemPink))
-                    )
-                    
+
                     Text(matchManager.authenticationState.rawValue)
                         .font(.headline.weight(.semibold))
-                        .foregroundColor(.orange)
-                        .padding()
-                    
+                        .foregroundColor(.white)
                     Spacer()
-                }.sheet(isPresented: $matchManager.inGame) {
-                    ThemeView(themes: themes, viewState: $viewState).environmentObject(matchManager)
                 }
             }
-            .navigationTitle("Voltar")
             .navigationBarItems(
                 trailing:
                     NavigationLink(destination: ConfigView()) {
-                        Image(systemName: "gearshape.fill")
+                        Image("confHome")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .scaledToFit()
+                            .scaleEffect(1.5)
                     }
             )
         }

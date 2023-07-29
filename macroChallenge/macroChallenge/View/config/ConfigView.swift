@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ConfigView: View {
     var body: some View {
-        VStack {
-            NavigationView {
+        NavigationView {
+            ZStack {
                 VStack {
                     RectangleButton(title: "Tutorial", view: AnyView(TutorialView()))
                     RectangleButton(title: "Regras", view: AnyView(RegrasView()))
@@ -27,6 +27,7 @@ struct ConfigView: View {
         }
     }
 }
+
 
 struct ConfigView_Previews: PreviewProvider {
     static var previews: some View {

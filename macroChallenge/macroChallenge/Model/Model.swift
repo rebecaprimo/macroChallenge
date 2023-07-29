@@ -12,12 +12,12 @@ import Foundation
 
 
 enum PlayerAuthState: String {
-    case authenticating = "Logging in to Game Center..."
-    case unauthenticated = "Please sign in to Game Center to play."
+    case authenticating = "Conectando ao Game Center..."
+    case unauthenticated = "Por favor, conecte ao Game Center para jogar."
     case authenticated = ""
     
-    case error = "There was an error logging into Game Center."
-    case restricted = "You're not allowed to play multiplayer games!"
+    case error = "Ocorreu um erro ao fazer login no Game Center."
+    case restricted = "Você não tem permissão para jogar jogos multiplayer!"
 }
 
 struct PastGuess: Identifiable {

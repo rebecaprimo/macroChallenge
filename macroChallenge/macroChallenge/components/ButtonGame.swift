@@ -15,10 +15,12 @@ struct ButtonGame: View {
     @State var isButtonOn = false // Estado individual para cada botão
     @State var letter: String
     private let idButton: Int
+    @State private var letterP: String
 
-    init(letter: String, idButton: Int) {
+    init(letter: String, idButton: Int, letterP: String) {
         self.letter = letter
         self.idButton = idButton
+        self.letterP = letterP
     }
 
     func buttonAction(nomeAudio: String){
@@ -35,10 +37,9 @@ struct ButtonGame: View {
                 matchManager.sendData(buttonId: idButton)
                 self.isButtonOn.toggle() // Altere o estado individual do botão
             }, label: {
-                Image(matchManager.buttonStates[idButton, default: false] ? "swift" : letter)
+                Image(matchManager.buttonStates[idButton, default: false] ? letterP : letter)
                     .resizable()
-                    .frame(width: 60, height: 60)
-                    //.background(matchManager.buttonStates[idButton, default: false] ? Color.red : Color.blue)
+                    .frame(width: 85, height: 85)
             })
             .foregroundColor(.black)
         }
