@@ -30,6 +30,8 @@ struct ContentView: View {
         .onAppear {
             manager.authenticateUser()
         }
+      
+        //aqui atualiza a view
         .onChange(of: manager.viewState) { newState in
             viewState = newState
         }

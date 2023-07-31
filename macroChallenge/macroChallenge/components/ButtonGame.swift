@@ -28,13 +28,19 @@ struct ButtonGame: View {
         audioPlayer = try! AVAudioPlayer(contentsOf: Bundle.main.url(forResource: nomeAudio, withExtension: "m4a")!)
         self.audioPlayer?.play()
     }
-
+    
     var body: some View {
         HStack {
             Button(action: {
                 buttonAction(nomeAudio: "coin")
                 self.isPlaying.toggle()
                 matchManager.sendData(buttonId: idButton)
+                matchManager.verifyAllButtonsArePressed()
+
+                
+                //o cara que clicou, avisa que o turn dele acabou e manda para o proximo
+          //      matchManager.sendDataTurnPlayer()
+                
                 self.isButtonOn.toggle() // Altere o estado individual do botão
             }, label: {
                 Image(matchManager.buttonStates[idButton, default: false] ? letterP : letter)

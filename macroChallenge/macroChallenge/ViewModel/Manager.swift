@@ -37,7 +37,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
    
     @Published var players: [Player] = []
     var hostIDHistoryComplete: Bool = false
-    var hostIDHistory: [Int] = []
+    var playersIDHistory: [Int] = []
     var randomThemes = Theme.themes
     
     private var randomHostNumber: Int = 0
@@ -139,13 +139,19 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     // ...
     
-    func determineMenuSheetContent(_ hostID: String) -> ViewState {
+    //passo 8 - determinando a view para os jogadores, todos estao indo direto para a do jogo
+    func determineGameView(_ hostID: String) -> ViewState {
         print("\(hostID)")
         print("numero de jogadores no total: \(numberOfPlayers)")
         
+        //nesse for, é bom sempre olhar para ver se, os jogadores foram adicionados corretamente ex:
+//        exemplo do print
+//        ID do jogador: 90
+//        ID do jogador: 2
         for player in players {
             print("ID do jogador: \(player.playerID)")
         }
+        
         var newViewState: ViewState = .waitingRoom
             
             if let hostID = Int(hostID) {
@@ -156,7 +162,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
                             isBombMasterAssigned = true
                             newViewState = .game
                             print("newViewStateHost: \(newViewState)")
-
                         } else {
                             print("CAI NO AGENTE")
                             newViewState = .game
@@ -170,35 +175,42 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             }
           return newViewState
         }
+    
 
     // MARK: JOGO
     
     // Função para gerar e enviar o numero do host
-    func generateAndSendHostNumber() {
+    
+    //passo 1
+    func generateAndSendPlayerID() {
         randomHostNumber = Int.random(in: 1...99)
         //nao deixar repetir
-        let randomNumberString = "$Host:\(randomHostNumber)"
+        
+        let randomNumberString = "$IDPlayer:\(randomHostNumber)"
         print("\(randomNumberString)")
         
         if let data = randomNumberString.data(using: .utf8) {
+            //passo 2
+            //enviar esse dado para os devices
             sendDataToAllPlayers(data, mode: .reliable)
         } else {
             print("erro ")
         }
     }
     
-    //Função para determinar o Host
     
-    func determineHost(_ dataString: String) {
-        let hostNumberString = dataString.replacingOccurrences(of: "$Host:", with: "")
+    //passo 6 - função para determinar e adicionar os jogadores
+
+    func determineOrderPlayers(_ dataString: String) {
+        let hostNumberString = dataString.replacingOccurrences(of: "$IDPlayer:", with: "")
         print("host number string: \(hostNumberString)")
         
         if let hostNumber = Int(hostNumberString) {
             // Adicionar o novo hostNumber ao histórico hostIDHistory
-            hostIDHistory.append(hostNumber)
+            playersIDHistory.append(hostNumber)
             
             // Ordenar o histórico hostIDHistory de forma crescente
-            hostIDHistory.sort()
+            playersIDHistory.sort()
             
             if let existingPlayerIndex = players.firstIndex(where: { $0.playerID == hostNumber }) {
                 // Atualizar isHost para false para todos os jogadores
@@ -209,8 +221,10 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
                 // atualizar isHost para true
                 players[existingPlayerIndex].isHost = true
                 
+                
+                // passo 7 - aqui adiciona na estrutura Player que provavelmente irá definir o turno na tela do jogo
             } else {
-                let newPlayer = Player(playerID: hostNumber, name: "AAAAAAAAAA", isHost: true)
+                let newPlayer = Player(playerID: hostNumber, name: "AAAAAAAAAA", isHost: true, turn: false)
                 players.append(newPlayer)
                 
                 //    print("\(hostID)")
@@ -225,29 +239,50 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
                 // definir isHost como true para o jogador com o maior numero
                 maxHostNumberPlayer.isHost = true
                 
-                if hostIDHistory.count == numberOfPlayers {
+                if playersIDHistory.count == numberOfPlayers {
                     hostIDHistoryComplete = true
                 }
-                if hostIDHistory.count == numberOfPlayers {
-                    let maxHostID = hostIDHistory.max()!
-                    let message = "$HostIDDetermined:\(maxHostID)"
+                //tem que arrumar a gambiarra do numberOfPlayers
+                
+                //aqui envia o dado do maior numero do array de playersIDHistory
+                
+                if playersIDHistory.count == numberOfPlayers {
+                    let maxHostID = playersIDHistory.max()!
+                    let message = "$MaxPlayerIDDetermined:\(maxHostID)"
                     if let data = message.data(using: .utf8) {
                         sendDataToAllPlayers(data, mode: .reliable)
                     }
                 }
-                print("historico ids: \(hostIDHistory)")// Adicionar o hostID ao histórico
+                print("historico ids: \(playersIDHistory)")// add o hostID ao historicoo
                 // Adicionar o hostID ao histórico
                 // tinha que atualizar o nomeeeeeee
-                print("o maior número que sera o host: \(maxHostNumberPlayer.playerID) e o nome: \(maxHostNumberPlayer.name)")
+                print("o maior número é: \(maxHostNumberPlayer.playerID) e o nome(que nao ta puxando): \(maxHostNumberPlayer.name)")
             }
         }
     }
     
     
+    //MARK: Verifica se todos os botões foram pressionados e se são true (vitóriaGrupo = true)
+        func verifyAllButtonsArePressed() {
+            let allButtonsAreTrue = buttonStates.allSatisfy({ (key: Int, value: Bool) in
+                value == true
+            })
+            if(buttonStates.count == 21 && allButtonsAreTrue) {
+                print("resultado")
+                var resultadoJogo = ResultadoJogo(vitoriaGrupo: true)
+                ErroJogadorView(resultado: resultadoJogo)
+    //            self.present(ErroJogadorView, animated: true, completion: nil) NÃO FUNCIONA. não seria na view??
+    //            NavigationLink(destination: ErroJogadorView(resultado: resultadoJogo)){EmptyView()} NÃO FUNCIONA. não seria na view??
+            }
+        }
+    
     
     
     //MARK: ENVIA O DADO PARA OS OUTROS JOGADORES
-    func sendData(buttonId: Int) {
+    func sendData(buttonId: Int, player: Player) {
+        
+        //enviar turno do jogador e o id dele
+        
         buttonStates[buttonId, default: false].toggle()
         do {
             let data = try JSONEncoder().encode(buttonStates)
@@ -260,17 +295,21 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     //MARK: RECEBER DADOS
     // Função para processar os dados recebidos
+    
     func receivedData(_ data: Data) {
+        // passo 5 - recebe o dado do id do player
         if let message = String(data: data, encoding: .utf8) {
-            if message.hasPrefix("$Host:") {
+            if message.hasPrefix("$IDPlayer:") {
                 print("\(message)")
-                determineHost(message)
+                determineOrderPlayers(message)
             }
-            else if message.hasPrefix("$HostIDDetermined:") {
-                let hostIDString = message.replacingOccurrences(of: "$HostIDDetermined:", with: "")
+            
+            //AQUI PROCESSA O MAIOR NUMERO DOS IDS QUE FOI DEFINIDO NA DETERMINEPLAYERID()
+            else if message.hasPrefix("$MaxPlayerIDDetermined:") {
+                let hostIDString = message.replacingOccurrences(of: "$MaxPlayerIDDetermined:", with: "")
                 
                 //                hostIDPublished = hostIDString
-                let newState = determineMenuSheetContent(hostIDString)
+                let newState = determineGameView(hostIDString)
                 DispatchQueue.main.async { [weak self] in
                     self?.viewState = newState
                 }
@@ -311,21 +350,29 @@ extension Manager: GKMatchDelegate {
     
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         
+        //passo 4 - recebe de outros jogadores
         receivedData(data)
+        //vai ter que receber dos outros jogadores o estado dos turnos e se ele é o proximo junto com o estado do botao
+
+        
         do {
+            //receberá aqui o botao, turno e id do jogador
             let newData = try JSONDecoder().decode([Int: Bool].self, from: data)
             buttonStates = newData
         } catch {
             print("GAME DATA ERROR")
         }
     }
+    
     func sendDataToAllPlayers(_ messageData: Data, mode: GKMatch.SendDataMode) {
         
         do {
             try gameMatch?.sendData(toAllPlayers: messageData, with: mode)
             
-            // Processar os dados enviados também localmente
+            //passo 4 - processar os dados enviados também localmente
             receivedData(messageData)
+            
+            //onde o jogador local manda o seu estado de turno
             
             
         } catch {
@@ -358,7 +405,7 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         gameMatch?.delegate = self
         print("Match found, starting game...")
         
-        generateAndSendHostNumber()
+        generateAndSendPlayerID()
         
         //de alguma forma, atualizar a view state conforme a funcao
         

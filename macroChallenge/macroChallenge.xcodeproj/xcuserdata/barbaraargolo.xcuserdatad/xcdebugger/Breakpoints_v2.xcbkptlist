@@ -333,8 +333,8 @@
             filePath = "macroChallenge/ViewModel/Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
             landmarkName = "matchmakerViewController(_:didFind:)"
             landmarkType = "7">
             <Locations>
@@ -411,8 +411,8 @@
             filePath = "macroChallenge/ViewModel/Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "Manager"
             landmarkType = "3">
             <Locations>
@@ -489,26 +489,10 @@
             filePath = "macroChallenge/ViewModel/Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "Manager"
             landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "82848443-3B41-4197-9D75-BE378C06CFCF"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "macroChallenge/ViewModel/Manager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
-            landmarkName = "match(_:didReceive:fromRemotePlayer:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -521,8 +505,8 @@
             filePath = "macroChallenge/ViewModel/Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
+            startingLineNumber = "373"
+            endingLineNumber = "373"
             landmarkName = "sendDataToAllPlayers(_:mode:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -537,8 +521,8 @@
             filePath = "macroChallenge/ViewModel/Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
             landmarkName = "receivedData(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -553,8 +537,8 @@
             filePath = "macroChallenge/ViewModel/Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
             landmarkName = "receivedData(_:)"
             landmarkType = "7">
             <Locations>
@@ -609,22 +593,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "14F2477D-995E-4D6E-9052-397EB64BED9B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "macroChallenge/ViewModel/Manager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
-            landmarkName = "Manager"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "7693A89E-E75B-4BCA-8FEA-656DFB115207"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -632,9 +600,9 @@
             filePath = "macroChallenge/ViewModel/Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "determineMenuSheetContent(_:)"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "determineGameView(_:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -680,8 +648,8 @@
             filePath = "macroChallenge/ViewModel/Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "matchmakerViewController(_:didFind:)"
             landmarkType = "7">
             <Locations>
@@ -774,9 +742,9 @@
             filePath = "macroChallenge/ViewModel/Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "determineMenuSheetContent(_:)"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "determineGameView(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -790,9 +758,9 @@
             filePath = "macroChallenge/ViewModel/Manager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "determineMenuSheetContent(_:)"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "determineGameView(_:)"
             landmarkType = "7">
             <Locations>
                <Location

@@ -11,10 +11,12 @@ class Player {
     let playerID: Int
     var isHost: Bool
     let name: String
+    var turn: Bool
 
-    init(playerID: Int, name: String, isHost: Bool) {
+    init(playerID: Int, name: String, isHost: Bool, turn: Bool) {
         self.playerID = playerID
         self.name = name
         self.isHost = isHost
+        self.turn = turn
     }
 }
