@@ -27,6 +27,9 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     @Published var chooseTheme = false
     @Published var isHost = false
+
+    @Published var feedbackMessage: String?
+
     var randomThemes = Theme.themes
     
     var myGame: GKMatchDelegate?
@@ -44,6 +47,11 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         return match?.participants.first{ $0 != localParticipant }
     }
     
+    private func otherParticipants() -> [GKTurnBasedParticipant]? {
+        guard let localParticipant = localParticipant else { return [] }
+        return match?.participants.filter { $0 != localParticipant }
+    }
+
     private var localPlayerIsCurrentParticipant: Bool {
         guard let localParticipant = localParticipant else { return false }
         return match?.currentParticipant == localParticipant
@@ -103,6 +111,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         let request = GKMatchRequest()
         request.minPlayers = self.minPlayers
         request.maxPlayers = self.maxPlayers
+        request.defaultNumberOfPlayers = 2
+
         request.inviteMessage = "Playzinha, bora?"
         
         let matchmakingVC = GKTurnBasedMatchmakerViewController(matchRequest: request)
@@ -124,7 +134,11 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             participant.matchOutcome = GKTurnBasedMatch.Outcome.lost
         }
         match?.endMatchInTurn(withMatch: getData()!) { error in
-            print(error ?? "Error ending match")
+            if (error != nil) {
+                print(error!)
+            }
+
+            // TODO: Se não houver erro, voltar pra tela anterior
         }
         
         // TODO: Chamar a tela de resultado. Verificar se é melhor escutar o valor de isGameOver ao invés de chamar aqui.
@@ -137,7 +151,11 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         }?.matchOutcome = GKTurnBasedMatch.Outcome.quit
         
         match?.endMatchInTurn(withMatch: getData()!) { error in
-            print(error ?? "Error ending match")
+            if (error != nil) {
+                print(error!)
+            }
+
+            // TODO: Se não houver erro, voltar pra tela anterior
         }
     }
     
@@ -187,6 +205,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     private func endTurn(_ gameBoardData: Data, _ originalState: [Int: Bool]) {
         guard let match = match, let nextParticipant = nextParticipant else { return }
+
         match.endTurn(withNextParticipants: [nextParticipant], turnTimeout: GKTurnTimeoutDefault, match: gameBoardData) {
             error in
             
@@ -196,6 +215,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             }
             
             print(error!)
+            self.feedbackMessage = error?.localizedDescription
             self.buttonStates = originalState
             
             // "A operação solicitada não pôde ser completada porque o participante especificado não é válido."
@@ -283,62 +303,64 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
 
 //MARK: EVENTOS DA PARTIDA EM ANDAMENTO
 
-extension Manager: GKMatchDelegate {
 
-    //MARK: essa fç executa quando o estado de um dos player muda. 
-    func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
-        guard state == .disconnected && !isGameOver else { return }
-        
-        let countActivePlayers = match.players.filter { p in
-            // TODO: filtrar somente players ativos
-            !p.displayName.isEmpty
-        }.count
-        
-        if (countActivePlayers >= self.minPlayers) { return }
 
-        // Caso número de jogadores ativos for menor que o mínimo permitido
-        // Desconectar também os jogadores ativos restantes na partida
-        let alert = UIAlertController(title: "Players disconnected", message: "The other players disconnected from the game.", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-            self.quitGameDisconnected()
-        })
-        
-        DispatchQueue.main.async {
-            self.resetGame()
-            self.rootViewController?.present(alert, animated: true)
-        }
-    }
-    
-    func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
-        do {
-            let newData = try JSONDecoder().decode([Int: Bool].self, from: data)
-            buttonStates = newData
-        } catch {
-            print("GAME DATA ERROR")
-        }
-    }
-    
-    
-    //MARK: ******* AQUI *********
-    
-//    //aqui vc envia uma string na received string
-//        func sendString(_ str: String) {
-//            guard let encoded = "changeButtonState".data(using: .utf8) else { return }
-//            sendData(encoded, mode: .reliable)
-//        }
+//extension Manager: GKMatchDelegate {
 //
-    
-    //MARK: ******* AQUI *********
-    
-//        do {
-//            try match?.sendData(toAllPlayers: data, with: mode)
-//        } catch {
-//            print(error)
+//    //MARK: essa fç executa quando o estado de um dos player muda.
+//    func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
+//        guard state == .disconnected && !isGameOver else { return }
+//
+//        let countActivePlayers = match.players.filter { p in
+//            // TODO: filtrar somente players ativos
+//            !p.displayName.isEmpty
+//        }.count
+//
+//        if (countActivePlayers >= self.minPlayers) { return }
+//
+//        // Caso número de jogadores ativos for menor que o mínimo permitido
+//        // Desconectar também os jogadores ativos restantes na partida
+//        let alert = UIAlertController(title: "Players disconnected", message: "The other players disconnected from the game.", preferredStyle: .alert)
+//
+//        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+//            self.quitGameDisconnected()
+//        })
+//
+//        DispatchQueue.main.async {
+//            self.resetGame()
+//            self.rootViewController?.present(alert, animated: true)
 //        }
 //    }
-    
-}
+//
+//    func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
+//        do {
+//            let newData = try JSONDecoder().decode([Int: Bool].self, from: data)
+//            buttonStates = newData
+//        } catch {
+//            print("GAME DATA ERROR")
+//        }
+//    }
+//
+//
+//    //MARK: ******* AQUI *********
+//
+////    //aqui vc envia uma string na received string
+////        func sendString(_ str: String) {
+////            guard let encoded = "changeButtonState".data(using: .utf8) else { return }
+////            sendData(encoded, mode: .reliable)
+////        }
+////
+//
+//    //MARK: ******* AQUI *********
+//
+////        do {
+////            try match?.sendData(toAllPlayers: data, with: mode)
+////        } catch {
+////            print(error)
+////        }
+////    }
+//
+//}
 
 
 
@@ -366,45 +388,15 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKTurnBasedMatc
     
     func player(_ player: GKPlayer, receivedTurnEventFor match: GKTurnBasedMatch, didBecomeActive: Bool) {
         print("player receivedTurnEventFor")
-        print("didBecomeActive: \(didBecomeActive)")
-        
-//        if didBecomeActive {
-//            // É o turno do jogador atual.
-//            isCurrentPlayerTurn = true
-//        } else {
-//            // É o turno de outro jogador, então o jogador atual não pode interagir com os botões.
-//            isCurrentPlayerTurn = false
-//        }
         
         if let vc = currentMatchmakerVC {
             currentMatchmakerVC = nil
             vc.dismiss(animated: true)
         }
         
-//        guard didBecomeActive else { return }
-        print("isCurrentPlayerTurn: \(didBecomeActive)")
-        isCurrentPlayerTurn = didBecomeActive
+        print("isCurrentPlayerTurn: \(localPlayerIsCurrentParticipant)")
+        isCurrentPlayerTurn = localPlayerIsCurrentParticipant
     }
-    
-    
-    
-//    func player(_ player: GKPlayer, receivedTurnEventFor match: GKTurnBasedMatch, didBecomeActive: Bool) {
-//        if didBecomeActive {
-//            // É o turno do jogador atual.
-//            isCurrentPlayerTurn = true
-//        } else {
-//            // É o turno de outro jogador, então o jogador atual não pode interagir com os botões.
-//            isCurrentPlayerTurn = false
-//        }
-//
-//        // Aqui, você pode atualizar a interface do usuário para refletir o turno atual.
-//        // Por exemplo: habilitar/desabilitar os botões de acordo com a variável isCurrentPlayerTurn.
-//        // Se for o turno do jogador atual, os botões devem estar habilitados; caso contrário, desabilitados.
-//
-//        // Além disso, você pode chamar a função que atualiza a exibição dos botões de acordo com o estado atual.
-//        // Por exemplo: updateButtonStatesUI()
-//    }
-    
     
     //AQUI MOSTRA OS JOGADORES QUE RECEBERAM OU ACEITARAM O CONVITE
     func turnBasedMatchmakerViewController(_ viewController: GKTurnBasedMatchmakerViewController, didFind match: GKTurnBasedMatch) {
