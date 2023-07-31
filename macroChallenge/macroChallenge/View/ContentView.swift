@@ -9,25 +9,41 @@ import Foundation
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var matchManager = Manager(viewState: $viewState)
+    @EnvironmentObject var manager: Manager
     @State private var viewState: ViewState = .menu
-
-    var themes: [Theme] = Theme.themes // Crie uma instância real do array de temas
-
+    var themes: [Theme] = Theme.themes
+    
     var body: some View {
         ZStack {
             if viewState == .menu {
-                MenuView(matchManager: matchManager, viewState: $viewState, themes: themes)
+                MenuView(viewState: $viewState, themes: themes)
             } else if viewState == .game {
-                GameView().environmentObject(matchManager)
+                GameView().environmentObject(manager)
             } else if viewState == .themeSelection {
-                ThemeView(themes: themes, viewState: $viewState) // Passe a instância real aqui
+                ThemeView(themes: themes, viewState: $viewState)
             } else {
-                //ErroJogadorView
+                Text("Erro")
             }
         }
         .onAppear {
-            matchManager.authenticateUser()
+            manager.authenticateUser()
         }
     }
 }
+
+//var body: some View {
+//    ZStack {
+//        if matchManager.viewState == .menu {
+//            MenuView(matchManager: matchManager, viewState: $matchManager.viewState, themes: themes)
+//        } else if matchManager.viewState == .game {
+//            GameView().environmentObject(matchManager)
+//        } else if matchManager.viewState == .themeSelection {
+//            ThemeView(themes: themes, viewState: $matchManager.viewState)
+//        } else {
+//            Text("Erro")
+//        }
+//    }
+//    .onAppear {
+//        matchManager.authenticateUser()
+//    }
+//}

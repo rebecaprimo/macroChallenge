@@ -140,9 +140,9 @@
 			children = (
 				6BDD4CEB2A2693BA00D8CE6D /* GameView.swift */,
 				A726010C2A5897F000A9308E /* ThemeView.swift */,
+				6B92C6BA2A773333004E81D4 /* AgentsView.swift */,
 				4DAC6E392A39F25500F7BC72 /* inicial */,
 				4DAC6E2E2A38E59F00F7BC72 /* config */,
-				6B92C6BA2A773333004E81D4 /* AgentsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MenuView: View {
     // objeto observável da classe Manager que gerencia o Gamekit
-    @ObservedObject var matchManager: Manager
+    @EnvironmentObject var matchManager: Manager
     @Binding var viewState: ViewState
     var themes: [Theme]
 

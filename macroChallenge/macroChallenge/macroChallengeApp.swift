@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct macroChallengeApp: App {
- //   @StateObject var matchManager = Manager(viewState: )
+    @StateObject var manager = Manager()
     var randomThemes = Theme.themes
     
     var body: some Scene {
         WindowGroup {
-         ContentView()
+       //     ContentView(matchManager: matchManager, viewState: $matchManager.viewState)
+         ContentView().environmentObject(manager)
         }
     }
 }
