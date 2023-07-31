@@ -25,7 +25,14 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     @Published var hostIDPublished = String()
     @Published var menuSheetContent: AnyView?
     @Published var showMenuSheet = false
+    
     @Published var viewState: ViewState = .menu
+//
+//
+//      init(viewState: Binding<ViewState>) {
+//          self.viewState = viewState.wrappedValue
+//          super.init()
+//      }
 
    
     @Published var players: [Player] = []
@@ -121,48 +128,48 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     
     func startGame(newMatch: GKMatch) {
-        gameMatch = newMatch
-        gameMatch?.delegate = self
-        otherPlayer = gameMatch?.players.first
+//        gameMatch = newMatch
+//        gameMatch?.delegate = self
+//        otherPlayer = gameMatch?.players.first
         inGame = true
+      //  viewState = .game
         
         print("cheguei na funcao startgame")
         
     }
     // ...
     
-    func determineMenuSheetContent(_ hostID: String, updateViewState: @escaping (ViewState) -> Void) {
+    func determineMenuSheetContent(_ hostID: String) -> ViewState {
         print("\(hostID)")
         print("numero de jogadores no total: \(numberOfPlayers)")
         
         for player in players {
             print("ID do jogador: \(player.playerID)")
         }
-        
-        // Suponha que o ViewState correto tenha sido determinado e armazenado em uma variável chamada "newViewState"
-        
-        if let hostID = Int(hostID) {
-            if let playerWithMaxHostID = players.first(where: { $0.playerID == hostID }) {
-                if playerWithMaxHostID.playerID == hostID {
-                    if !isBombMasterAssigned {
-                        print("CAI NO HOST: \(hostID)")
-                        isBombMasterAssigned = true
-                        updateViewState(.themeSelection)
-                        print("viewStateHost: \(viewState)")
+        var newViewState: ViewState = .waitingRoom
+            
+            if let hostID = Int(hostID) {
+                if let playerWithMaxHostID = players.first(where: { $0.playerID == hostID }) {
+                    if playerWithMaxHostID.playerID == hostID {
+                        if !isBombMasterAssigned {
+                            print("CAI NO HOST: \(hostID)")
+                            isBombMasterAssigned = true
+                            newViewState = .game
+                            print("newViewStateHost: \(newViewState)")
 
+                        } else {
+                            print("CAI NO AGENTE")
+                            newViewState = .game
+                            print("newViewStateAgent: \(newViewState)")
+                            
+                        }
                     } else {
-                        print("CAI NO AGENTE")
-                        updateViewState(.waitingRoom)
-                        print("viewStateHost: \(viewState)")
-                        
+                        newViewState = .waitingRoom
                     }
-                } else {
-                    // Restante do código...
-                    updateViewState(.waitingRoom)
                 }
             }
+          return newViewState
         }
-    }
 
     // MARK: JOGO
     
@@ -263,8 +270,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
                 let hostIDString = message.replacingOccurrences(of: "$HostIDDetermined:", with: "")
                 
                 //                hostIDPublished = hostIDString
-                determineMenuSheetContent(hostIDString) { [weak self] newState in
-                    print("newState: \(newState)")
+                let newState = determineMenuSheetContent(hostIDString)
+                DispatchQueue.main.async { [weak self] in
                     self?.viewState = newState
                 }
             } else {
@@ -357,7 +364,7 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         
         
         viewController.dismiss(animated: true)
-        startGame(newMatch: match)
+     //   startGame(newMatch: match)
     }
     
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFailWithError error: Error) {

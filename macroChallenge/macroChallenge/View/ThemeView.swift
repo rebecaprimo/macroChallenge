@@ -63,7 +63,7 @@ struct ThemeView: View {
                         .padding(.top, geometry.size.height * 0.0) // Adicione espaço na parte superior
 
                     Button {
-                        viewState = .game
+                    //    viewState = .game
                     } label: {
                         Image("OK")
                             .resizable()

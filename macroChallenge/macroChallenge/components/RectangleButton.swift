@@ -79,9 +79,9 @@ struct RectangleButton<Content: View>: View {
     }
 }
 
-struct RectangleButton_Previews: PreviewProvider {
-    static var previews: some View {
-        RectangleButton(title: "Teste", view: GameView())
-    }
-}
+//struct RectangleButton_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RectangleButton(title: "Teste", view: GameView())
+//    }
+//}
 

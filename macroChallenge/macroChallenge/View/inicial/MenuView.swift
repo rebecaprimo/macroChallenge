@@ -13,10 +13,12 @@ struct MenuView: View {
     @Binding var viewState: ViewState
     var themes: [Theme]
 
+    @State private var showGameView = false // add o estado para mostrar a Sheet
+
     var body: some View {
         NavigationView {
             ZStack {
-                Image("fundoHome") // Substitua "background" pelo nome da sua imagem de fundo
+                Image("fundoHome")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .edgesIgnoringSafeArea(.all)
@@ -26,7 +28,7 @@ struct MenuView: View {
                     GeometryReader { geometry in
                         Button {
                             matchManager.startMatchmaking()
-                         //   viewState = .themeSelection
+                           // viewState = .game
                         } label: {
                             Image("jogarHome")
                                 .resizable()
@@ -56,5 +58,9 @@ struct MenuView: View {
                     }
             )
         }
+//        .sheet(isPresented: $showGameView) { // Apresenta a GameView em uma Sheet
+//            GameView(viewState: $viewState) // Passa o Binding viewState para a GameView
+//                .environmentObject(matchManager) // Passa o EnvironmentObject matchManager para a GameView
+//        }
     }
 }

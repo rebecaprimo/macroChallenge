@@ -18,15 +18,20 @@ struct ContentView: View {
             if viewState == .menu {
                 MenuView(viewState: $viewState, themes: themes)
             } else if viewState == .game {
-                GameView().environmentObject(manager)
+                GameView(viewState: $viewState).environmentObject(manager)
             } else if viewState == .themeSelection {
                 ThemeView(themes: themes, viewState: $viewState)
+            } else if viewState == .waitingRoom {
+                AgentsView()
             } else {
                 Text("Erro")
             }
         }
         .onAppear {
             manager.authenticateUser()
+        }
+        .onChange(of: manager.viewState) { newState in
+            viewState = newState
         }
     }
 }

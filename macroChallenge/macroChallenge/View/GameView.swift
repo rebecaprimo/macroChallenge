@@ -10,8 +10,9 @@ import SwiftUI
 import AVFAudio
 
 struct GameView: View {
-    @EnvironmentObject private var matchManager: Manager
-    
+        @EnvironmentObject var matchManager: Manager 
+        @Binding var viewState: ViewState
+
     var body: some View {
         ZStack {
             Image("fg")
