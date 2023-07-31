@@ -71,6 +71,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     var playerUUIDKey = UUID().uuidString
     
+    var gcBugTimer: Timer?
+    
     var rootViewController: UIViewController? {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         return windowScene?.windows.first?.rootViewController
@@ -203,6 +205,21 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         }
     }
     
+    @objc func isMatchActive() {
+      // currentMatch - global variable contains information about current match
+      GKTurnBasedMatch.load(withID: match!.matchID) { (match, error) in
+        if match != nil {
+          let participant = match?.currentParticipant
+          let localPlayer = GKLocalPlayer.local
+          if localPlayer.teamPlayerID == participant?.player?.teamPlayerID {
+            self.player(localPlayer, receivedTurnEventFor: match!, didBecomeActive: false)
+          }
+        } else {
+          print(error?.localizedDescription ?? "")
+        }
+      }
+    }
+    
     private func endTurn(_ gameBoardData: Data, _ originalState: [Int: Bool]) {
         guard let match = match, let nextParticipant = nextParticipant else { return }
 
@@ -210,7 +227,11 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             error in
             
             if (error == nil) {
-                // deu certo
+                // setar timer para verificar novos turnos
+                let interval = 1.0
+                self.gcBugTimer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(self.isMatchActive), userInfo: nil, repeats: true)
+                self.gcBugTimer!.tolerance = 1.0
+                
                 return
             }
             
@@ -388,6 +409,10 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKTurnBasedMatc
     
     func player(_ player: GKPlayer, receivedTurnEventFor match: GKTurnBasedMatch, didBecomeActive: Bool) {
         print("player receivedTurnEventFor")
+        
+        if gcBugTimer?.isValid == true {
+          gcBugTimer!.invalidate()
+        }
         
         if let vc = currentMatchmakerVC {
             currentMatchmakerVC = nil
