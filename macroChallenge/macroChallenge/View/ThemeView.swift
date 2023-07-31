@@ -8,17 +8,24 @@
 import SwiftUI
 
 struct ThemeView: View {
-    @StateObject var matchManager = Manager()
+    @StateObject var matchManager = Manager
     @State private var currentTheme: Theme?
     @State private var buttonCount = 0
     @Binding var viewState: ViewState
     
-    var themes: [Theme]
     
     init(themes: [Theme], viewState: Binding<ViewState>) {
         self.themes = themes
+
         _viewState = viewState
+        _matchManager = StateObject(wrappedValue: Manager(viewState: viewState))
     }
+    
+    
+    var themes: [Theme]
+       
+
+
     
     var body: some View {
         ZStack {

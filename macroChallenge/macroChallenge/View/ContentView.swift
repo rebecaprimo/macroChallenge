@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var matchManager = Manager()
+    @StateObject var matchManager = Manager(viewState: $viewState)
     @State private var viewState: ViewState = .menu
 
     var themes: [Theme] = Theme.themes // Crie uma instância real do array de temas

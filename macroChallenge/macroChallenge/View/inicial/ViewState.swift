@@ -11,5 +11,6 @@ enum ViewState {
     case menu
     case themeSelection
     case game
+    case waitingRoom
     case result
 }

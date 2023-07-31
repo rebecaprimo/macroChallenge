@@ -26,7 +26,7 @@ struct MenuView: View {
                     GeometryReader { geometry in
                         Button {
                             matchManager.startMatchmaking()
-                            viewState = .themeSelection
+                         //   viewState = .themeSelection
                         } label: {
                             Image("jogarHome")
                                 .resizable()
