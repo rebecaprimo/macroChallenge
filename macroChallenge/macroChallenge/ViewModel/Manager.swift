@@ -25,6 +25,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     @Published var hostIDPublished = String()
     @Published var menuSheetContent: AnyView?
     @Published var showMenuSheet = false
+    var resultado : ResultadoJogo?
     
     @Published var viewState: ViewState = .menu
 //
@@ -261,25 +262,55 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         }
     }
     
-    
     //MARK: Verifica se todos os botões foram pressionados e se são true (vitóriaGrupo = true)
-        func verifyAllButtonsArePressed() {
-            let allButtonsAreTrue = buttonStates.allSatisfy({ (key: Int, value: Bool) in
-                value == true
-            })
-            if(buttonStates.count == 21 && allButtonsAreTrue) {
-                print("resultado")
-                var resultadoJogo = ResultadoJogo(vitoriaGrupo: true)
-                ErroJogadorView(resultado: resultadoJogo)
-    //            self.present(ErroJogadorView, animated: true, completion: nil) NÃO FUNCIONA. não seria na view??
-    //            NavigationLink(destination: ErroJogadorView(resultado: resultadoJogo)){EmptyView()} NÃO FUNCIONA. não seria na view??
-            }
+    func verifyAllButtonsArePressed() {
+        let allButtonsAreTrue = buttonStates.allSatisfy({ (key: Int, value: Bool) in
+            value == true
+        })
+        print(buttonStates.count)
+        if(buttonStates.count == 21 && allButtonsAreTrue) {
+            print("resultado")
+            sendDataResultadoJogo(vitoriaGrupo: true)
         }
+    }
     
+    func navegarParaResultadoJogoView(vitoriaGrupo : Bool, textDesafio : String) {
+       resultado = ResultadoJogo(vitoriaGrupo: vitoriaGrupo, textDesafio: textDesafio)
+        DispatchQueue.main.async { [weak self] in
+            self?.viewState = .result
+        }
+    }
+    
+    //envia dados de resultado para o Game Center
+    func sendDataResultadoJogo(vitoriaGrupo : Bool) {
+        var desafio = ""
+        
+        if (!vitoriaGrupo) {
+            let desafios = ["Dançar chiquititas.",
+                            "Imitar um cachorro.",
+                            "Carregar alguém no colo em volta da sala.",
+                            "Beber 2 copos de água."]
+            
+            desafio = desafios.randomElement()!
+        }
+        
+        var dict = ["tipo" : "resultado",
+                    "vitoriaGrupo" : "\(vitoriaGrupo)",
+                    "desafio" : desafio]
+        
+        do {
+            let data = try JSONEncoder().encode(dict)
+            print(data)
+            try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
+            navegarParaResultadoJogoView(vitoriaGrupo: true, textDesafio: desafio)
+        } catch {
+            print("SEND DATA RESULTADO JOGO FAILED")
+        }
+    }
     
     
     //MARK: ENVIA O DADO PARA OS OUTROS JOGADORES
-    func sendData(buttonId: Int, player: Player) {
+    func sendData(buttonId: Int) {
         
         //enviar turno do jogador e o id dele
         
@@ -354,13 +385,24 @@ extension Manager: GKMatchDelegate {
         receivedData(data)
         //vai ter que receber dos outros jogadores o estado dos turnos e se ele é o proximo junto com o estado do botao
 
+        do {
+            let newData = try JSONDecoder().decode([String : String].self, from: data)
+            if (newData["tipo"] == "resultado") {
+                let vitoria = Bool(newData["vitoriaGrupo"]!)!
+                let desafio = newData["desafio"]!
+                navegarParaResultadoJogoView(vitoriaGrupo: vitoria, textDesafio: desafio)
+            }
+            
+        } catch {
+            print("GAME DATA ERROR receivedDataCarol")
+        }
         
         do {
             //receberá aqui o botao, turno e id do jogador
             let newData = try JSONDecoder().decode([Int: Bool].self, from: data)
             buttonStates = newData
         } catch {
-            print("GAME DATA ERROR")
+            print("GAME DATA ERROR receivedData")
         }
     }
     

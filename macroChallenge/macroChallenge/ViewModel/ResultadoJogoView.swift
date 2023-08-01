@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct ErroJogadorView: View {
+struct ResultadoJogoView: View {
     
     @State var resultado : ResultadoJogo
     
@@ -36,7 +36,6 @@ struct ErroJogadorView: View {
                             .frame(width: contentWidth/2, alignment: .leading)
                             .fixedSize(horizontal: true, vertical: false)
                             .padding(.leading, 10)
-//                            .background(.gray)
                         
                         Text("\(resultado.statusBomba)")
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -44,52 +43,44 @@ struct ErroJogadorView: View {
                     }
                     .padding(.top, 60)
                     .frame(width: contentWidth)
-//                    .background(.orange)
                     
                     HStack(spacing: 0) {
                         Text("Vitória")
                             .font(.custom("Special Elite", size: 12))
                             .frame(width: (contentWidth/4)-10, alignment: .leading)
                             .padding(.leading, 10)
-//                            .background(.purple)
                         HStack(spacing: 0){
                             HStack(spacing: 0){
                                 Image(systemName: "\(resultado.imageVitoriaGrupo)")
-                                //                                .background(.blue)
                                 Text("Agentes")
                                     .bold()
                                     .padding(.leading, 6)
-                                //                                .background(.orange)
                             }
                             .padding(.trailing, 14)
                             HStack(spacing: 0){
                                 Image(
                                     systemName: "\(resultado.imageVitoriaMestre)")
-                                //                                .background(.blue)
                                 Text("Mestre das Bombas")
                                     .bold()
                                     .padding(.leading, 6)
-                                //                                .background(.orange)
                             }
                         }
                         .frame(width: (contentWidth/4)*3, alignment: .leading)
                     }
                     .padding(.top, 40)
                     .frame(width: contentWidth)
-                    //                .background(.cyan)
                     
                     HStack(alignment: .top, spacing: 0) {
                         Text("Desafio")
                             .font(.custom("Special Elite", size: 12))
                             .frame(width: (contentWidth/4)-10, alignment: .leading)
                             .padding(.leading, 10)
-//                            .background(.gray)
                         
-                        Text("O \(resultado.nomeVencedor) deve:\n\(resultado.textDesafio)")
+//                        Text("O \(resultado.nomePerdedor) deve:\n\(resultado.textFinal)")
+                        Text("\(resultado.textDesafio)")
                             .bold()
                             .multilineTextAlignment(.center)
                             .frame(width: (contentWidth/4)*3 , height: 70)
-//                            .background(.green)
                     }
                     .padding(.top, 40)
                     

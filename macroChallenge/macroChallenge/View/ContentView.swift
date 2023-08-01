@@ -23,6 +23,8 @@ struct ContentView: View {
                 ThemeView(themes: themes, viewState: $viewState)
             } else if viewState == .waitingRoom {
                 AgentsView()
+            } else if viewState == .result {
+                ResultadoJogoView(resultado: manager.resultado!)
             } else {
                 Text("Erro")
             }

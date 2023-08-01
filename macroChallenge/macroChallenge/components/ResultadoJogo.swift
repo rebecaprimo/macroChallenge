@@ -15,19 +15,17 @@ struct ResultadoJogo {
     var imageVitoriaGrupo: String
     var imageVitoriaMestre: String
     
-    var nomeVencedor: String
+//    var nomePerdedor: String
     var statusBomba: String
-    
-    let desafios = ["Dançar chiquititas.", "Imitar um cachorro.", "Carregar alguém no colo em volta da sala.", "Beber 2 copos de água."]
     var textDesafio : String
     
-    init(vitoriaGrupo: Bool) {
+    init(vitoriaGrupo: Bool, textDesafio: String) {
         self.vitoriaGrupo = vitoriaGrupo
         self.imageVitoriaGrupo = vitoriaGrupo ? "checkmark.square" : "square"
         self.imageVitoriaMestre = vitoriaGrupo ? "square" : "checkmark.square"
-        self.nomeVencedor = vitoriaGrupo ? "mestre" : "grupo"
+//        self.nomePerdedor = vitoriaGrupo ? "mestre" : "grupo"
         self.statusBomba = vitoriaGrupo ? "DESARMADA" : "DETONADA"
-        self.textDesafio = desafios.randomElement()!
+        self.textDesafio = vitoriaGrupo ? "Parabéns, você venceu!" : textDesafio
     }
     
 }

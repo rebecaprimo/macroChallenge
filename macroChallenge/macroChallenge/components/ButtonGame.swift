@@ -15,12 +15,12 @@ struct ButtonGame: View {
     @State var isButtonOn = false // Estado individual para cada botão
     @State var letter: String
     private let idButton: Int
-    @State private var letterP: String
+    @State private var letterP: String = ""
+    
 
     init(letter: String, idButton: Int, letterP: String) {
         self.letter = letter
         self.idButton = idButton
-        self.letterP = letterP
     }
 
     func buttonAction(nomeAudio: String){
@@ -30,20 +30,22 @@ struct ButtonGame: View {
     }
     
     var body: some View {
+        let isPressed = matchManager.buttonStates[idButton, default: false]
+        
         HStack {
             Button(action: {
+                guard !isPressed else { return } // Verifica se o botão já foi pressionado. Se não pressionado, prossegue a action
                 buttonAction(nomeAudio: "coin")
                 self.isPlaying.toggle()
                 matchManager.sendData(buttonId: idButton)
                 matchManager.verifyAllButtonsArePressed()
 
-                
                 //o cara que clicou, avisa que o turn dele acabou e manda para o proximo
           //      matchManager.sendDataTurnPlayer()
                 
                 self.isButtonOn.toggle() // Altere o estado individual do botão
             }, label: {
-                Image(matchManager.buttonStates[idButton, default: false] ? letterP : letter)
+                Image(isPressed ? letter+"P" : letter)
                     .resizable()
                     .frame(width: 85, height: 85)
             })
