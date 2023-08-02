@@ -26,7 +26,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     @Published var menuSheetContent: AnyView?
     @Published var showMenuSheet = false
     var resultado : ResultadoJogo?
-    var textTema : String = ""
+    var textDesafio : String = ""
     var horarios : [Int] = []
     
     @Published var viewState: ViewState = .menu
@@ -277,7 +277,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     
     //chama a tela de resultado
-    func navegarParaResultadoJogoView(vitoriaGrupo : Bool, textDesafio : String) {
+    func navegarParaResultadoJogoView(vitoriaGrupo : Bool) {
        resultado = ResultadoJogo(vitoriaGrupo: vitoriaGrupo, textDesafio: textDesafio)
         DispatchQueue.main.async { [weak self] in
             self?.viewState = .result
@@ -286,26 +286,14 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     //envia dados de resultado para o Game Center
     func sendDataResultadoJogo(vitoriaGrupo : Bool) {
-        var desafio = ""
-        
-        if (!vitoriaGrupo) {
-            let desafios = ["Dançar chiquititas.",
-                            "Imitar um cachorro.",
-                            "Carregar alguém no colo em volta da sala.",
-                            "Beber 2 copos de água."]
-            
-            desafio = desafios.randomElement()!
-        }
-        
         let dict = ["tipo" : "resultado",
-                    "vitoriaGrupo" : "\(vitoriaGrupo)",
-                    "desafio" : desafio]
+                    "vitoriaGrupo" : "\(vitoriaGrupo)"]
         
         do {
             let data = try JSONEncoder().encode(dict)
             print(data)
             try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
-            navegarParaResultadoJogoView(vitoriaGrupo: true, textDesafio: desafio)
+            navegarParaResultadoJogoView(vitoriaGrupo: true)
         } catch {
             print("SEND DATA RESULTADO JOGO FAILED")
         }
@@ -441,15 +429,14 @@ extension Manager: GKMatchDelegate {
             let newData = try JSONDecoder().decode([String : String].self, from: data)
             if (newData["tipo"] == "resultado") {
                 let vitoria = Bool(newData["vitoriaGrupo"]!)!
-                let desafio = newData["desafio"]!
-                navegarParaResultadoJogoView(vitoriaGrupo: vitoria, textDesafio: desafio)
+                navegarParaResultadoJogoView(vitoriaGrupo: vitoria)
             } else if (newData["tipo"] == "horarioInicial") {
                 let horario = Int(newData["horario"]!)!
                 horarios.append(horario)
                 print(horario)
                 if (match.players.count + 1 == horarios.count) {
                     currentTheme = calcularElementoPorHorarios(horarios, Theme.themes) as? Theme
-                    print(currentTheme)
+                    textDesafio = calcularElementoPorHorarios(horarios, ResultadoJogo.desafios) as! String
                 }
             }
         } catch {

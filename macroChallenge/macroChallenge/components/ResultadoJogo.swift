@@ -28,4 +28,8 @@ struct ResultadoJogo {
         self.textDesafio = vitoriaGrupo ? "Parabéns, você venceu!" : textDesafio
     }
     
+    static let desafios = ["Dançar chiquititas.",
+                           "Imitar um cachorro.",
+                           "Carregar alguém no colo em volta da sala.",
+                           "Beber 2 copos de água."]
 }
