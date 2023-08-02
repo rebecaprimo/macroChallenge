@@ -122,7 +122,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         gameMatch?.delegate = nil
         gameMatch = nil
         otherPlayer = nil
-        
+        buttonStates.removeAll()
     }
     
     
