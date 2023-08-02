@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ResultadoJogoView: View {
     
+    @EnvironmentObject var matchManager: Manager
     @State var resultado : ResultadoJogo
     
     var body: some View {
@@ -88,7 +89,9 @@ struct ResultadoJogoView: View {
                         .padding(.top, 40)
                     
                     Button(action: {
-                            print("tapped!")
+                            DispatchQueue.main.async {
+                                matchManager.viewState = .menu
+                            }
                         }, label: {
                             Text("HOME")
                                 .foregroundColor(.black)
