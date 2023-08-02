@@ -26,6 +26,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     @Published var menuSheetContent: AnyView?
     @Published var showMenuSheet = false
     var resultado : ResultadoJogo?
+    var textTema : String = ""
+    var horarios : [Int] = []
     
     @Published var viewState: ViewState = .menu
 //
@@ -95,14 +97,14 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     func startMatchmaking() {
         let request = GKMatchRequest()
         request.minPlayers = 2
-        request.maxPlayers = 3
+        request.maxPlayers = 2
         // request.inviteMessage = "Playzinha?"
         
         let matchmakingVC = GKMatchmakerViewController(matchRequest: request)
         matchmakingVC?.matchmakerDelegate = self
         
         rootViewController?.present(matchmakingVC!, animated: true)
-        print("cheguei")
+        print("cheguei startMatchMaking")
     }
     
     func gameOver() {
@@ -274,6 +276,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         }
     }
     
+    //chama a tela de resultado
     func navegarParaResultadoJogoView(vitoriaGrupo : Bool, textDesafio : String) {
        resultado = ResultadoJogo(vitoriaGrupo: vitoriaGrupo, textDesafio: textDesafio)
         DispatchQueue.main.async { [weak self] in
@@ -294,7 +297,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             desafio = desafios.randomElement()!
         }
         
-        var dict = ["tipo" : "resultado",
+        let dict = ["tipo" : "resultado",
                     "vitoriaGrupo" : "\(vitoriaGrupo)",
                     "desafio" : desafio]
         
@@ -307,6 +310,44 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             print("SEND DATA RESULTADO JOGO FAILED")
         }
     }
+    
+    // cada player manda o seu horario local
+    func sendDataHorarioInicial() {
+        let horarioAtual = pegarHorarioAtual()
+        horarios.append(horarioAtual)
+        let dict = ["tipo" : "horarioInicial",
+                    "horario" : "\(horarioAtual)"]
+        print("sending horario inicial")
+        
+        do {
+            let data = try JSONEncoder().encode(dict)
+            print(data)
+            try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
+            //try gameMatch?.sendData(toAllPlayers: messageData, with: mode)
+        } catch {
+            print("SEND DATA Horario Inicial FAILED")
+        }
+    }
+    
+//    func sendDataTema(){
+//        var tema = ""
+//        let themes = ["Nomes", "Animais", "C.E.P.", "Fruta", "Alimentos", "Objeto"]
+//        tema = themes.randomElement()!
+//
+//        do {
+//            let data = try JSONEncoder().encode(tema)
+//            print(data)
+//            try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
+////            navegarParaGameView(textTheme: tema)
+//        } catch {
+//            print("SEND DATA TEMAS JOGO FAILED")
+//        }
+//    }
+    
+//    func navegarParaGameView(String: tema) {
+//        DispatchQueue.main.async { [weak self] in
+//            self?.viewState = .game
+//    }
     
     
     //MARK: ENVIA O DADO PARA OS OUTROS JOGADORES
@@ -351,13 +392,23 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             print("Error decoding data to string.")
         }
     }
+    
+//    MARK: funções para calcular horários para id da partida
+    func pegarHorarioAtual() -> Int {
+        return Int(Date().timeIntervalSince1970*1_000_000)
+    }
+
+    func calcularElementoPorHorarios(_ horarios: [Int], _ array: [Any]) -> Any {
+        var sum = 0
+        for horario in horarios {
+            sum += horario
+        }
+
+        let indice = sum % array.count
+        return array[indice]
+    }
+     
 }
-
-
-
-
-
-//MARK: ******* AQUI *********
 
 
 
@@ -386,13 +437,21 @@ extension Manager: GKMatchDelegate {
         //vai ter que receber dos outros jogadores o estado dos turnos e se ele é o proximo junto com o estado do botao
 
         do {
+            print("receiving data")
             let newData = try JSONDecoder().decode([String : String].self, from: data)
             if (newData["tipo"] == "resultado") {
                 let vitoria = Bool(newData["vitoriaGrupo"]!)!
                 let desafio = newData["desafio"]!
                 navegarParaResultadoJogoView(vitoriaGrupo: vitoria, textDesafio: desafio)
+            } else if (newData["tipo"] == "horarioInicial") {
+                let horario = Int(newData["horario"]!)!
+                horarios.append(horario)
+                print(horario)
+                if (match.players.count + 1 == horarios.count) {
+                    currentTheme = calcularElementoPorHorarios(horarios, Theme.themes) as? Theme
+                    print(currentTheme)
+                }
             }
-            
         } catch {
             print("GAME DATA ERROR receivedDataCarol")
         }
@@ -430,7 +489,7 @@ extension Manager: GKMatchDelegate {
 extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerViewControllerDelegate {
     
     func player(_ player: GKPlayer, didAccept invite: GKInvite) {
-        print("chegaaq")
+        print("player didAccept")
         
         otherPlayer = invite.sender
         let vc = GKMatchmakerViewController(invite: invite)
@@ -438,15 +497,16 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         vc?.delegate = self
         let rootViewController = UIApplication.shared.delegate?.window?!.rootViewController
         rootViewController?.present(vc!, animated: true)
+        sendDataHorarioInicial()
     }
     
     //AQUI MOSTRA OS JOGADORES QUE RECEBERAM OU ACEITARAM O CONVITE
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
-        print("chegaaq")
+        print("matchmakerViewController didFind")
         gameMatch = match
         gameMatch?.delegate = self
         print("Match found, starting game...")
-        
+        sendDataHorarioInicial()
         generateAndSendPlayerID()
         
         //de alguma forma, atualizar a view state conforme a funcao

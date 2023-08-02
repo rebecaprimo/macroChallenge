@@ -30,6 +30,11 @@ struct GameView: View {
             }
             VStack(spacing: 10) {
                 Spacer()
+                Text(matchManager.currentTheme?.name ?? "")
+                    .foregroundColor(.black)
+                    .font(.system(size: 137))
+                    .position(x: UIScreen.main.bounds.width - 100, y: 60)
+                
                 HStack {
                     ButtonGame(letter: "A", idButton: 1, letterP: "AP")
                     ButtonGame(letter: "B", idButton: 2, letterP: "BP")
