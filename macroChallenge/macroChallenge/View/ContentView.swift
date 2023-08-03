@@ -32,27 +32,8 @@ struct ContentView: View {
         .onAppear {
             manager.authenticateUser()
         }
-      
-        //aqui atualiza a view
         .onChange(of: manager.viewState) { newState in
             viewState = newState
         }
     }
 }
-
-//var body: some View {
-//    ZStack {
-//        if matchManager.viewState == .menu {
-//            MenuView(matchManager: matchManager, viewState: $matchManager.viewState, themes: themes)
-//        } else if matchManager.viewState == .game {
-//            GameView().environmentObject(matchManager)
-//        } else if matchManager.viewState == .themeSelection {
-//            ThemeView(themes: themes, viewState: $matchManager.viewState)
-//        } else {
-//            Text("Erro")
-//        }
-//    }
-//    .onAppear {
-//        matchManager.authenticateUser()
-//    }
-//}

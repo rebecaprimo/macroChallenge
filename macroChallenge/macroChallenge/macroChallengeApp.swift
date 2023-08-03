@@ -5,19 +5,33 @@
 //  Created by rebeca primo on 22/05/23.
 //
 
+import Foundation
 import SwiftUI
 
 @main
-struct macroChallengeApp: App {
- //   @State private var viewState: ViewState = .menu
-     @StateObject var manager = Manager()
-
-    var randomThemes = Theme.themes
+struct YourAppName: App {
+    @StateObject private var manager = Manager()
+    @State private var showingSplash = true
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(manager) 
+            // Exibe a ContentView após um atraso de 2 segundos
+            ZStack {
+                if showingSplash {
+                    SplashView()
+                } else {
+                    ContentView()
+                        .environmentObject(manager)
+                }
+            }
+            .onAppear {
+                // Simula um atraso de 2 segundos antes de passar para a ContentView
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    withAnimation {
+                        showingSplash = false
+                    }
+                }
+            }
         }
     }
 }
