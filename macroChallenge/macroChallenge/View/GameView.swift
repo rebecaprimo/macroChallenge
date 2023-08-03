@@ -22,7 +22,7 @@ struct GameView: View {
             ZStack {
                 Color.clear
                 
-                CountTimer()
+                CountTimer(timeIsUp: matchManager.endTimer)
                     .padding()
                     .background(Color.blue)
                     .cornerRadius(10)

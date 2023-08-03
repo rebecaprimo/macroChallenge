@@ -383,6 +383,11 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         return array[indice]
     }
      
+    //MARK: função de timer encerrado
+    func endTimer() {
+        gameOver()
+        navegarParaResultadoJogoView(vitoriaGrupo: false)
+    }
 }
 
 

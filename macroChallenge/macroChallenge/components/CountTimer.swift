@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct CountTimer: View {
-    @State var timeRemaining = 150 // Tempo em segundos (2 minutos e 30 segundos)
+    @State var timeRemaining = 10 // Tempo em segundos (2 minutos e 30 segundos)
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    var timeIsUp: () -> Void
     
     var body: some View {
         Text(format(timeRemaining))
@@ -17,6 +18,8 @@ struct CountTimer: View {
             .onReceive(timer) { _ in
                 if timeRemaining > 0 {
                     timeRemaining -= 1
+                } else {
+                    timeIsUp()
                 }
             }
             .onAppear {
@@ -28,7 +31,7 @@ struct CountTimer: View {
     }
     
     func startTimer() {
-        timeRemaining = 150 // Tempo inicial em segundos (2 minutos e 30 segundos)
+        timeRemaining = 10 // Tempo inicial em segundos (2 minutos e 30 segundos)
     }
     
     func stopTimer() {
