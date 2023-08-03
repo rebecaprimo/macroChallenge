@@ -95,6 +95,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     //MARK: PARA ACHAR JOGADORES
     func startMatchmaking() {
+        resetGame()
+        
         let request = GKMatchRequest()
         request.minPlayers = 2
         request.maxPlayers = 2
@@ -110,6 +112,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     func gameOver() {
         isGameOver = true
         gameMatch?.disconnect()
+        gameMatch?.delegate = nil
     }
     
     
@@ -123,6 +126,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         gameMatch = nil
         otherPlayer = nil
         buttonStates.removeAll()
+        playersIDHistory.removeAll()
+        horarios.removeAll()
     }
     
     
@@ -273,6 +278,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         if(buttonStates.count == 21 && allButtonsAreTrue) {
             print("resultado")
             sendDataResultadoJogo(vitoriaGrupo: true)
+            gameOver()
+            navegarParaResultadoJogoView(vitoriaGrupo: true)
         }
     }
     
@@ -293,7 +300,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             let data = try JSONEncoder().encode(dict)
             print(data)
             try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
-            navegarParaResultadoJogoView(vitoriaGrupo: true)
         } catch {
             print("SEND DATA RESULTADO JOGO FAILED")
         }
@@ -316,26 +322,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             print("SEND DATA Horario Inicial FAILED")
         }
     }
-    
-//    func sendDataTema(){
-//        var tema = ""
-//        let themes = ["Nomes", "Animais", "C.E.P.", "Fruta", "Alimentos", "Objeto"]
-//        tema = themes.randomElement()!
-//
-//        do {
-//            let data = try JSONEncoder().encode(tema)
-//            print(data)
-//            try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
-////            navegarParaGameView(textTheme: tema)
-//        } catch {
-//            print("SEND DATA TEMAS JOGO FAILED")
-//        }
-//    }
-    
-//    func navegarParaGameView(String: tema) {
-//        DispatchQueue.main.async { [weak self] in
-//            self?.viewState = .game
-//    }
     
     
     //MARK: ENVIA O DADO PARA OS OUTROS JOGADORES
@@ -366,6 +352,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             
             //AQUI PROCESSA O MAIOR NUMERO DOS IDS QUE FOI DEFINIDO NA DETERMINEPLAYERID()
             else if message.hasPrefix("$MaxPlayerIDDetermined:") {
+                print("$MaxPlayerIDDetermined")
                 let hostIDString = message.replacingOccurrences(of: "$MaxPlayerIDDetermined:", with: "")
                 
                 //                hostIDPublished = hostIDString
@@ -419,16 +406,19 @@ extension Manager: GKMatchDelegate {
     }
     
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
-        
+        print("didReceive")
+        print("viewState: \(self.viewState)")
         //passo 4 - recebe de outros jogadores
         receivedData(data)
         //vai ter que receber dos outros jogadores o estado dos turnos e se ele é o proximo junto com o estado do botao
-
+        print("viewState: \(self.viewState)")
+        
         do {
             print("receiving data")
             let newData = try JSONDecoder().decode([String : String].self, from: data)
             if (newData["tipo"] == "resultado") {
                 let vitoria = Bool(newData["vitoriaGrupo"]!)!
+                gameOver()
                 navegarParaResultadoJogoView(vitoriaGrupo: vitoria)
             } else if (newData["tipo"] == "horarioInicial") {
                 let horario = Int(newData["horario"]!)!
@@ -490,6 +480,7 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
     //AQUI MOSTRA OS JOGADORES QUE RECEBERAM OU ACEITARAM O CONVITE
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
         print("matchmakerViewController didFind")
+        print("viewState: \(self.viewState)")
         gameMatch = match
         gameMatch?.delegate = self
         print("Match found, starting game...")

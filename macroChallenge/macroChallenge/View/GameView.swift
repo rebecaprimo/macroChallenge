@@ -32,7 +32,7 @@ struct GameView: View {
                 Spacer()
                 Text(matchManager.currentTheme?.name ?? "")
                     .foregroundColor(.black)
-                    .font(.system(size: 137))
+                    .font(.system(size: 20))
                     .position(x: UIScreen.main.bounds.width - 100, y: 60)
                 
                 HStack {
