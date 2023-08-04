@@ -367,7 +367,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             print("Error decoding data to string.")
         }
     }
-    
+         
 //    MARK: funções para calcular horários para id da partida
     func pegarHorarioAtual() -> Int {
         return Int(Date().timeIntervalSince1970*1_000_000)
