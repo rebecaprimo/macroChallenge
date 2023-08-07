@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+
 @main
 struct YourAppName: App {
     @StateObject private var manager = Manager()
