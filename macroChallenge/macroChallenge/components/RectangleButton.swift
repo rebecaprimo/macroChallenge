@@ -60,28 +60,23 @@ struct RectangleButton<Content: View>: View {
         NavigationLink(destination: view, label: {
             HStack {
                 Text(title)
-                    .font(.system(size: 20))
+                    .font(.custom("SpecialElite-Regular", size: 20))
                     .font(.title)
                 
                 Spacer()
                 
                 Image(systemName: "chevron.right")
                     .frame(alignment: .trailing)
+                    
             }
             .frame(height: 20)
-            .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 5)
             .padding(.horizontal, 25)
             .foregroundColor(.black)
         })
         .padding([.trailing, .leading], 10)
         .padding(0)
+        Separator()
     }
 }
-
-//struct RectangleButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RectangleButton(title: "Teste", view: GameView())
-//    }
-//}
 
