@@ -24,9 +24,10 @@ struct YourAppName: App {
                 if showingSplash {
                     SplashView()
                 } else {
-                    ThemeView(themes: themes, viewState: $viewState)
-//                    ContentView()
-//                        .environmentObject(manager)
+//                    ThemeView(themes: themes, viewState: $viewState).environmentObject(manager) // Injete o Manager aqui
+
+                    ContentView()
+                        .environmentObject(manager)
                 }
             }
             .onAppear {

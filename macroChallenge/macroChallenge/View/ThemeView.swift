@@ -48,7 +48,9 @@ struct ThemeView: View {
                     }.position(x: geometry.size.width / 2, y: geometry.size.height / 1.5)
                     HStack {
                         Button {
-                            //  viewState = .game
+                            manager.determineGameView()
+                            //enviar tema pra tela do jogo
+                            
                         } label: {
                             Image("OK")
                                 .resizable()

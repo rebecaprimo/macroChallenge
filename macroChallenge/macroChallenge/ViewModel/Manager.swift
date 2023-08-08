@@ -25,6 +25,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     @Published var hostIDPublished = String()
     @Published var menuSheetContent: AnyView?
     @Published var showMenuSheet = false
+    @Published var MaxIDGame: Int = 0
     var resultado : ResultadoJogo?
     var textDesafio : String = ""
     var horarios : [Int] = []
@@ -147,43 +148,36 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     // ...
     
-    //passo 8 - determinando a view para os jogadores, todos estao indo direto para a do jogo
-    func determineGameView(_ hostID: String) -> ViewState {
-        print("\(hostID)")
-        print("numero de jogadores no total: \(numberOfPlayers)")
-        
-        //nesse for, é bom sempre olhar para ver se, os jogadores foram adicionados corretamente ex:
-//        exemplo do print
-//        ID do jogador: 90
-//        ID do jogador: 2
-        for player in players {
-            print("ID do jogador: \(player.playerID)")
+    func determineGameView() {
+        if ((gameMatch?.players.count)! + 1 == playersIDHistory.count) {
+            DispatchQueue.main.async { [weak self] in
+                self?.viewState = .game
+            }
         }
+    }
         
-        var newViewState: ViewState = .waitingRoom
+     
+    func determineOrderPlayers(_ dataString: String) {
+        let hostNumberString = dataString.replacingOccurrences(of: "$IDPlayer:", with: "")
+        print("host number string: \(hostNumberString)")
+        
+        if let hostNumber = Int(hostNumberString) {
+            playersIDHistory.append(hostNumber)
             
-            if let hostID = Int(hostID) {
-                if let playerWithMaxHostID = players.first(where: { $0.playerID == hostID }) {
-                    if playerWithMaxHostID.playerID == hostID {
-                        if !isBombMasterAssigned {
-                            print("CAI NO HOST: \(hostID)")
-                            isBombMasterAssigned = true
-                            newViewState = .game
-                            print("newViewStateHost: \(newViewState)")
-                        } else {
-                            print("CAI NO AGENTE")
-                            newViewState = .game
-                            print("newViewStateAgent: \(newViewState)")
-                            
-                        }
-                    } else {
-                        newViewState = .waitingRoom
+            if ((gameMatch?.players.count)! + 1 == playersIDHistory.count) {
+                var maxHostID = playersIDHistory.max()!
+                if (randomHostNumber == maxHostID) {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.viewState = .themeSelection
+                    }
+                } else {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.viewState = .waitingRoom
                     }
                 }
             }
-          return newViewState
         }
-    
+    }
 
     // MARK: JOGO
     
@@ -202,28 +196,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     //passo 6 - função para determinar e adicionar os jogadores
     
-    func determineOrderPlayers(_ dataString: String) {
-        let hostNumberString = dataString.replacingOccurrences(of: "$IDPlayer:", with: "")
-        print("host number string: \(hostNumberString)")
-        
-        if let hostNumber = Int(hostNumberString) {
-            playersIDHistory.append(hostNumber)
-            
-            if ((gameMatch?.players.count)! + 1 == playersIDHistory.count) {
-//                print(playersIDHistory)
-                let maxHostID = playersIDHistory.max()!
-                if (randomHostNumber == maxHostID) {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.viewState = .themeSelection
-                    }
-                } else {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.viewState = .waitingRoom
-                    }
-                }
-            }
-        }
-    }
 
     
     //MARK: Verifica se todos os botões foram pressionados e se são true (vitóriaGrupo = true)
@@ -308,18 +280,18 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             }
             
             //AQUI PROCESSA O MAIOR NUMERO DOS IDS QUE FOI DEFINIDO NA DETERMINEPLAYERID()
-            else if message.hasPrefix("$MaxPlayerIDDetermined:") {
-                print("$MaxPlayerIDDetermined")
-                let hostIDString = message.replacingOccurrences(of: "$MaxPlayerIDDetermined:", with: "")
-                
-                //                hostIDPublished = hostIDString
-                let newState = determineGameView(hostIDString)
-                DispatchQueue.main.async { [weak self] in
-                    self?.viewState = newState
-                }
-            } else {
-                print("Unable to determine type of message: \(message)")
-            }
+//            else if message.hasPrefix("$MaxPlayerIDDetermined:") {
+//                print("$MaxPlayerIDDetermined")
+//                let hostIDString = message.replacingOccurrences(of: "$MaxPlayerIDDetermined:", with: "")
+//
+//                //                hostIDPublished = hostIDString
+//                let newState = determineGameView(hostIDString)
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.viewState = newState
+//                }
+//            } else {
+//                print("Unable to determine type of message: \(message)")
+//            }
         } else {
             print("Error decoding data to string.")
         }
