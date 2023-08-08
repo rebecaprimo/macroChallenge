@@ -15,7 +15,7 @@ struct ResultadoJogo {
     var imageVitoriaGrupo: String
     var imageVitoriaMestre: String
     
-//    var nomePerdedor: String
+    var nomePerdedor: String
     var statusBomba: String
     var textDesafio : String
     
@@ -23,9 +23,9 @@ struct ResultadoJogo {
         self.vitoriaGrupo = vitoriaGrupo
         self.imageVitoriaGrupo = vitoriaGrupo ? "checkmark.square" : "square"
         self.imageVitoriaMestre = vitoriaGrupo ? "square" : "checkmark.square"
-//        self.nomePerdedor = vitoriaGrupo ? "mestre" : "grupo"
+        self.nomePerdedor = vitoriaGrupo ? "mestre" : "grupo"
         self.statusBomba = vitoriaGrupo ? "DESARMADA" : "DETONADA"
-        self.textDesafio = vitoriaGrupo ? "Parabéns, você venceu!" : textDesafio
+        self.textDesafio = vitoriaGrupo ? textDesafio : textDesafio
     }
     
     static let desafios = ["Dançar chiquititas.",

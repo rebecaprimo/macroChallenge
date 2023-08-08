@@ -13,6 +13,9 @@ import SwiftUI
 struct YourAppName: App {
     @StateObject private var manager = Manager()
     @State private var showingSplash = true
+    @State private var viewState: ViewState = .menu
+    var themes: [Theme] = Theme.themes
+    
 
     var body: some Scene {
         WindowGroup {
@@ -21,8 +24,9 @@ struct YourAppName: App {
                 if showingSplash {
                     SplashView()
                 } else {
-                    ContentView()
-                        .environmentObject(manager)
+                    ThemeView(themes: themes, viewState: $viewState)
+//                    ContentView()
+//                        .environmentObject(manager)
                 }
             }
             .onAppear {
