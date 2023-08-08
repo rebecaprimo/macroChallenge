@@ -99,7 +99,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         
         let request = GKMatchRequest()
         request.minPlayers = 2
-        request.maxPlayers = 2
+        request.maxPlayers = 3
         // request.inviteMessage = "Playzinha?"
         
         let matchmakingVC = GKMatchmakerViewController(matchRequest: request)
@@ -191,15 +191,12 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     //passo 1
     func generateAndSendPlayerID() {
-        randomHostNumber = Int.random(in: 1...99)
-        //nao deixar repetir
+        randomHostNumber = Int.random(in: 1...999_999)
         
         let randomNumberString = "$IDPlayer:\(randomHostNumber)"
-        print("\(randomNumberString)")
+//        print("\(randomNumberString)")
         
         if let data = randomNumberString.data(using: .utf8) {
-            //passo 2
-            //enviar esse dado para os devices
             sendDataToAllPlayers(data, mode: .reliable)
         } else {
             print("erro ")
@@ -208,66 +205,89 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     
     //passo 6 - função para determinar e adicionar os jogadores
-
+    
     func determineOrderPlayers(_ dataString: String) {
         let hostNumberString = dataString.replacingOccurrences(of: "$IDPlayer:", with: "")
         print("host number string: \(hostNumberString)")
         
         if let hostNumber = Int(hostNumberString) {
-            // Adicionar o novo hostNumber ao histórico hostIDHistory
             playersIDHistory.append(hostNumber)
             
-            // Ordenar o histórico hostIDHistory de forma crescente
-            playersIDHistory.sort()
-            
-            if let existingPlayerIndex = players.firstIndex(where: { $0.playerID == hostNumber }) {
-                // Atualizar isHost para false para todos os jogadores
-                for index in players.indices {
-                    players[index].isHost = false
-                }
-                
-                // atualizar isHost para true
-                players[existingPlayerIndex].isHost = true
-                
-                
-                // passo 7 - aqui adiciona na estrutura Player que provavelmente irá definir o turno na tela do jogo
-            } else {
-                let newPlayer = Player(playerID: hostNumber, name: "AAAAAAAAAA", isHost: true, turn: false)
-                players.append(newPlayer)
-                
-                //    print("\(hostID)")
-            }
-            
-            // encontrar o jogador com o maior numero e definir isHost como true
-            if let maxHostNumberPlayer = players.max(by: { $0.playerID < $1.playerID }) {
-                
-                for index in players.indices {
-                    players[index].isHost = false
-                }
-                // definir isHost como true para o jogador com o maior numero
-                maxHostNumberPlayer.isHost = true
-                
-                if playersIDHistory.count == numberOfPlayers {
-                    hostIDHistoryComplete = true
-                }
-                //tem que arrumar a gambiarra do numberOfPlayers
-                
-                //aqui envia o dado do maior numero do array de playersIDHistory
-                
-                if playersIDHistory.count == numberOfPlayers {
-                    let maxHostID = playersIDHistory.max()!
-                    let message = "$MaxPlayerIDDetermined:\(maxHostID)"
-                    if let data = message.data(using: .utf8) {
-                        sendDataToAllPlayers(data, mode: .reliable)
+            if ((gameMatch?.players.count)! + 1 == playersIDHistory.count) {
+//                print(playersIDHistory)
+                let maxHostID = playersIDHistory.max()!
+                if (randomHostNumber == maxHostID) {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.viewState = .themeSelection
+                    }
+                } else {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.viewState = .waitingRoom
                     }
                 }
-                print("historico ids: \(playersIDHistory)")// add o hostID ao historicoo
-                // Adicionar o hostID ao histórico
-                // tinha que atualizar o nomeeeeeee
-                print("o maior número é: \(maxHostNumberPlayer.playerID) e o nome(que nao ta puxando): \(maxHostNumberPlayer.name)")
             }
         }
     }
+
+//    func determineOrderPlayers(_ dataString: String) {
+//        let hostNumberString = dataString.replacingOccurrences(of: "$IDPlayer:", with: "")
+//        print("host number string: \(hostNumberString)")
+//
+//        if let hostNumber = Int(hostNumberString) {
+//            // Adicionar o novo hostNumber ao histórico hostIDHistory
+//            playersIDHistory.append(hostNumber)
+//
+//            // Ordenar o histórico hostIDHistory de forma crescente
+//            playersIDHistory.sort()
+//
+//            if let existingPlayerIndex = players.firstIndex(where: { $0.playerID == hostNumber }) {
+//                // Atualizar isHost para false para todos os jogadores
+//                for index in players.indices {
+//                    players[index].isHost = false
+//                }
+//
+//                // atualizar isHost para true
+//                players[existingPlayerIndex].isHost = true
+//
+//
+//                // passo 7 - aqui adiciona na estrutura Player que provavelmente irá definir o turno na tela do jogo
+//            } else {
+//                let newPlayer = Player(playerID: hostNumber, name: "AAAAAAAAAA", isHost: true, turn: false)
+//                players.append(newPlayer)
+//
+//                //    print("\(hostID)")
+//            }
+//
+//            // encontrar o jogador com o maior numero e definir isHost como true
+//            if let maxHostNumberPlayer = players.max(by: { $0.playerID < $1.playerID }) {
+//
+//                for index in players.indices {
+//                    players[index].isHost = false
+//                }
+//                // definir isHost como true para o jogador com o maior numero
+//                maxHostNumberPlayer.isHost = true
+//
+//                if playersIDHistory.count == numberOfPlayers {
+//                    hostIDHistoryComplete = true
+//                }
+//                //tem que arrumar a gambiarra do numberOfPlayers
+//
+//                //aqui envia o dado do maior numero do array de playersIDHistory
+//
+//                if playersIDHistory.count == numberOfPlayers {
+//                    let maxHostID = playersIDHistory.max()!
+//                    let message = "$MaxPlayerIDDetermined:\(maxHostID)"
+//                    if let data = message.data(using: .utf8) {
+//                        sendDataToAllPlayers(data, mode: .reliable)
+//                    }
+//                }
+//                print("historico ids: \(playersIDHistory)")// add o hostID ao historicoo
+//                // Adicionar o hostID ao histórico
+//                // tinha que atualizar o nomeeeeeee
+//                print("o maior número é: \(maxHostNumberPlayer.playerID) e o nome(que nao ta puxando): \(maxHostNumberPlayer.name)")
+//            }
+//        }
+//    }
     
     //MARK: Verifica se todos os botões foram pressionados e se são true (vitóriaGrupo = true)
     func verifyAllButtonsArePressed() {
