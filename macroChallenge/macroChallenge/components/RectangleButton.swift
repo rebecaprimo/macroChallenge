@@ -66,12 +66,13 @@ struct RectangleButton<Content: View>: View {
                 Spacer()
                 
                 Image(systemName: "chevron.right")
+                    .font(.custom("SpecialElite-Regular", size: 20))
                     .frame(alignment: .trailing)
                     
             }
             .frame(height: 20)
             .padding(.vertical, 5)
-            .padding(.horizontal, 25)
+            .padding(.horizontal, 55)
             .foregroundColor(.black)
         })
         .padding([.trailing, .leading], 10)

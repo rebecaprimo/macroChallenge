@@ -8,30 +8,40 @@
 import SwiftUI
 
 struct CountTimer: View {
-    @State var timeRemaining = 10 // Tempo em segundos (2 minutos e 30 segundos)
+    @State var timeRemaining = 20 // Tempo em segundos (2 minutos e 30 segundos)
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var timeIsUp: () -> Void
     
     var body: some View {
-        Text(format(timeRemaining))
-            .font(.custom("alarm clock", size: 20))
-            .onReceive(timer) { _ in
-                if timeRemaining > 0 {
-                    timeRemaining -= 1
-                } else {
-                    timeIsUp()
+        ZStack {
+            Image("tempo")
+                .resizable()
+                .frame(width: 110, height: 52)
+            
+            
+            Text(format(timeRemaining))
+                .font(.custom("alarm clock", size: 30))
+                .onReceive(timer) { _ in
+                    if timeRemaining > 0 {
+                        timeRemaining -= 1
+                    } else {
+                        timeIsUp()
+                    }
                 }
-            }
-            .onAppear {
-                startTimer()
-            }
-            .onDisappear {
-                stopTimer()
-            }
+                .onAppear {
+                    startTimer()
+                }
+                .onDisappear {
+                    stopTimer()
+                }
+        }
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .topTrailing)
     }
-    
     func startTimer() {
-        timeRemaining = 10 // Tempo inicial em segundos (2 minutos e 30 segundos)
+        timeRemaining = 20 // Tempo inicial em segundos (2 minutos e 30 segundos)
     }
     
     func stopTimer() {
@@ -43,4 +53,5 @@ struct CountTimer: View {
         let remainingSeconds = seconds % 60
         return String(format: "%02d:%02d", minutes, remainingSeconds)
     }
+        
 }

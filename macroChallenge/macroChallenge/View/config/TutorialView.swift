@@ -10,7 +10,11 @@ import SwiftUI
 
 struct TutorialView: View {
     var body: some View {
-        Text("")
+        ZStack {
+            Image("extensa")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+        }
             .navigationTitle("Tutorial")
             .navigationBarTitleDisplayMode(.inline)
     }

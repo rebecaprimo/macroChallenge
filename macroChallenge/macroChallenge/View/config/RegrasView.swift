@@ -9,8 +9,12 @@ import SwiftUI
 
 struct RegrasView: View {
     var body: some View {
-        Text("")
-            .navigationTitle("Regras")
-            .navigationBarTitleDisplayMode(.inline)
+        ZStack {
+            Image("extensa")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+        }
+        .navigationTitle("Regras")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }

@@ -8,28 +8,28 @@
 import SwiftUI
 
 struct ConfigView: View {
-    //@Binding var viewState: ViewState
-    @State var themes: [Theme] = []
+    @Binding var viewState: ViewState
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                Image("fundoC")
-                    .resizable()
-                    .edgesIgnoringSafeArea(.all)
-                VStack {
-                    //TitleView(title: "Configurações", view: MenuView(viewState: $viewState, themes: themes))
-                    Separator()
-                    RectangleButton(title: "Tutorial", view: TutorialView())
-                    RectangleButton(title: "Regras", view: RegrasView())
-                    RectangleButton(title: "Política de privacidade", view: PoliticaView())
-                    RectangleButton(title: "Termos de uso", view: TermosView())
-                    RectangleButton(title: "Fale conosco", view: FaleView())
-                }
-                .padding(.top, 30) // Adicionando o padding na VStack para posicioná-la na parte superior
+        ZStack {
+            Image("fundoC")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                //TitleView(title: "Configurações", view: MenuView(viewState: $viewState, themes: themes))
+                Separator()
+                RectangleButton(title: "Tutorial", view: TutorialView())
+                RectangleButton(title: "Regras", view: RegrasView())
+                RectangleButton(title: "Política de privacidade", view: PoliticaView())
+                RectangleButton(title: "Termos de uso", view: TermosView())
+                RectangleButton(title: "Fale conosco", view: FaleView())
             }
-            .navigationTitle("Configurações")
-            .navigationBarTitleDisplayMode(.inline)
+            .padding(.top, 30) // Adicionando o padding na VStack para posicioná-la na parte superior
         }
+        .navigationBarTitle("Menu")
+        .font(.custom("SpecialElite-Regular", size: 20))
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
+
+

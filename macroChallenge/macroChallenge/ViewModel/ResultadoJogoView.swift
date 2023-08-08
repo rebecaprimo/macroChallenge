@@ -77,7 +77,7 @@ struct ResultadoJogoView: View {
                             .frame(width: (contentWidth/4)-10, alignment: .leading)
                             .padding(.leading, 10)
                         
-//                        Text("O \(resultado.nomePerdedor) deve:\n\(resultado.textFinal)")
+                        Text("O \(resultado.nomePerdedor) deve: ")
                         Text("\(resultado.textDesafio)")
                             .bold()
                             .multilineTextAlignment(.center)

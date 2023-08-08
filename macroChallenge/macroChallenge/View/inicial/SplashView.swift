@@ -16,7 +16,7 @@ struct SplashView: View {
         ZStack {
             Image("splash")
                 .resizable()
-                .aspectRatio(contentMode: .fill)
+                //.aspectRatio(contentMode: .fill)
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 Image("logo")
