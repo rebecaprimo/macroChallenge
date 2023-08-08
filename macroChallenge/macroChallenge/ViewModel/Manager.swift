@@ -30,14 +30,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     var horarios : [Int] = []
     
     @Published var viewState: ViewState = .menu
-//
-//
-//      init(viewState: Binding<ViewState>) {
-//          self.viewState = viewState.wrappedValue
-//          super.init()
-//      }
 
-   
     @Published var players: [Player] = []
     var hostIDHistoryComplete: Bool = false
     var playersIDHistory: [Int] = []
@@ -53,7 +46,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     //armazena todos os jogadores e retorna quantos estao na partida
     var numberOfPlayers: Int = 2
-    
     
     
     var rootViewController: UIViewController? {
@@ -79,7 +71,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
                 return
             }
             
-            
             if localPlayer.isAuthenticated {
                 if localPlayer.isMultiplayerGamingRestricted {
                     authenticationState = .restricted
@@ -99,8 +90,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         
         let request = GKMatchRequest()
         request.minPlayers = 2
-        request.maxPlayers = 3
-        // request.inviteMessage = "Playzinha?"
+        request.maxPlayers = 2
+        request.inviteMessage = "Playzinha?"
         
         let matchmakingVC = GKMatchmakerViewController(matchRequest: request)
         matchmakingVC?.matchmakerDelegate = self
@@ -115,13 +106,11 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         gameMatch?.delegate = nil
     }
     
-    
     func resetGame() {
         DispatchQueue.main.async { [self] in
             isGameOver = false
             inGame = false
         }
-        
         gameMatch?.delegate = nil
         gameMatch = nil
         otherPlayer = nil
@@ -133,8 +122,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     //MARK: INICIO DO JOGO
     
-    
-    
     func startGame(newMatch: GKMatch) {
 //        gameMatch = newMatch
 //        gameMatch?.delegate = self
@@ -145,8 +132,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         print("cheguei na funcao startgame")
         
     }
-    // ...
     
+    //VERIFICAR NECESSIDADE DA DETERMINEGAMEVIEW()
     //passo 8 - determinando a view para os jogadores, todos estao indo direto para a do jogo
     func determineGameView(_ hostID: String) -> ViewState {
         print("\(hostID)")
@@ -201,7 +188,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     
     //passo 6 - função para determinar e adicionar os jogadores
-    
     func determineOrderPlayers(_ dataString: String) {
         let hostNumberString = dataString.replacingOccurrences(of: "$IDPlayer:", with: "")
         print("host number string: \(hostNumberString)")
@@ -210,7 +196,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             playersIDHistory.append(hostNumber)
             
             if ((gameMatch?.players.count)! + 1 == playersIDHistory.count) {
-//                print(playersIDHistory)
                 let maxHostID = playersIDHistory.max()!
                 if (randomHostNumber == maxHostID) {
                     DispatchQueue.main.async { [weak self] in
@@ -283,9 +268,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     //MARK: ENVIA O DADO PARA OS OUTROS JOGADORES
     func sendData(buttonId: Int) {
-        
         //enviar turno do jogador e o id dele
-        
         buttonStates[buttonId, default: false].toggle()
         do {
             let data = try JSONEncoder().encode(buttonStates)
@@ -298,7 +281,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     //MARK: RECEBER DADOS
     // Função para processar os dados recebidos
-    
     func receivedData(_ data: Data) {
         // passo 5 - recebe o dado do id do player
         if let message = String(data: data, encoding: .utf8) {
@@ -306,20 +288,20 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
                 print("\(message)")
                 determineOrderPlayers(message)
             }
-            
-            //AQUI PROCESSA O MAIOR NUMERO DOS IDS QUE FOI DEFINIDO NA DETERMINEPLAYERID()
-            else if message.hasPrefix("$MaxPlayerIDDetermined:") {
-                print("$MaxPlayerIDDetermined")
-                let hostIDString = message.replacingOccurrences(of: "$MaxPlayerIDDetermined:", with: "")
-                
-                //                hostIDPublished = hostIDString
-                let newState = determineGameView(hostIDString)
-                DispatchQueue.main.async { [weak self] in
-                    self?.viewState = newState
-                }
-            } else {
-                print("Unable to determine type of message: \(message)")
-            }
+            //VERIFICAR NECESSIDADE DESSE TRECHO DO CÓDIGO
+//            //AQUI PROCESSA O MAIOR NUMERO DOS IDS QUE FOI DEFINIDO NA DETERMINEPLAYERID()
+//            else if message.hasPrefix("$MaxPlayerIDDetermined:") {
+//                print("$MaxPlayerIDDetermined")
+//                let hostIDString = message.replacingOccurrences(of: "$MaxPlayerIDDetermined:", with: "")
+//
+//                //                hostIDPublished = hostIDString
+//                let newState = determineGameView(hostIDString)
+//                DispatchQueue.main.async { [weak self] in
+//                    self?.viewState = newState
+//                }
+//            } else {
+//                print("Unable to determine type of message: \(message)")
+//            }
         } else {
             print("Error decoding data to string.")
         }
@@ -396,7 +378,6 @@ extension Manager: GKMatchDelegate {
         }
         
         do {
-            //receberá aqui o botao, turno e id do jogador
             let newData = try JSONDecoder().decode([Int: Bool].self, from: data)
             buttonStates = newData
         } catch {
@@ -405,16 +386,10 @@ extension Manager: GKMatchDelegate {
     }
     
     func sendDataToAllPlayers(_ messageData: Data, mode: GKMatch.SendDataMode) {
-        
         do {
             try gameMatch?.sendData(toAllPlayers: messageData, with: mode)
-            
             //passo 4 - processar os dados enviados também localmente
             receivedData(messageData)
-            
-            //onde o jogador local manda o seu estado de turno
-            
-            
         } catch {
             print(error)
         }
@@ -448,9 +423,6 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         print("Match found, starting game...")
         sendDataHorarioInicial()
         generateAndSendPlayerID()
-        
-        //de alguma forma, atualizar a view state conforme a funcao
-        
         
         viewController.dismiss(animated: true)
      //   startGame(newMatch: match)

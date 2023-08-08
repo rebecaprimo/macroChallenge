@@ -38,11 +38,7 @@ struct ButtonGame: View {
                 buttonAction(nomeAudio: "coin")
                 self.isPlaying.toggle()
                 matchManager.sendData(buttonId: idButton)
-                matchManager.verifyAllButtonsArePressed()
-
-                //o cara que clicou, avisa que o turn dele acabou e manda para o proximo
-          //      matchManager.sendDataTurnPlayer()
-                
+                matchManager.verifyAllButtonsArePressed()                
                 self.isButtonOn.toggle() // Altere o estado individual do botão
             }, label: {
                 Image(isPressed ? letter+"P" : letter)
