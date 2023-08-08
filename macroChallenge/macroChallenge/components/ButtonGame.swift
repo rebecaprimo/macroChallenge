@@ -45,7 +45,7 @@ struct ButtonGame: View {
                 
                 self.isButtonOn.toggle() // Altere o estado individual do botão
             }, label: {
-                Image(isPressed ? letterP : letter)
+                Image(isPressed ? letter+"P" : letter)
                     .resizable()
                     .frame(width: 80, height: 80)
             })
