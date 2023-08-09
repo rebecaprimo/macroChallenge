@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ConfigView: View {
+    //@Binding var viewState: ViewState
+      @State var themes: [Theme] = []
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -17,20 +20,15 @@ struct ConfigView: View {
                     .edgesIgnoringSafeArea(.all)
                 VStack {
                     RectangleButton(title: "Tutorial", view: TutorialView())
-                    Divider()
                     RectangleButton(title: "Regras", view: RegrasView())
-                    Divider()
-                    RectangleButton(title: "Som", view: SomView())
-                    Divider()
                     RectangleButton(title: "Política de privacidade", view: PoliticaView())
-                    Divider()
                     RectangleButton(title: "Termos de uso", view: TermosView())
-                    Divider()
-                    //RectangleButton(title: "Fale conosco", view: FaleView())
+                    RectangleButton(title: "Fale conosco", view: FaleView())
                 }
-                .navigationTitle("Configurações")
-                .navigationBarTitleDisplayMode(.inline)
+                .padding(.top, 30) // Adicionando o padding na VStack para posicioná-la na parte superior
             }
+            .navigationTitle("Configurações")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

@@ -133,44 +133,16 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         
     }
     
-    //VERIFICAR NECESSIDADE DA DETERMINEGAMEVIEW()
-    //passo 8 - determinando a view para os jogadores, todos estao indo direto para a do jogo
-    func determineGameView(_ hostID: String) -> ViewState {
-        print("\(hostID)")
-        print("numero de jogadores no total: \(numberOfPlayers)")
-        
-        //nesse for, é bom sempre olhar para ver se, os jogadores foram adicionados corretamente ex:
-//        exemplo do print
-//        ID do jogador: 90
-//        ID do jogador: 2
-        for player in players {
-            print("ID do jogador: \(player.playerID)")
-        }
-        
-        var newViewState: ViewState = .waitingRoom
-            
-            if let hostID = Int(hostID) {
-                if let playerWithMaxHostID = players.first(where: { $0.playerID == hostID }) {
-                    if playerWithMaxHostID.playerID == hostID {
-                        if !isBombMasterAssigned {
-                            print("CAI NO HOST: \(hostID)")
-                            isBombMasterAssigned = true
-                            newViewState = .game
-                            print("newViewStateHost: \(newViewState)")
-                        } else {
-                            print("CAI NO AGENTE")
-                            newViewState = .game
-                            print("newViewStateAgent: \(newViewState)")
-                            
-                        }
-                    } else {
-                        newViewState = .waitingRoom
-                    }
-                }
-            }
-          return newViewState
-        }
     
+    func determineGameView() {
+        if ((gameMatch?.players.count)! + 1 == playersIDHistory.count) {
+            DispatchQueue.main.async { [weak self] in
+                self?.viewState = .game
+            }
+        }
+    }
+                
+                
 
     // MARK: JOGO
     
@@ -369,7 +341,7 @@ extension Manager: GKMatchDelegate {
                 horarios.append(horario)
                 print(horario)
                 if (match.players.count + 1 == horarios.count) {
-                    currentTheme = calcularElementoPorHorarios(horarios, Theme.themes) as? Theme
+//                    currentTheme = calcularElementoPorHorarios(horarios, Theme.themes) as? Theme
                     textDesafio = calcularElementoPorHorarios(horarios, ResultadoJogo.desafios) as! String
                 }
             }
@@ -412,6 +384,7 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         let rootViewController = UIApplication.shared.delegate?.window?!.rootViewController
         rootViewController?.present(vc!, animated: true)
         sendDataHorarioInicial()
+        generateAndSendPlayerID()
     }
     
     //AQUI MOSTRA OS JOGADORES QUE RECEBERAM OU ACEITARAM O CONVITE

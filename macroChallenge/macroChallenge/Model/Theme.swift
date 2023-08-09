@@ -7,6 +7,14 @@
 
 import Foundation
 
+//struct Theme {
+//    var name: String
+//
+//
+//    static let themes = ["Nomes", "Animais", "C.E.P.", "Fruta", "Alimentos", "Objeto"]
+//}
+
+
 struct Theme: Identifiable, Hashable {
     var id: Int
     var name: String
