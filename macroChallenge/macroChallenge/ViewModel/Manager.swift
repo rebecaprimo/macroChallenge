@@ -29,6 +29,9 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     var resultado : ResultadoJogo?
     var textDesafio : String = ""
     var horarios : [Int] = []
+    var temaAtual : String = ""
+    var themeHost: String = ""
+
     
     @Published var viewState: ViewState = .menu
 //
@@ -146,9 +149,9 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         print("cheguei na funcao startgame")
         
     }
-    // ...
     
-    func determineGameView() {
+    func determineGameView(_ dataString: String) {
+        
         if ((gameMatch?.players.count)! + 1 == playersIDHistory.count) {
             DispatchQueue.main.async { [weak self] in
                 self?.viewState = .game
@@ -165,7 +168,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             playersIDHistory.append(hostNumber)
             
             if ((gameMatch?.players.count)! + 1 == playersIDHistory.count) {
-                var maxHostID = playersIDHistory.max()!
+                let maxHostID = playersIDHistory.max()!
                 if (randomHostNumber == maxHostID) {
                     DispatchQueue.main.async { [weak self] in
                         self?.viewState = .themeSelection
@@ -264,8 +267,20 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             print(buttonStates)
             try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
         } catch {
-            print("SEND DATA FAILED")
+            print("SEND BUTTONDATA FAILED")
         }
+    }
+    
+    func sendDataTheme(currentTheme: String){
+        themeHost.append(currentTheme)
+        
+        do {
+            let data = try JSONEncoder().encode(currentTheme)
+            try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
+        } catch {
+            print("SEND THEMEDATA FAILED")
+        }
+
     }
     
     //MARK: RECEBER DADOS
@@ -278,20 +293,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
                 print("\(message)")
                 determineOrderPlayers(message)
             }
-            
-            //AQUI PROCESSA O MAIOR NUMERO DOS IDS QUE FOI DEFINIDO NA DETERMINEPLAYERID()
-//            else if message.hasPrefix("$MaxPlayerIDDetermined:") {
-//                print("$MaxPlayerIDDetermined")
-//                let hostIDString = message.replacingOccurrences(of: "$MaxPlayerIDDetermined:", with: "")
-//
-//                //                hostIDPublished = hostIDString
-//                let newState = determineGameView(hostIDString)
-//                DispatchQueue.main.async { [weak self] in
-//                    self?.viewState = newState
-//                }
-//            } else {
-//                print("Unable to determine type of message: \(message)")
-//            }
         } else {
             print("Error decoding data to string.")
         }
@@ -359,7 +360,7 @@ extension Manager: GKMatchDelegate {
                 horarios.append(horario)
                 print(horario)
                 if (match.players.count + 1 == horarios.count) {
-                    currentTheme = calcularElementoPorHorarios(horarios, Theme.themes) as? Theme
+            //        currentTheme = calcularElementoPorHorarios(horarios, Theme.themes) as? Theme
                     textDesafio = calcularElementoPorHorarios(horarios, ResultadoJogo.desafios) as! String
                 }
             }
@@ -374,19 +375,27 @@ extension Manager: GKMatchDelegate {
         } catch {
             print("GAME DATA ERROR receivedData")
         }
+        
+        do {
+            let newData = try JSONDecoder().decode(String.self, from: data)
+            print("dado recebido theme: \(newData)")
+            currentTheme = Theme(id: 1, name: "")
+            currentTheme?.name = newData
+            themeHost = newData
+            
+            determineGameView(themeHost)
+        } catch {
+            print("GAME DATA ERROR ThemeView")
+        }
     }
     
     func sendDataToAllPlayers(_ messageData: Data, mode: GKMatch.SendDataMode) {
         
         do {
             try gameMatch?.sendData(toAllPlayers: messageData, with: mode)
-            
             //passo 4 - processar os dados enviados também localmente
             receivedData(messageData)
-            
             //onde o jogador local manda o seu estado de turno
-            
-            
         } catch {
             print(error)
         }
@@ -420,10 +429,7 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         print("Match found, starting game...")
         sendDataHorarioInicial()
         generateAndSendPlayerID()
-        
-        //de alguma forma, atualizar a view state conforme a funcao
-        
-        
+
         viewController.dismiss(animated: true)
      //   startGame(newMatch: match)
     }

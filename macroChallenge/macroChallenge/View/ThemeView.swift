@@ -48,8 +48,13 @@ struct ThemeView: View {
                     }.position(x: geometry.size.width / 2, y: geometry.size.height / 1.5)
                     HStack {
                         Button {
-                            manager.determineGameView()
+                        //    manager.determineGameView()
                             //enviar tema pra tela do jogo
+                            //sendData para o tema
+                            manager.sendDataTheme(currentTheme: currentTheme.name)
+                            print("valor da variavel: \(currentTheme.name)")
+                           // manager.determineGameView(<#String#>)
+                            
                             
                         } label: {
                             Image("OK")
