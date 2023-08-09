@@ -51,7 +51,8 @@ struct ThemeView: View {
                         //    manager.determineGameView()
                             //enviar tema pra tela do jogo
                             //sendData para o tema
-                            manager.sendDataTheme(currentTheme: currentTheme.name)
+//                            manager.sendDataTheme(currentTheme: currentTheme.name)
+                            manager.onThemePicked(currentTheme.name)
                             print("valor da variavel: \(currentTheme.name)")
                            // manager.determineGameView(<#String#>)
                             

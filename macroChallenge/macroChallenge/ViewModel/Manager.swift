@@ -150,12 +150,9 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         
     }
     
-    func determineGameView(_ dataString: String) {
-        
-        if ((gameMatch?.players.count)! + 1 == playersIDHistory.count) {
-            DispatchQueue.main.async { [weak self] in
-                self?.viewState = .game
-            }
+    func determineGameView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewState = .game
         }
     }
         
@@ -271,16 +268,28 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         }
     }
     
-    func sendDataTheme(currentTheme: String){
-        themeHost.append(currentTheme)
+    func sendDataTheme(){
+        print("send data theme: \(currentTheme?.name)")
+        let dict = ["tipo" : "tema",
+                    "tema" : "\(currentTheme!.name)"]
         
         do {
-            let data = try JSONEncoder().encode(currentTheme)
+            let data = try JSONEncoder().encode(dict)
             try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
         } catch {
             print("SEND THEMEDATA FAILED")
         }
 
+    }
+    
+    func onThemePicked(_ theme: String) {
+        //currentTheme?.name = theme //isso so tá atribuindo se currentTheme nao fosse nulo. como ele é, ele continua sem trocar
+        currentTheme = Theme.themes.first (where: { t in
+            return t.name == theme
+        })
+        
+        sendDataTheme()
+        determineGameView()
     }
     
     //MARK: RECEBER DADOS
@@ -322,6 +331,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
 
 
 
+
 //MARK: EVENTOS DA PARTIDA EM ANDAMENTO
 
 extension Manager: GKMatchDelegate {
@@ -355,6 +365,7 @@ extension Manager: GKMatchDelegate {
                 let vitoria = Bool(newData["vitoriaGrupo"]!)!
                 gameOver()
                 navegarParaResultadoJogoView(vitoriaGrupo: vitoria)
+                return
             } else if (newData["tipo"] == "horarioInicial") {
                 let horario = Int(newData["horario"]!)!
                 horarios.append(horario)
@@ -363,6 +374,14 @@ extension Manager: GKMatchDelegate {
             //        currentTheme = calcularElementoPorHorarios(horarios, Theme.themes) as? Theme
                     textDesafio = calcularElementoPorHorarios(horarios, ResultadoJogo.desafios) as! String
                 }
+                return
+            } else if (newData["tipo"] == "tema") {
+//                print("received data theme: \(newData["tema"])")
+                currentTheme = Theme.themes.first (where: { t in
+                    return t.name == newData["tema"]
+                })
+                determineGameView()
+                return
             }
         } catch {
             print("GAME DATA ERROR receivedDataCarol")
@@ -376,17 +395,17 @@ extension Manager: GKMatchDelegate {
             print("GAME DATA ERROR receivedData")
         }
         
-        do {
-            let newData = try JSONDecoder().decode(String.self, from: data)
-            print("dado recebido theme: \(newData)")
-            currentTheme = Theme(id: 1, name: "")
-            currentTheme?.name = newData
-            themeHost = newData
-            
-            determineGameView(themeHost)
-        } catch {
-            print("GAME DATA ERROR ThemeView")
-        }
+//        do {
+//            let newData = try JSONDecoder().decode(String.self, from: data)
+////            print("dado recebido theme: \(newData)")
+//            currentTheme = Theme(id: 1, name: "")
+//            currentTheme?.name = newData
+////            themeHost = newData
+////
+////            determineGameView()
+//        } catch {
+//            print("GAME DATA ERROR ThemeView")
+//        }
     }
     
     func sendDataToAllPlayers(_ messageData: Data, mode: GKMatch.SendDataMode) {

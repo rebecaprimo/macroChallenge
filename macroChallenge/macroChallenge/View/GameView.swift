@@ -30,7 +30,7 @@ struct GameView: View {
             }
             VStack(spacing: 10) {
                 Spacer()
-                Text(matchManager.currentTheme?.name ?? "")
+                Text(matchManager.currentTheme?.name ?? "?")
                     .foregroundColor(.black)
                     .font(.system(size: 20))
                     .position(x: UIScreen.main.bounds.width - 100, y: 60)
