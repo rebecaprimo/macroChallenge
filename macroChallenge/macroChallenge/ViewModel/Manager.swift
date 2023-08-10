@@ -104,7 +104,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             isGameOver = false
             inGame = false
         }
-        
         gameMatch?.delegate = nil
         gameMatch = nil
         otherPlayer = nil
@@ -198,7 +197,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         horarios.append(horarioAtual)
         let dict = ["tipo" : "horarioInicial",
                     "horario" : "\(horarioAtual)"]
-       // print("sending horario inicial")
+        print("sending horario inicial")
         
         do {
             let data = try JSONEncoder().encode(dict)

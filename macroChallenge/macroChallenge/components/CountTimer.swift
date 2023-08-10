@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct CountTimer: View {
     @State var timeRemaining = 20 // Tempo em segundos (2 minutos e 30 segundos)
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -42,6 +43,7 @@ struct CountTimer: View {
     }
     func startTimer() {
         timeRemaining = 20 // Tempo inicial em segundos (2 minutos e 30 segundos)
+
     }
     
     func stopTimer() {
