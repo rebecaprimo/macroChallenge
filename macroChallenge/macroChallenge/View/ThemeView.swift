@@ -31,39 +31,32 @@ struct ThemeView: View {
         ZStack {
             Image("fgTema")
                 .resizable()
-               // .aspectRatio(contentMode: .fill)
                 .edgesIgnoringSafeArea(.all)
             
             GeometryReader { geometry in
                 VStack {
-                    HStack {
+                    ZStack {
+                        Image("theme")
+                            .resizable()
+                            .frame(width: 280, height: 200)
                         Picker("Choose a theme", selection: $currentTheme) {
                             ForEach(themes) { theme in
                                 Text(theme.name).tag(theme)
                             }
                         }.pickerStyle(.wheel)
-                        
-                   //     Text("You selected: \(currentTheme.name)")
-
                     }.position(x: geometry.size.width / 2, y: geometry.size.height / 1.5)
                     HStack {
                         Button {
-                        //    manager.determineGameView()
-                            //enviar tema pra tela do jogo
-                            //sendData para o tema
-//                            manager.sendDataTheme(currentTheme: currentTheme.name)
                             manager.onThemePicked(currentTheme.name)
                             print("valor da variavel: \(currentTheme.name)")
-                           // manager.determineGameView(<#String#>)
-                            
-                            
                         } label: {
-                            Image("OK")
+                            Image("okButton")
                                 .resizable()
-                                .aspectRatio(contentMode: .fit) // Ajuste a imagem do botão "OK" ao content mode "fit"
-                                .frame(width: geometry.size.width * 0.6, height: geometry.size.height * 0.15) // Ajuste o tamanho do botão "OK"
+                                .aspectRatio(contentMode: .fit)
+                                //.frame(width: 200, height: 160)
+                                .frame(width: 140)
                         }
-                    }.position(x: geometry.size.width / 2, y: geometry.size.height / 3)
+                    }//.position(x: geometry.size.width / 2, y: geometry.size.height / 3)
                 }
             }
         }
