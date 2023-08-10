@@ -10,7 +10,7 @@ import SwiftUI
 struct TermosView: View {
     var body: some View {
         ZStack {
-            Image("extensa")
+            Image("fundoC")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
         }

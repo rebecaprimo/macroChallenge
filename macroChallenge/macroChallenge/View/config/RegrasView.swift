@@ -10,7 +10,7 @@ import SwiftUI
 struct RegrasView: View {
     var body: some View {
         ZStack {
-            Image("extensa")
+            Image("fundoC")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
         }

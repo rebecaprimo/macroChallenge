@@ -20,7 +20,7 @@ struct ConfigView: View {
                 Separator()
                 RectangleButton(title: "Tutorial", view: TutorialView())
                 RectangleButton(title: "Regras", view: RegrasView())
-                RectangleButton(title: "Política de privacidade", view: PoliticaView())
+                RectangleButton(title: "Privacidade", view: PoliticaView())
                 RectangleButton(title: "Termos de uso", view: TermosView())
                 RectangleButton(title: "Fale conosco", view: FaleView())
             }
