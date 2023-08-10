@@ -9,8 +9,9 @@ import SwiftUI
 
 
 struct CountTimer: View {
+    @EnvironmentObject private var matchManager: Manager
     @State var timeRemaining = 20 // Tempo em segundos (2 minutos e 30 segundos)
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
     var timeIsUp: () -> Void
     
     var body: some View {
@@ -22,28 +23,29 @@ struct CountTimer: View {
             
             Text(format(timeRemaining))
                 .font(.custom("alarm clock", size: 30))
-                .onReceive(timer) { _ in
-                    if timeRemaining > 0 {
-                        timeRemaining -= 1
-                    } else {
-                        timeIsUp()
-                    }
-                }
-                .onAppear {
-                    startTimer()
-                }
-                .onDisappear {
-                    stopTimer()
-                }
         }
         .frame(
             maxWidth: .infinity,
             maxHeight: .infinity,
             alignment: .topTrailing)
+        .onAppear {
+            startTimer()
+        }
+        .onDisappear {
+            stopTimer()
+        }
     }
+    
     func startTimer() {
-        timeRemaining = 20 // Tempo inicial em segundos (2 minutos e 30 segundos)
-
+        DispatchQueue.global().async {
+            while timeRemaining > 0 {
+                Thread.sleep(forTimeInterval: 1)
+                DispatchQueue.main.async {
+                    timeRemaining -= 1
+                }
+            }
+            timeIsUp()
+        }
     }
     
     func stopTimer() {
@@ -55,5 +57,6 @@ struct CountTimer: View {
         let remainingSeconds = seconds % 60
         return String(format: "%02d:%02d", minutes, remainingSeconds)
     }
-        
 }
+
+
