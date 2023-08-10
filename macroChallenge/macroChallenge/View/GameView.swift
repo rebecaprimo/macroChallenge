@@ -19,9 +19,7 @@ struct GameView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .edgesIgnoringSafeArea(.all)
-                
-                
-            
+          
             VStack(spacing: 20) {
                     HStack {
                         Text(matchManager.currentTheme?.name ?? "")

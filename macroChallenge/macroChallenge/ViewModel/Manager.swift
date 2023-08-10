@@ -25,9 +25,13 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     @Published var hostIDPublished = String()
     @Published var menuSheetContent: AnyView?
     @Published var showMenuSheet = false
+    @Published var MaxIDGame: Int = 0
     var resultado : ResultadoJogo?
     var textDesafio : String = ""
     var horarios : [Int] = []
+    var temaAtual : String = ""
+    var themeHost: String = ""
+
     
     @Published var viewState: ViewState = .menu
 //
@@ -99,7 +103,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         
         let request = GKMatchRequest()
         request.minPlayers = 2
-        request.maxPlayers = 2
+        request.maxPlayers = 3
         // request.inviteMessage = "Playzinha?"
         
         let matchmakingVC = GKMatchmakerViewController(matchRequest: request)
@@ -145,61 +149,44 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         print("cheguei na funcao startgame")
         
     }
-    // ...
     
-    //passo 8 - determinando a view para os jogadores, todos estao indo direto para a do jogo
-    func determineGameView(_ hostID: String) -> ViewState {
-        print("\(hostID)")
-        print("numero de jogadores no total: \(numberOfPlayers)")
-        
-        //nesse for, é bom sempre olhar para ver se, os jogadores foram adicionados corretamente ex:
-//        exemplo do print
-//        ID do jogador: 90
-//        ID do jogador: 2
-        for player in players {
-            print("ID do jogador: \(player.playerID)")
+    func determineGameView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewState = .game
         }
+    }
         
-        var newViewState: ViewState = .waitingRoom
+     
+    func determineOrderPlayers(_ dataString: String) {
+        let hostNumberString = dataString.replacingOccurrences(of: "$IDPlayer:", with: "")
+        print("host number string: \(hostNumberString)")
+        
+        if let hostNumber = Int(hostNumberString) {
+            playersIDHistory.append(hostNumber)
             
-            if let hostID = Int(hostID) {
-                if let playerWithMaxHostID = players.first(where: { $0.playerID == hostID }) {
-                    if playerWithMaxHostID.playerID == hostID {
-                        if !isBombMasterAssigned {
-                            print("CAI NO HOST: \(hostID)")
-                            isBombMasterAssigned = true
-                            newViewState = .game
-                            print("newViewStateHost: \(newViewState)")
-                        } else {
-                            print("CAI NO AGENTE")
-                            newViewState = .game
-                            print("newViewStateAgent: \(newViewState)")
-                            
-                        }
-                    } else {
-                        newViewState = .waitingRoom
+            if ((gameMatch?.players.count)! + 1 == playersIDHistory.count) {
+                let maxHostID = playersIDHistory.max()!
+                if (randomHostNumber == maxHostID) {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.viewState = .themeSelection
+                    }
+                } else {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.viewState = .waitingRoom
                     }
                 }
             }
-          return newViewState
         }
-    
+    }
 
     // MARK: JOGO
     
-    // Função para gerar e enviar o numero do host
-    
-    //passo 1
+    //passo 1 - Função para gerar e enviar o numero do ID
     func generateAndSendPlayerID() {
-        randomHostNumber = Int.random(in: 1...99)
-        //nao deixar repetir
-        
+        randomHostNumber = Int.random(in: 1...999_999)
         let randomNumberString = "$IDPlayer:\(randomHostNumber)"
-        print("\(randomNumberString)")
         
         if let data = randomNumberString.data(using: .utf8) {
-            //passo 2
-            //enviar esse dado para os devices
             sendDataToAllPlayers(data, mode: .reliable)
         } else {
             print("erro ")
@@ -208,66 +195,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     
     //passo 6 - função para determinar e adicionar os jogadores
+    
 
-    func determineOrderPlayers(_ dataString: String) {
-        let hostNumberString = dataString.replacingOccurrences(of: "$IDPlayer:", with: "")
-        print("host number string: \(hostNumberString)")
-        
-        if let hostNumber = Int(hostNumberString) {
-            // Adicionar o novo hostNumber ao histórico hostIDHistory
-            playersIDHistory.append(hostNumber)
-            
-            // Ordenar o histórico hostIDHistory de forma crescente
-            playersIDHistory.sort()
-            
-            if let existingPlayerIndex = players.firstIndex(where: { $0.playerID == hostNumber }) {
-                // Atualizar isHost para false para todos os jogadores
-                for index in players.indices {
-                    players[index].isHost = false
-                }
-                
-                // atualizar isHost para true
-                players[existingPlayerIndex].isHost = true
-                
-                
-                // passo 7 - aqui adiciona na estrutura Player que provavelmente irá definir o turno na tela do jogo
-            } else {
-                let newPlayer = Player(playerID: hostNumber, name: "AAAAAAAAAA", isHost: true, turn: false)
-                players.append(newPlayer)
-                
-                //    print("\(hostID)")
-            }
-            
-            // encontrar o jogador com o maior numero e definir isHost como true
-            if let maxHostNumberPlayer = players.max(by: { $0.playerID < $1.playerID }) {
-                
-                for index in players.indices {
-                    players[index].isHost = false
-                }
-                // definir isHost como true para o jogador com o maior numero
-                maxHostNumberPlayer.isHost = true
-                
-                if playersIDHistory.count == numberOfPlayers {
-                    hostIDHistoryComplete = true
-                }
-                //tem que arrumar a gambiarra do numberOfPlayers
-                
-                //aqui envia o dado do maior numero do array de playersIDHistory
-                
-                if playersIDHistory.count == numberOfPlayers {
-                    let maxHostID = playersIDHistory.max()!
-                    let message = "$MaxPlayerIDDetermined:\(maxHostID)"
-                    if let data = message.data(using: .utf8) {
-                        sendDataToAllPlayers(data, mode: .reliable)
-                    }
-                }
-                print("historico ids: \(playersIDHistory)")// add o hostID ao historicoo
-                // Adicionar o hostID ao histórico
-                // tinha que atualizar o nomeeeeeee
-                print("o maior número é: \(maxHostNumberPlayer.playerID) e o nome(que nao ta puxando): \(maxHostNumberPlayer.name)")
-            }
-        }
-    }
     
     //MARK: Verifica se todos os botões foram pressionados e se são true (vitóriaGrupo = true)
     func verifyAllButtonsArePressed() {
@@ -335,8 +264,32 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             print(buttonStates)
             try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
         } catch {
-            print("SEND DATA FAILED")
+            print("SEND BUTTONDATA FAILED")
         }
+    }
+    
+    func sendDataTheme(){
+        print("send data theme: \(currentTheme?.name)")
+        let dict = ["tipo" : "tema",
+                    "tema" : "\(currentTheme!.name)"]
+        
+        do {
+            let data = try JSONEncoder().encode(dict)
+            try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
+        } catch {
+            print("SEND THEMEDATA FAILED")
+        }
+
+    }
+    
+    func onThemePicked(_ theme: String) {
+        //currentTheme?.name = theme //isso so tá atribuindo se currentTheme nao fosse nulo. como ele é, ele continua sem trocar
+        currentTheme = Theme.themes.first (where: { t in
+            return t.name == theme
+        })
+        
+        sendDataTheme()
+        determineGameView()
     }
     
     //MARK: RECEBER DADOS
@@ -349,25 +302,11 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
                 print("\(message)")
                 determineOrderPlayers(message)
             }
-            
-            //AQUI PROCESSA O MAIOR NUMERO DOS IDS QUE FOI DEFINIDO NA DETERMINEPLAYERID()
-            else if message.hasPrefix("$MaxPlayerIDDetermined:") {
-                print("$MaxPlayerIDDetermined")
-                let hostIDString = message.replacingOccurrences(of: "$MaxPlayerIDDetermined:", with: "")
-                
-                //                hostIDPublished = hostIDString
-                let newState = determineGameView(hostIDString)
-                DispatchQueue.main.async { [weak self] in
-                    self?.viewState = newState
-                }
-            } else {
-                print("Unable to determine type of message: \(message)")
-            }
         } else {
             print("Error decoding data to string.")
         }
     }
-    
+         
 //    MARK: funções para calcular horários para id da partida
     func pegarHorarioAtual() -> Int {
         return Int(Date().timeIntervalSince1970*1_000_000)
@@ -389,6 +328,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         navegarParaResultadoJogoView(vitoriaGrupo: false)
     }
 }
+
 
 
 
@@ -425,14 +365,23 @@ extension Manager: GKMatchDelegate {
                 let vitoria = Bool(newData["vitoriaGrupo"]!)!
                 gameOver()
                 navegarParaResultadoJogoView(vitoriaGrupo: vitoria)
+                return
             } else if (newData["tipo"] == "horarioInicial") {
                 let horario = Int(newData["horario"]!)!
                 horarios.append(horario)
                 print(horario)
                 if (match.players.count + 1 == horarios.count) {
-                    currentTheme = calcularElementoPorHorarios(horarios, Theme.themes) as? Theme
+            //        currentTheme = calcularElementoPorHorarios(horarios, Theme.themes) as? Theme
                     textDesafio = calcularElementoPorHorarios(horarios, ResultadoJogo.desafios) as! String
                 }
+                return
+            } else if (newData["tipo"] == "tema") {
+//                print("received data theme: \(newData["tema"])")
+                currentTheme = Theme.themes.first (where: { t in
+                    return t.name == newData["tema"]
+                })
+                determineGameView()
+                return
             }
         } catch {
             print("GAME DATA ERROR receivedDataCarol")
@@ -445,19 +394,27 @@ extension Manager: GKMatchDelegate {
         } catch {
             print("GAME DATA ERROR receivedData")
         }
+        
+//        do {
+//            let newData = try JSONDecoder().decode(String.self, from: data)
+////            print("dado recebido theme: \(newData)")
+//            currentTheme = Theme(id: 1, name: "")
+//            currentTheme?.name = newData
+////            themeHost = newData
+////
+////            determineGameView()
+//        } catch {
+//            print("GAME DATA ERROR ThemeView")
+//        }
     }
     
     func sendDataToAllPlayers(_ messageData: Data, mode: GKMatch.SendDataMode) {
         
         do {
             try gameMatch?.sendData(toAllPlayers: messageData, with: mode)
-            
             //passo 4 - processar os dados enviados também localmente
             receivedData(messageData)
-            
             //onde o jogador local manda o seu estado de turno
-            
-            
         } catch {
             print(error)
         }
@@ -491,10 +448,7 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         print("Match found, starting game...")
         sendDataHorarioInicial()
         generateAndSendPlayerID()
-        
-        //de alguma forma, atualizar a view state conforme a funcao
-        
-        
+
         viewController.dismiss(animated: true)
      //   startGame(newMatch: match)
     }

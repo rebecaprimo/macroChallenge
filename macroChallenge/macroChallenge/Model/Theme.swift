@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Theme: Identifiable, Hashable {
+struct Theme: Identifiable, Hashable, Codable {
     var id: Int
     var name: String
 }
