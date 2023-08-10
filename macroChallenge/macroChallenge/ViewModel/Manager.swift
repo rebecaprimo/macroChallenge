@@ -221,6 +221,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     
     func sendData(buttonId: Int) {
+
         buttonStates[buttonId, default: false].toggle()
         do {
             let data = try JSONEncoder().encode(buttonStates)
@@ -378,6 +379,7 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         let rootViewController = UIApplication.shared.delegate?.window?!.rootViewController
         rootViewController?.present(vc!, animated: true)
         sendDataHorarioInicial()
+        generateAndSendPlayerID()
     }
     
     //AQUI MOSTRA OS JOGADORES QUE RECEBERAM OU ACEITARAM O CONVITE

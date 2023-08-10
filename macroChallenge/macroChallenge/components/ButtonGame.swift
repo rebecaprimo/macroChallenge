@@ -34,17 +34,19 @@ struct ButtonGame: View {
         
         HStack {
             Button(action: {
-                if matchManager.isHost {
-                    buttonAction(nomeAudio: "coin")
-                    self.isPlaying.toggle()
-                    matchManager.sendData(buttonId: idButton)
-                    matchManager.verifyAllButtonsArePressed()
-                } else {
-                    guard !isPressed else { return } // Verifica se o botão já foi pressionado. Se não pressionado, prossegue a action
-                    buttonAction(nomeAudio: "coin")
-                    self.isPlaying.toggle()
-                    matchManager.sendData(buttonId: idButton)
-                    matchManager.verifyAllButtonsArePressed()
+                DispatchQueue.main.async {
+                    if matchManager.isHost {
+                        buttonAction(nomeAudio: "coin")
+                        self.isPlaying.toggle()
+                        matchManager.sendData(buttonId: idButton)
+                        matchManager.verifyAllButtonsArePressed()
+                    } else {
+                        guard !isPressed else { return } // Verifica se o botão já foi pressionado. Se não pressionado, prossegue a action
+                        buttonAction(nomeAudio: "coin")
+                        self.isPlaying.toggle()
+                        matchManager.sendData(buttonId: idButton)
+                        matchManager.verifyAllButtonsArePressed()
+                    }
                 }
 
                 self.isButtonOn.toggle() // Altere o estado individual do botão
