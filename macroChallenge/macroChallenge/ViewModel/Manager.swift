@@ -25,40 +25,19 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     @Published var hostIDPublished = String()
     @Published var menuSheetContent: AnyView?
     @Published var showMenuSheet = false
+    @Published var viewState: ViewState = .menu
+    @Published var players: [Player] = []
     @Published var MaxIDGame: Int = 0
+    @Published var isHost: Bool = false
+    private var randomHostNumber: Int = 0
     var resultado : ResultadoJogo?
     var textDesafio : String = ""
     var horarios : [Int] = []
-    var temaAtual : String = ""
-    var themeHost: String = ""
-
-    
-    @Published var viewState: ViewState = .menu
-//
-//
-//      init(viewState: Binding<ViewState>) {
-//          self.viewState = viewState.wrappedValue
-//          super.init()
-//      }
-
-   
-    @Published var players: [Player] = []
-    var hostIDHistoryComplete: Bool = false
     var playersIDHistory: [Int] = []
     var randomThemes = Theme.themes
-    
-    private var randomHostNumber: Int = 0
-    
-    var isBombMasterAssigned = false
     var myGame: GKMatchDelegate?
-    var agents: [GKPlayer]?
     var otherPlayer: GKPlayer?
     var localPlayer = GKLocalPlayer.local
-    
-    //armazena todos os jogadores e retorna quantos estao na partida
-    var numberOfPlayers: Int = 2
-    
-    
     
     var rootViewController: UIViewController? {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
@@ -136,27 +115,15 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     
     //MARK: INICIO DO JOGO
+    //
+    //    func startGame(newMatch: GKMatch) {
+    //        inGame = true
+    //        print("cheguei na funcao startgame")
+    //    }
+    
+    // MARK: JOGO
     
     
-    
-    func startGame(newMatch: GKMatch) {
-//        gameMatch = newMatch
-//        gameMatch?.delegate = self
-//        otherPlayer = gameMatch?.players.first
-        inGame = true
-      //  viewState = .game
-        
-        print("cheguei na funcao startgame")
-        
-    }
-    
-    func determineGameView() {
-        DispatchQueue.main.async { [weak self] in
-            self?.viewState = .game
-        }
-    }
-        
-     
     func determineOrderPlayers(_ dataString: String) {
         let hostNumberString = dataString.replacingOccurrences(of: "$IDPlayer:", with: "")
         print("host number string: \(hostNumberString)")
@@ -167,6 +134,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             if ((gameMatch?.players.count)! + 1 == playersIDHistory.count) {
                 let maxHostID = playersIDHistory.max()!
                 if (randomHostNumber == maxHostID) {
+                    isHost = true
                     DispatchQueue.main.async { [weak self] in
                         self?.viewState = .themeSelection
                     }
@@ -178,25 +146,13 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             }
         }
     }
-
-    // MARK: JOGO
     
-    //passo 1 - Função para gerar e enviar o numero do ID
-    func generateAndSendPlayerID() {
-        randomHostNumber = Int.random(in: 1...999_999)
-        let randomNumberString = "$IDPlayer:\(randomHostNumber)"
-        
-        if let data = randomNumberString.data(using: .utf8) {
-            sendDataToAllPlayers(data, mode: .reliable)
-        } else {
-            print("erro ")
+    func determineGameView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewState = .game
         }
     }
     
-    
-    //passo 6 - função para determinar e adicionar os jogadores
-    
-
     
     //MARK: Verifica se todos os botões foram pressionados e se são true (vitóriaGrupo = true)
     func verifyAllButtonsArePressed() {
@@ -214,11 +170,13 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     //chama a tela de resultado
     func navegarParaResultadoJogoView(vitoriaGrupo : Bool) {
-       resultado = ResultadoJogo(vitoriaGrupo: vitoriaGrupo, textDesafio: textDesafio)
+        resultado = ResultadoJogo(vitoriaGrupo: vitoriaGrupo, textDesafio: textDesafio)
         DispatchQueue.main.async { [weak self] in
             self?.viewState = .result
         }
     }
+    
+    //MARK: ENVIA O DADO PARA OS OUTROS JOGADORES
     
     //envia dados de resultado para o Game Center
     func sendDataResultadoJogo(vitoriaGrupo : Bool) {
@@ -240,7 +198,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         horarios.append(horarioAtual)
         let dict = ["tipo" : "horarioInicial",
                     "horario" : "\(horarioAtual)"]
-        print("sending horario inicial")
+       // print("sending horario inicial")
         
         do {
             let data = try JSONEncoder().encode(dict)
@@ -252,12 +210,18 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         }
     }
     
+    func generateAndSendPlayerID() {
+        randomHostNumber = Int.random(in: 1...999_999)
+        let randomNumberString = "$IDPlayer:\(randomHostNumber)"
+        
+        if let data = randomNumberString.data(using: .utf8) {
+            sendDataToAllPlayers(data, mode: .reliable)
+        } else {
+            print("erro ")
+        }
+    }
     
-    //MARK: ENVIA O DADO PARA OS OUTROS JOGADORES
     func sendData(buttonId: Int) {
-        
-        //enviar turno do jogador e o id dele
-        
         buttonStates[buttonId, default: false].toggle()
         do {
             let data = try JSONEncoder().encode(buttonStates)
@@ -269,7 +233,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     
     func sendDataTheme(){
-        print("send data theme: \(currentTheme?.name)")
         let dict = ["tipo" : "tema",
                     "tema" : "\(currentTheme!.name)"]
         
@@ -279,11 +242,10 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         } catch {
             print("SEND THEMEDATA FAILED")
         }
-
+        
     }
     
     func onThemePicked(_ theme: String) {
-        //currentTheme?.name = theme //isso so tá atribuindo se currentTheme nao fosse nulo. como ele é, ele continua sem trocar
         currentTheme = Theme.themes.first (where: { t in
             return t.name == theme
         })
@@ -293,10 +255,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     
     //MARK: RECEBER DADOS
-    // Função para processar os dados recebidos
     
     func receivedData(_ data: Data) {
-        // passo 5 - recebe o dado do id do player
         if let message = String(data: data, encoding: .utf8) {
             if message.hasPrefix("$IDPlayer:") {
                 print("\(message)")
@@ -306,31 +266,29 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             print("Error decoding data to string.")
         }
     }
-         
-//    MARK: funções para calcular horários para id da partida
+    
+    //    MARK: funções para calcular horários para id da partida
+    
     func pegarHorarioAtual() -> Int {
         return Int(Date().timeIntervalSince1970*1_000_000)
     }
-
+    
     func calcularElementoPorHorarios(_ horarios: [Int], _ array: [Any]) -> Any {
         var sum = 0
         for horario in horarios {
             sum += horario
         }
-
+        
         let indice = sum % array.count
         return array[indice]
     }
-     
+    
     //MARK: função de timer encerrado
     func endTimer() {
         gameOver()
         navegarParaResultadoJogoView(vitoriaGrupo: false)
     }
 }
-
-
-
 
 //MARK: EVENTOS DA PARTIDA EM ANDAMENTO
 
@@ -353,9 +311,7 @@ extension Manager: GKMatchDelegate {
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         print("didReceive")
         print("viewState: \(self.viewState)")
-        //passo 4 - recebe de outros jogadores
         receivedData(data)
-        //vai ter que receber dos outros jogadores o estado dos turnos e se ele é o proximo junto com o estado do botao
         print("viewState: \(self.viewState)")
         
         do {
@@ -371,12 +327,10 @@ extension Manager: GKMatchDelegate {
                 horarios.append(horario)
                 print(horario)
                 if (match.players.count + 1 == horarios.count) {
-            //        currentTheme = calcularElementoPorHorarios(horarios, Theme.themes) as? Theme
                     textDesafio = calcularElementoPorHorarios(horarios, ResultadoJogo.desafios) as! String
                 }
                 return
             } else if (newData["tipo"] == "tema") {
-//                print("received data theme: \(newData["tema"])")
                 currentTheme = Theme.themes.first (where: { t in
                     return t.name == newData["tema"]
                 })
@@ -394,18 +348,6 @@ extension Manager: GKMatchDelegate {
         } catch {
             print("GAME DATA ERROR receivedData")
         }
-        
-//        do {
-//            let newData = try JSONDecoder().decode(String.self, from: data)
-////            print("dado recebido theme: \(newData)")
-//            currentTheme = Theme(id: 1, name: "")
-//            currentTheme?.name = newData
-////            themeHost = newData
-////
-////            determineGameView()
-//        } catch {
-//            print("GAME DATA ERROR ThemeView")
-//        }
     }
     
     func sendDataToAllPlayers(_ messageData: Data, mode: GKMatch.SendDataMode) {
@@ -448,9 +390,9 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         print("Match found, starting game...")
         sendDataHorarioInicial()
         generateAndSendPlayerID()
-
+        
         viewController.dismiss(animated: true)
-     //   startGame(newMatch: match)
+        //   startGame(newMatch: match)
     }
     
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFailWithError error: Error) {
