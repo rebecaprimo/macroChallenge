@@ -32,7 +32,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     private var randomHostNumber: Int = 0
     var resultado : ResultadoJogo?
     var textDesafio : String = ""
-    var horarios : [Int] = []
     var playersIDHistory: [Int] = []
     var randomThemes = Theme.themes
     var myGame: GKMatchDelegate?
@@ -109,7 +108,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         otherPlayer = nil
         buttonStates.removeAll()
         playersIDHistory.removeAll()
-        horarios.removeAll()
     }
     
     
@@ -131,6 +129,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             playersIDHistory.append(hostNumber)
             
             if ((gameMatch?.players.count)! + 1 == playersIDHistory.count) {
+                textDesafio = calcularElementoPorIDs(playersIDHistory, ResultadoJogo.desafios) as! String
                 let maxHostID = playersIDHistory.max()!
                 if (randomHostNumber == maxHostID) {
                     isHost = true
@@ -188,24 +187,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
         } catch {
             print("SEND DATA RESULTADO JOGO FAILED")
-        }
-    }
-    
-    // cada player manda o seu horario local
-    func sendDataHorarioInicial() {
-        let horarioAtual = pegarHorarioAtual()
-        horarios.append(horarioAtual)
-        let dict = ["tipo" : "horarioInicial",
-                    "horario" : "\(horarioAtual)"]
-        print("sending horario inicial")
-        
-        do {
-            let data = try JSONEncoder().encode(dict)
-            print(data)
-            try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
-            //try gameMatch?.sendData(toAllPlayers: messageData, with: mode)
-        } catch {
-            print("SEND DATA Horario Inicial FAILED")
         }
     }
     
@@ -267,16 +248,10 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         }
     }
     
-    //    MARK: funções para calcular horários para id da partida
-    
-    func pegarHorarioAtual() -> Int {
-        return Int(Date().timeIntervalSince1970*1_000_000)
-    }
-    
-    func calcularElementoPorHorarios(_ horarios: [Int], _ array: [Any]) -> Any {
+    func calcularElementoPorIDs(_ ids: [Int], _ array: [Any]) -> Any {
         var sum = 0
-        for horario in horarios {
-            sum += horario
+        for id in ids {
+            sum += id
         }
         
         let indice = sum % array.count
@@ -321,14 +296,6 @@ extension Manager: GKMatchDelegate {
                 let vitoria = Bool(newData["vitoriaGrupo"]!)!
                 gameOver()
                 navegarParaResultadoJogoView(vitoriaGrupo: vitoria)
-                return
-            } else if (newData["tipo"] == "horarioInicial") {
-                let horario = Int(newData["horario"]!)!
-                horarios.append(horario)
-                print(horario)
-                if (match.players.count + 1 == horarios.count) {
-                    textDesafio = calcularElementoPorHorarios(horarios, ResultadoJogo.desafios) as! String
-                }
                 return
             } else if (newData["tipo"] == "tema") {
                 currentTheme = Theme.themes.first (where: { t in
@@ -378,7 +345,6 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         vc?.delegate = self
         let rootViewController = UIApplication.shared.delegate?.window?!.rootViewController
         rootViewController?.present(vc!, animated: true)
-        sendDataHorarioInicial()
         generateAndSendPlayerID()
     }
     
@@ -389,7 +355,6 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         gameMatch = match
         gameMatch?.delegate = self
         print("Match found, starting game...")
-        sendDataHorarioInicial()
         generateAndSendPlayerID()
         
         viewController.dismiss(animated: true)
