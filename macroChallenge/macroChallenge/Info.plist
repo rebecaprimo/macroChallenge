@@ -4,6 +4,8 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string></string>
+		<string>specialagent.ttf</string>
 		<string>SpecialElite-Regular.ttf</string>
 		<string>alarm clock.ttf</string>
 	</array>

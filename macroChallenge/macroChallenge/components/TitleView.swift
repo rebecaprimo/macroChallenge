@@ -7,24 +7,16 @@
 
 import SwiftUI
 
-struct TitleView<Content: View>: View {
-    private var title: String
-    private var view: Content
-    
-    init(title: String, view: Content) {
-        self.title = title
-        self.view = view
-    }
-    
+struct TitleView: View {
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
-        ZStack {
-            HStack {
-                NavigationLink(destination: view) {
-                    Image(systemName: "chevron.left")
-                }
-                Text(title)
-            }
-            .font(.custom("SpecialElite-Regular", size: 10))
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }) {
+            Image(systemName: "arrow.left")
+                .foregroundColor(.blue) // Personalize a cor do ícone do botão de voltar
+                .imageScale(.large)
         }
     }
 }

@@ -9,7 +9,11 @@ import SwiftUI
 
 struct TermosView: View {
     var body: some View {
-        Text("")
+        ZStack {
+            Image("fundoC")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+        }
             .navigationTitle("Termos de uso")
             .navigationBarTitleDisplayMode(.inline)
     }

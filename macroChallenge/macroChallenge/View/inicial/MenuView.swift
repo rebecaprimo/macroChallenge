@@ -25,7 +25,7 @@ struct MenuView: View {
                 VStack {
                     HStack {
                         Spacer()
-                        NavigationLink(destination: ConfigView()) {
+                        NavigationLink(destination: ConfigView(viewState: $viewState)) {
                             Image("confHome")
                                 .resizable()
                                 .frame(width: 30, height: 30)
@@ -50,7 +50,7 @@ struct MenuView: View {
                     .padding(.vertical, 80)
 
                     Text(matchManager.authenticationState.rawValue)
-                        .font(.custom("SpecialElite-Regular", size: 20))
+                        .font(.custom("SpecialElite-Regular", size: 15))
                         .foregroundColor(.white)
                 }
             }

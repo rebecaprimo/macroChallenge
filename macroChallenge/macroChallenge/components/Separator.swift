@@ -10,8 +10,8 @@ import SwiftUI
 struct Separator: View {
     var body: some View {
         Image("line")
-            .padding(.bottom, 10)
-            .padding(.top, 10)
+            .padding(.bottom, 15)
+            .padding(.top, 15)
     }
 }
 

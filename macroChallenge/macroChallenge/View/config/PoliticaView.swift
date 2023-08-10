@@ -9,7 +9,11 @@ import SwiftUI
 
 struct PoliticaView: View {
     var body: some View {
-        Text("")
+        ZStack {
+            Image("fundoC")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+        }
             .navigationTitle("Política de privacidade")
             .navigationBarTitleDisplayMode(.inline)
     }

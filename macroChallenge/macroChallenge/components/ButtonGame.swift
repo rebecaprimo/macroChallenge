@@ -47,7 +47,7 @@ struct ButtonGame: View {
             }, label: {
                 Image(isPressed ? letter+"P" : letter)
                     .resizable()
-                    .frame(width: 85, height: 85)
+                    .frame(width: 80, height: 80)
             })
             .foregroundColor(.black)
         }
