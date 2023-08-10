@@ -9,8 +9,11 @@ import SwiftUI
 
 
 struct CountTimer: View {
+    
+    static let time = 20
+    
     @EnvironmentObject private var matchManager: Manager
-    @State var timeRemaining = 20 // Tempo em segundos (2 minutos e 30 segundos)
+    @State var timeRemaining = CountTimer.time // Tempo em segundos (2 minutos e 30 segundos)
     let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
     var timeIsUp: () -> Void
     
@@ -37,6 +40,8 @@ struct CountTimer: View {
     }
     
     func startTimer() {
+        print("start timer")
+        timeRemaining = CountTimer.time
         DispatchQueue.global().async {
             while timeRemaining > 0 {
                 Thread.sleep(forTimeInterval: 1)
@@ -49,6 +54,7 @@ struct CountTimer: View {
     }
     
     func stopTimer() {
+        print("stop timer")
         timer.upstream.connect().cancel()
     }
     
