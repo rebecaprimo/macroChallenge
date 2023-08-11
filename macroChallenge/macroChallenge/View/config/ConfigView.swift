@@ -20,7 +20,7 @@ struct ConfigView: View {
                 RectangleButton(title: "Tutorial", view: TutorialView())
                 RectangleButton(title: "Privacidade", view: PoliticaView())
                 RectangleButton(title: "Termos de uso", view: TermosView())
-                RectangleButton(title: "Fale conosco", view: FaleView())
+                //RectangleButton(title: "Fale conosco", view: FaleView())
             }
             .padding(.top, 30)
         }
