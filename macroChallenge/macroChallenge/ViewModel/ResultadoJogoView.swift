@@ -83,6 +83,7 @@ struct ResultadoJogoView: View {
                 Button(action: {
                     DispatchQueue.main.async {
                         matchManager.viewState = .menu
+                        matchManager.resetGame()
                     }
                 }, label: {
                     Image("home")
@@ -90,6 +91,7 @@ struct ResultadoJogoView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 150)
                 })
+                .position(x: gWidth / 2, y: gHeight / 2)
                 .frame(height: contentHeight-60)
             }
             .frame(

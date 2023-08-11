@@ -16,7 +16,6 @@ struct DataTest: Codable {
 class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     @Published var inGame = false
-    @Published var isGameOver = false
     @Published var authenticationState = PlayerAuthState.authenticating
     @Published var gameMatch: GKMatch?
     @Published var buttonStates: [Int: Bool] = [:]
@@ -30,6 +29,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     @Published var MaxIDGame: Int = 0
     @Published var isHost: Bool = false
     private var randomHostNumber: Int = 0
+    var isGameOver = false
+
     var resultado : ResultadoJogo?
     var textDesafio : String = ""
     var horarios : [Int] = []
@@ -93,6 +94,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     
     func gameOver() {
+
         isGameOver = true
         gameMatch?.disconnect()
         gameMatch?.delegate = nil
@@ -104,6 +106,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             isGameOver = false
             inGame = false
         }
+        isHost = false
         gameMatch?.delegate = nil
         gameMatch = nil
         otherPlayer = nil
@@ -303,7 +306,7 @@ extension Manager: GKMatchDelegate {
         })
         
         DispatchQueue.main.async {
-            self.resetGame()
+//            self.resetGame()
             self.rootViewController?.present(alert, animated: true)
         }
     }
