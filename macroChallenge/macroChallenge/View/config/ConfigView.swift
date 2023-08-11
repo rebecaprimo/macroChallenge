@@ -16,15 +16,13 @@ struct ConfigView: View {
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                //TitleView(title: "Configurações", view: MenuView(viewState: $viewState, themes: themes))
                 Separator()
                 RectangleButton(title: "Tutorial", view: TutorialView())
-                RectangleButton(title: "Regras", view: RegrasView())
                 RectangleButton(title: "Privacidade", view: PoliticaView())
                 RectangleButton(title: "Termos de uso", view: TermosView())
                 RectangleButton(title: "Fale conosco", view: FaleView())
             }
-            .padding(.top, 30) // Adicionando o padding na VStack para posicioná-la na parte superior
+            .padding(.top, 30)
         }
         .navigationBarTitle("Menu")
         .font(.custom("SpecialElite-Regular", size: 20))
