@@ -18,7 +18,7 @@ struct ResultadoJogoView: View {
             let gHeight = g.size.height
 
             let contentPadding = 38.0
-            var contentWidth = gWidth - (contentPadding*2)
+            let contentWidth = gWidth - (contentPadding*2)
             var contentHeight = gHeight - 200 - 200
 
             VStack(alignment: HorizontalAlignment.center, spacing: 0) {
@@ -36,7 +36,7 @@ struct ResultadoJogoView: View {
                     Text("\(resultado.statusBomba)")
                         .font(.custom("Special Elite", size: 25))
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .bold()
+                        //.bold()
                 }
                 .padding(.top, 60)
                 .frame(width: contentWidth)
@@ -91,7 +91,7 @@ struct ResultadoJogoView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 150)
                 })
-                .position(x: gWidth / 2, y: gHeight / 2)
+                .position(x: g.size.width / 2, y: g.size.height / 2.5)
                 .frame(height: contentHeight-60)
             }
             .frame(
@@ -108,3 +108,6 @@ struct ResultadoJogoView: View {
         }
     }
 }
+
+
+
