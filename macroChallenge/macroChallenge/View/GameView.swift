@@ -29,7 +29,7 @@ struct GameView: View {
                                 maxHeight: .infinity,
                                 alignment: .topLeading)
                             .padding(.vertical, 10)
-                            
+                            .foregroundColor(.black)
                             
                         CountTimer(timeIsUp: matchManager.endTimer)
                             .frame(maxWidth: .infinity, alignment: .trailing)

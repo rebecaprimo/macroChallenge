@@ -14,11 +14,8 @@ struct ThemeView: View {
     @State private var buttonCount = 0
     var themes: [Theme]
     
-    
     var colors = ["Red", "Green", "Blue", "Tartan"]
     @State private var selectedColor = "Red"
-    
-    
     
     
     init(themes: [Theme], viewState: Binding<ViewState>) {
@@ -42,6 +39,7 @@ struct ThemeView: View {
                         Picker("Choose a theme", selection: $currentTheme) {
                             ForEach(themes) { theme in
                                 Text(theme.name).tag(theme)
+                                    .foregroundColor(.black)
                             }
                         }.pickerStyle(.wheel)
                     }.position(x: geometry.size.width / 2, y: geometry.size.height / 1.5)

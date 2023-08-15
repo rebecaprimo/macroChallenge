@@ -48,6 +48,7 @@ struct TutorialView: View {
                 .padding(.leading, 30)
                 .padding(.trailing, 30)
                 .padding(.top, 100)
+                .foregroundColor(.black)
             }
         }
             .navigationTitle("Tutorial")

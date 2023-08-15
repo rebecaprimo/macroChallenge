@@ -25,6 +25,7 @@ struct ResultadoJogoView: View {
                 Text("Fim de jogo!")
                     .font(.custom("Special Elite", size: 40))
                     .padding(.top, 57)
+                    .foregroundColor(.black)
 
                 HStack(spacing: 0) {
                     Text("Status da bomba")
@@ -40,10 +41,12 @@ struct ResultadoJogoView: View {
                 }
                 .padding(.top, 60)
                 .frame(width: contentWidth)
+                .foregroundColor(.black)
 
                 HStack(spacing: 0) {
                     Text("Vitória")
                         .font(.custom("Special Elite", size: 15))
+                        .foregroundColor(.black)
                         .frame(width: (contentWidth/4)-10, alignment: .leading)
                         .padding(.leading, 10)
                     HStack(spacing: 0){
@@ -63,6 +66,7 @@ struct ResultadoJogoView: View {
                         }
                     }
                     .frame(width: (contentWidth/4)*3, alignment: .leading)
+                    .foregroundColor(.black)
                 }
                 .padding(.top, 40)
                 .frame(width: contentWidth)
@@ -79,6 +83,7 @@ struct ResultadoJogoView: View {
                         .frame(width: (contentWidth/4)*3 , height: 70)
                 }
                 .padding(.top, 20)
+                .foregroundColor(.black)
 
                 Button(action: {
                     DispatchQueue.main.async {
@@ -91,7 +96,7 @@ struct ResultadoJogoView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 150)
                 })
-                .position(x: gWidth / 2, y: gHeight / 2)
+                .position(x: g.size.width / 2, y: g.size.height / 2.5)
                 .frame(height: contentHeight-60)
             }
             .frame(
