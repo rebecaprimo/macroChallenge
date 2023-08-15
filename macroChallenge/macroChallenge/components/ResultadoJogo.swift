@@ -15,6 +15,11 @@ struct ResultadoJogo {
     var imageVitoriaGrupo: String
     var imageVitoriaMestre: String
     
+
+      var description: String {
+          return "Vitória do Grupo: \(vitoriaGrupo), Texto do Desafio: \(textDesafio)"
+      }
+    
     var nomePerdedor: String
     var statusBomba: String
     var textDesafio : String

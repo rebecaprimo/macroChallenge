@@ -153,6 +153,7 @@
 				6BDD4CEB2A2693BA00D8CE6D /* GameView.swift */,
 				A726010C2A5897F000A9308E /* ThemeView.swift */,
 				6B92C6BA2A773333004E81D4 /* AgentsView.swift */,
+				A7AFF6882A37964500274B81 /* ResultadoJogoView.swift */,
 				4DAC6E392A39F25500F7BC72 /* inicial */,
 				4DAC6E2E2A38E59F00F7BC72 /* config */,
 			);
@@ -278,7 +279,6 @@
 			isa = PBXGroup;
 			children = (
 				6BDD4CEE2A269ADC00D8CE6D /* Manager.swift */,
-				A7AFF6882A37964500274B81 /* ResultadoJogoView.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -615,7 +615,11 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+<<<<<<< HEAD
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+=======
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+>>>>>>> 3baa4c007399cc4f716ce03906eaf8d27ca37be1
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -650,7 +654,11 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+<<<<<<< HEAD
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+=======
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+>>>>>>> 3baa4c007399cc4f716ce03906eaf8d27ca37be1
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
