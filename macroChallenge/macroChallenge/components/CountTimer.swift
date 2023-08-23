@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CountTimer: View {
     @EnvironmentObject private var matchManager: Manager
-    @State var timeRemaining = 90 // Tempo em segundos (2 minutos e 30 segundos)
+    @State var timeRemaining = 4 // Tempo em segundos (2 minutos e 30 segundos)
     let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
     var timeIsUp: () -> Void
     
