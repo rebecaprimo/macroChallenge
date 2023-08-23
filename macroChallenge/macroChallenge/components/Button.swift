@@ -17,6 +17,8 @@ struct ButtonFile: View {
     let imageWidth: CGFloat
     let imageHeight: CGFloat
     let buttonAction: (() -> Void)
+    @Environment(\.screenSize) var screenSize
+
     
     var body: some View {
         Button (action: {
@@ -24,7 +26,7 @@ struct ButtonFile: View {
         }, label: {
             Image(image)
                 .resizable()
-                .frame(width: imageWidth, height: imageHeight)
+                .frame(width: screenSize.width * imageWidth, height: screenSize.width * imageHeight) // Tamanho proporcional ao tamanho da tela
         })
         .position(x: screenWidth, y: screenHeight)
     }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 //let everydayObjects = ["carol", "barbara", "rebeca", "duda"]  //apagar depois
@@ -23,5 +24,16 @@ enum PlayerAuthState: String {
 struct PastGuess: Identifiable {
     let id = UUID()
     var message: String
+}
+
+private struct ScreenSizeKey : EnvironmentKey {
+    static let defaultValue: CGSize = .zero
+}
+
+extension EnvironmentValues {
+    var screenSize: CGSize {
+        get { self[ScreenSizeKey.self] }
+        set { self[ScreenSizeKey.self] = newValue }
+    }
 }
 
