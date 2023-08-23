@@ -19,19 +19,15 @@ struct YourAppName: App {
 
     var body: some Scene {
         WindowGroup {
-            // Exibe a ContentView após um atraso de 2 segundos
             ZStack {
                 if showingSplash {
                     SplashView()
                 } else {
-              //      ThemeView(themes: themes, viewState: $viewState).environmentObject(manager) // Injete o Manager aqui
-
                     ContentView()
                         .environmentObject(manager)
                 }
             }
             .onAppear {
-                // Simula um atraso de 2 segundos antes de passar para a ContentView
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     withAnimation {
                         showingSplash = false
