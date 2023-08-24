@@ -82,7 +82,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         resetGame()
         
         let request = GKMatchRequest()
-        request.minPlayers = 4
+        request.minPlayers = 2
         request.maxPlayers = 4
         // request.inviteMessage = "Playzinha?"
         
@@ -114,14 +114,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         playersIDHistory.removeAll()
         horarios.removeAll()
     }
-    
-    
-    //MARK: INICIO DO JOGO
-    //
-    //    func startGame(newMatch: GKMatch) {
-    //        inGame = true
-    //        print("cheguei na funcao startgame")
-    //    }
+
     
     // MARK: JOGO
     
