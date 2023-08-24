@@ -19,7 +19,7 @@ struct ResultadoJogoView: View {
 
             let contentPadding = 38.0
             let contentWidth = gWidth - (contentPadding*2)
-            var contentHeight = gHeight - 200 - 200
+            let contentHeight = gHeight - 200 - 200
 
             VStack(alignment: HorizontalAlignment.center, spacing: 0) {
                 Text("Fim de jogo!")
@@ -95,6 +95,7 @@ struct ResultadoJogoView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 150)
+                        .padding(.bottom, 100)
                 })
                 .position(x: g.size.width / 2, y: g.size.height / 2.5)
                 .frame(height: contentHeight-60)

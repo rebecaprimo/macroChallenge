@@ -21,12 +21,11 @@ struct GameView: View {
         let fontSize = baseFontSize * pow(scaleFactor, CGFloat(text.count))
         return min(maxSize, fontSize)
     }
-    
+  
     var body: some View {
         ZStack {
             Image("gameFundo")
                 .resizable()
-                .aspectRatio(contentMode: .fit)
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 20) {

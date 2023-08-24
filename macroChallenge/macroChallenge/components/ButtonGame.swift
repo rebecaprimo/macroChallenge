@@ -16,6 +16,8 @@ struct ButtonGame: View {
     @State var letter: String
     private let idButton: Int
     @State private var letterP: String = ""
+    @Environment(\.screenSize) var screenSize
+
     
 
     init(letter: String, idButton: Int, letterP: String) {
@@ -32,30 +34,33 @@ struct ButtonGame: View {
     var body: some View {
         let isPressed = matchManager.buttonStates[idButton, default: false]
         
-        HStack {
-            Button(action: {
-                DispatchQueue.main.async {
-                    if matchManager.isHost {
-                        buttonAction(nomeAudio: "coin")
-                        self.isPlaying.toggle()
-                        matchManager.sendData(buttonId: idButton)
-                        matchManager.verifyAllButtonsArePressed()
-                    } else {
-                        guard !isPressed else { return } // Verifica se o botão já foi pressionado. Se não pressionado, prossegue a action
-                        buttonAction(nomeAudio: "coin")
-                        self.isPlaying.toggle()
-                        matchManager.sendData(buttonId: idButton)
-                        matchManager.verifyAllButtonsArePressed()
+        GeometryReader { geo in
+            HStack {
+                Button(action: {
+                    DispatchQueue.main.async {
+                        if matchManager.isHost {
+                            buttonAction(nomeAudio: "coin")
+                            self.isPlaying.toggle()
+                            matchManager.sendData(buttonId: idButton)
+                            matchManager.verifyAllButtonsArePressed()
+                        } else {
+                            guard !isPressed else { return } // Verifica se o botão já foi pressionado. Se não pressionado, prossegue a action
+                            buttonAction(nomeAudio: "coin")
+                            self.isPlaying.toggle()
+                            matchManager.sendData(buttonId: idButton)
+                            matchManager.verifyAllButtonsArePressed()
+                        }
                     }
-                }
-
-                self.isButtonOn.toggle() // Altere o estado individual do botão
-            }, label: {
-                Image(isPressed ? letter+"P" : letter)
-                    .resizable()
-                    .frame(width: 80, height: 80)
-            })
-            .foregroundColor(.black)
+                    
+                    self.isButtonOn.toggle() // Altere o estado individual do botão
+                }, label: {
+                    Image(isPressed ? letter+"P" : letter)
+                        .resizable()
+                      //  .padding(.horizontal, )
+                        .frame(width: geo.size.width * 0.85 , height: geo.size.height * 0.90)
+                })
+                .foregroundColor(.black)
+            }
         }
     }
 }
