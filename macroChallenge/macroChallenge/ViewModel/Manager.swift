@@ -82,8 +82,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         resetGame()
         
         let request = GKMatchRequest()
-        request.minPlayers = 4
-        request.maxPlayers = 4
+        request.minPlayers = 2
+        request.maxPlayers = 5
         // request.inviteMessage = "Playzinha?"
         
         let matchmakingVC = GKMatchmakerViewController(matchRequest: request)

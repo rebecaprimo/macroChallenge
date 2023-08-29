@@ -23,7 +23,7 @@ struct GameView: View {
             VStack(spacing: 20) {
                     HStack {
                         Text(matchManager.currentTheme?.name ?? "")
-                            .font(.custom("SpecialElite-Regular", size: 25))
+                            .font(.custom("SpecialElite-Regular", size: 20))
                             .frame(
                                 maxWidth: .infinity,
                                 maxHeight: .infinity,
