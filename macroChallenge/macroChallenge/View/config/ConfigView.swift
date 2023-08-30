@@ -8,28 +8,26 @@
 import SwiftUI
 
 struct ConfigView: View {
+    @Binding var viewState: ViewState
+    
     var body: some View {
-        VStack {
-            NavigationView {
-                VStack {
-                    RectangleButton(title: "Tutorial", view: AnyView(TutorialView()))
-                    RectangleButton(title: "Regras", view: AnyView(RegrasView()))
-                    RectangleButton(title: "Som", view: AnyView(SomView()))
-                    RectangleButton(title: "Política de privacidade", view: AnyView(PoliticaView()))
-                    RectangleButton(title: "Termos de uso", view: AnyView(TermosView()))
-                    RectangleButton(title: "Fale conosco", view: AnyView(FaleView()))
-                    
-                    Spacer()
-                }
-                .navigationTitle("Configurações")
-                .navigationBarTitleDisplayMode(.inline)
+        ZStack {
+            Image("fundoC")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                Separator()
+                RectangleButton(title: "Tutorial", view: TutorialView())
+                RectangleButton(title: "Privacidade", view: PoliticaView())
+                RectangleButton(title: "Termos de uso", view: TermosView())
+                //RectangleButton(title: "Fale conosco", view: FaleView())
             }
+            .padding(.top, 30)
         }
+        .navigationBarTitle("Menu")
+        .font(.custom("SpecialElite-Regular", size: 20))
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-struct ConfigView_Previews: PreviewProvider {
-    static var previews: some View {
-        ConfigView()
-    }
-}
+

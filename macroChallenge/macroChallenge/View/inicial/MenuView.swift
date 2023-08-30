@@ -8,51 +8,51 @@
 import SwiftUI
 
 struct MenuView: View {
-    //objeto observavel da classe Manager que gerencia o Gamekit
-    @ObservedObject var matchManager: Manager
-  //  @Binding var inputAnswer: String
+    // objeto observável da classe Manager que gerencia o Gamekit
+    @EnvironmentObject var matchManager: Manager
+    @Binding var viewState: ViewState
+
+    @State private var showGameView = false // add o estado para mostrar a Sheet
 
     var body: some View {
-        
-        Color.white.edgesIgnoringSafeArea(.all)
         NavigationView {
-            VStack {
+            ZStack {
+                Image("fundoHome")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
+
                 VStack {
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: ConfigView(viewState: $viewState)) {
+                            Image("confHome")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .scaledToFit()
+                                .scaleEffect(1.5)
+                                .padding(.trailing)
+                        }
+                    }
+                    
                     Spacer()
+                    
                     Button {
                         matchManager.startMatchmaking()
                     } label: {
-                        Text("Online")
-                            .foregroundColor(.blue)
-                            .font(.largeTitle)
-                            .bold()
+                        Image("jogarHome")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 150)
+                            .opacity(matchManager.authenticationState != .authenticated || matchManager.inGame ? 0.5 : 1.0)
                     }
                     .disabled(matchManager.authenticationState != .authenticated || matchManager.inGame)
-                    .padding(.vertical, 20)
-                    .padding(.horizontal, 100)
-                    .background(
-                        //se for authenticado, cai aqui
-                        Capsule(style: .circular)
-                            .fill(matchManager.authenticationState != .authenticated || matchManager.inGame ? .gray : Color(.systemPink))
-                    )
-                    
+                    .padding(.vertical, 80)
+
                     Text(matchManager.authenticationState.rawValue)
-                        .font(.headline.weight(.semibold))
-                        .foregroundColor(.orange)
-                        .padding()
-                    
-                    Spacer()
-                }.sheet(isPresented: $matchManager.inGame) {
-                    GameView().environmentObject(matchManager)
+                        .font(.custom("SpecialElite-Regular", size: 15))
+                        .foregroundColor(.white)
                 }
             }
-            .navigationTitle("Voltar")
-            .navigationBarItems(
-                trailing:
-                    NavigationLink(destination: ConfigView()) {
-                        Image(systemName: "gearshape.fill")
-                    }
-            )
         }
     }
 }

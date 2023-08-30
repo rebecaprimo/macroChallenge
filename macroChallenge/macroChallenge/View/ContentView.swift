@@ -9,21 +9,32 @@ import Foundation
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var matchManager = Manager()
- //   @State var inputAnswer = ""
+    @EnvironmentObject var manager: Manager
+    @State private var viewState: ViewState = .menu
+    var themes: [Theme] = Theme.themes
     
     var body: some View {
         ZStack {
-            if matchManager.isGameOver {
-              //  GameOverView(matchManager: matchManager)
-            } else if matchManager.inGame {
-                GameView().environmentObject(matchManager)
+            if viewState == .menu {
+                MenuView(viewState: $viewState)
+            } else if viewState == .game {
+                GameView(viewState: $viewState)//.environmentObject(manager)
+            } else if viewState == .themeSelection {
+                ThemeView(themes: Theme.themes, viewState: $viewState)//.environmentObject(manager) // Injete o Manager aqui
+
+            } else if viewState == .waitingRoom {
+                AgentsView()
+            } else if viewState == .result {
+                ResultadoJogoView(resultado: manager.resultado!)
             } else {
-                MenuView(matchManager: matchManager)
+                Text("Erro")
             }
         }
         .onAppear {
-            matchManager.authenticateUser()
+            manager.authenticateUser()
+        }
+        .onChange(of: manager.viewState) { newState in
+            viewState = newState
         }
     }
 }

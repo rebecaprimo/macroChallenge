@@ -5,13 +5,53 @@
 //  Created by rebeca primo on 12/06/23.
 //
 
+//import SwiftUI
+//
+//struct RectangleButton: View {
+//    private var title: String
+//    private let view: AnyView?
+//
+//    init(title: String, view: AnyView?) {
+//        self.title = title
+//        self.view = view
+//    }
+//
+//    var body: some View {
+//        NavigationLink(destination: view, label: {
+//            HStack {
+//                Text(title)
+//                    .font(.system(size: 20))
+//                    .font(.title)
+//
+//                Spacer()
+//
+//                Image(systemName: "chevron.right")
+//                    .frame(alignment: .trailing)
+//            }
+//            .frame(height: 20)
+//            .frame(maxWidth: .infinity, alignment: .leading)
+//            .padding(.vertical, 5)
+//            .padding(.horizontal, 25)
+//            .foregroundColor(.black)
+//        })
+//        .padding([.trailing, .leading], 10)
+//        .padding(0)
+//    }
+//}
+//
+//struct RectangleButton_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RectangleButton(title: "Teste", view: AnyView(GameView()))
+//    }
+//}
+
 import SwiftUI
 
-struct RectangleButton: View {
+struct RectangleButton<Content: View>: View {
     private var title: String
-    private let view: AnyView?
+    private let view: Content?
     
-    init(title: String, view: AnyView?) {
+    init(title: String, view: Content?) {
         self.title = title
         self.view = view
     }
@@ -20,29 +60,24 @@ struct RectangleButton: View {
         NavigationLink(destination: view, label: {
             HStack {
                 Text(title)
-                    .font(.system(size: 20))
+                    .font(.custom("SpecialElite-Regular", size: 20))
                     .font(.title)
                 
                 Spacer()
                 
                 Image(systemName: "chevron.right")
+                    .font(.custom("SpecialElite-Regular", size: 20))
                     .frame(alignment: .trailing)
+                    
             }
             .frame(height: 20)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.vertical, 20)
-            .padding(.horizontal, 25)
+            .padding(.vertical, 5)
+            .padding(.horizontal, 55)
             .foregroundColor(.black)
-            .background(.gray)
-            .cornerRadius(15)
         })
         .padding([.trailing, .leading], 10)
         .padding(0)
+        Separator()
     }
 }
 
-struct RectangleButton_Previews: PreviewProvider {
-    static var previews: some View {
-        RectangleButton(title: "Teste", view: AnyView(GameView()))
-    }
-}

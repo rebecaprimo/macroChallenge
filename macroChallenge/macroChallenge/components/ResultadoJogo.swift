@@ -15,19 +15,50 @@ struct ResultadoJogo {
     var imageVitoriaGrupo: String
     var imageVitoriaMestre: String
     
-    var nomeVencedor: String
-    var statusBomba: String
+
+      var description: String {
+          return "Vitória do Grupo: \(vitoriaGrupo), Texto do Desafio: \(textDesafio)"
+      }
     
-    let desafios = ["Dançar chiquititas.", "Imitar um cachorro.", "Carregar alguém no colo em volta da sala.", "Beber 2 copos de água."]
+    var nomePerdedor: String
+    var statusBomba: String
     var textDesafio : String
     
-    init(vitoriaGrupo: Bool) {
+    init(vitoriaGrupo: Bool, textDesafio: String) {
         self.vitoriaGrupo = vitoriaGrupo
         self.imageVitoriaGrupo = vitoriaGrupo ? "checkmark.square" : "square"
         self.imageVitoriaMestre = vitoriaGrupo ? "square" : "checkmark.square"
-        self.nomeVencedor = vitoriaGrupo ? "mestre" : "grupo"
+        self.nomePerdedor = vitoriaGrupo ? "mestre" : "grupo"
         self.statusBomba = vitoriaGrupo ? "DESARMADA" : "DETONADA"
-        self.textDesafio = desafios.randomElement()!
+        self.textDesafio = vitoriaGrupo ? textDesafio : textDesafio
     }
     
+    static let desafios = ["Dançar chiquititas.",
+                           "Imitar um cachorro.",
+                           "Carregar alguém no colo em volta da sala.",
+                           "Beber 2 copos de água.",
+                           "Imitar um objeto ou animal usando apenas gestos.",
+                           "Responder 3 perguntas de forma engraçada sem rir.",
+                           "Criar uma dança maluca e dançar por 1 minuto.",
+                           "Contar uma piada e fazer todos rirem.",
+                           "Tocar um objeto vendado e adivinhe o que é.",
+                           "Dizer uma frase difícil de entender de forma engraçada.",
+                           "Fazer uma série de expressões faciais exageradas.",
+                           "Imitar um animal de forma convincente.",
+                           "Ler um trava-línguas rapidamente sem errar.",
+                           "Tentar desenhar um objeto específico vendado.",
+                           "Elogiar alguém de forma exagerada e criativa.",
+                           "Falar uma frase em um sotaque estrangeiro.",
+                           "Contar uma história começando com Eu Nunca...",
+                           "Tocar num objeto vendado e adivinhar o que é.",
+                           "Imitar um personagem de desenho animado.",
+                           "Pegar um objeto com as mãos atrás das costas.",
+                           "Imitar uma celebridade, seja na fala ou na ação.",
+                           "Gritar em silêncio 3 vezes.",
+                           "Contar uma charada.",
+                           "Maquiar alguém vendado e depois ver o resultado.",
+                           "Dançar ao som de uma música.",
+                           "Contar de 10 a 1 começando pelo número 7.",
+                           "Provar uma comida vendado e adivinhar o que é."
+                           ]
 }
