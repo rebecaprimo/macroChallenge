@@ -157,7 +157,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     
     //MARK: Verifica se todos os botões foram pressionados e se são true (vitóriaGrupo = true)
-    func verifyAllButtonsArePressed() {
+    func verifyAllButtonsArePressed() -> Bool {
         let allButtonsAreTrue = buttonStates.allSatisfy({ (key: Int, value: Bool) in
             value == true
         })
@@ -167,7 +167,9 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             sendDataResultadoJogo(vitoriaGrupo: true)
             gameOver()
             navegarParaResultadoJogoView(vitoriaGrupo: true)
+            return true
         }
+        return false
     }
     
     //chama a tela de resultado
