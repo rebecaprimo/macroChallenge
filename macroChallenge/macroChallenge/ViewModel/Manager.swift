@@ -149,15 +149,15 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         }
     }
     
-    func determineGameView() {
-        DispatchQueue.main.async { [weak self] in
-            self?.viewState = .game
-        }
-    }
+//    func determineGameView() {
+//        DispatchQueue.main.async { [weak self] in
+//            self?.viewState = .game
+//        }
+//    }
     
     
     //MARK: Verifica se todos os botões foram pressionados e se são true (vitóriaGrupo = true)
-    func verifyAllButtonsArePressed() {
+    func verifyAllButtonsArePressed() -> Bool {
         let allButtonsAreTrue = buttonStates.allSatisfy({ (key: Int, value: Bool) in
             value == true
         })
@@ -167,7 +167,9 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             sendDataResultadoJogo(vitoriaGrupo: true)
             gameOver()
             navegarParaResultadoJogoView(vitoriaGrupo: true)
+            return true
         }
+        return false
     }
     
     //chama a tela de resultado
@@ -248,14 +250,30 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         
     }
     
+//    func onThemePicked(_ theme: String) {
+//        currentTheme = Theme.themes.first (where: { t in
+//            return t.name == theme
+//        })
+//
+//        sendDataTheme()
+//        self.viewState = .game
+//    }
+    
     func onThemePicked(_ theme: String) {
-        currentTheme = Theme.themes.first (where: { t in
-            return t.name == theme
-        })
-        
-        sendDataTheme()
-        determineGameView()
-    }
+            print("o valor do tema ao clicar \(theme)")
+            
+            if let selectedTheme = Theme.themes.first(where: { $0.name == theme }) {
+                print("o valor do tema no if let \(selectedTheme)")
+                
+                DispatchQueue.main.async {
+                    self.currentTheme = selectedTheme
+                    self.sendDataTheme()
+                    self.viewState = .game
+                }
+            } else {
+                print("Tema não encontrado!")
+            }
+        }
     
     //MARK: RECEBER DADOS
     
@@ -338,7 +356,7 @@ extension Manager: GKMatchDelegate {
                 currentTheme = Theme.themes.first (where: { t in
                     return t.name == newData["tema"]
                 })
-                determineGameView()
+                self.viewState = .game
                 return
             }
         } catch {

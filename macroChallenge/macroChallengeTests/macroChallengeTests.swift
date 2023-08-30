@@ -10,27 +10,39 @@ import XCTest
 
 final class macroChallengeTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var sut: Manager!
+    
+    override func setUp() {
+        super.setUp()
+        sut = Manager()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func test_verifyAllButtonsArePressed_oneButton() {
+        sut.sendData(buttonId: 1)
+        let result = sut.verifyAllButtonsArePressed()
+        XCTAssertFalse(result)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    //fazer esse teste mais dividido: false de 1 a 20 e true 21
+    func test_verifyAllButtonsArePressed_allButtons() {
+        var result = false
+        
+        for i in 1...21 {
+            sut.sendData(buttonId: i)
+            result = sut.verifyAllButtonsArePressed()
         }
+        XCTAssertTrue(result)
     }
-
+    
+    //teste de sendData(): buttonStates antes tem que estar vazio e depois com valor. Inclusive ele não está sobreescrevendo valores.
+    func test_sendData() {
+//        sut.buttonStates
+//        print(sut.buttonStates)
+        XCTAssertEqual(sut.buttonStates, [:])
+        sut.sendData(buttonId: 1)
+        XCTAssertEqual(sut.buttonStates, [1 : true])
+        sut.sendData(buttonId: 2)
+        XCTAssertEqual(sut.buttonStates, [1 : true, 2 : true])
+    }
 }
