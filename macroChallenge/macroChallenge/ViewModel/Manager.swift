@@ -308,6 +308,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     func endTimer() {
         gameOver()
         navegarParaResultadoJogoView(vitoriaGrupo: false)
+        HapticManager.instance.notification(type: .error)
     }
 }
 
