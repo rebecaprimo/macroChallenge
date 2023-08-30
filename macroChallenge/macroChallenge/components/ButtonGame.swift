@@ -11,7 +11,8 @@ import AVFAudio
 struct ButtonGame: View {
     @EnvironmentObject private var matchManager: Manager
     @State var audioPlayer: AVAudioPlayer?
-    @State var isPlaying = true
+    @State var isPlaying: Bool = true
+    @State var isButtonOn = false // Estado individual para cada botão
     @State var letter: String
     private let idButton: Int
     @State private var letterP: String = ""
