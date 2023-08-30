@@ -160,11 +160,16 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             sendDataResultadoJogo(vitoriaGrupo: true)
             gameOver()
             navegarParaResultadoJogoView(vitoriaGrupo: true)
+        } else {
+            sendDataResultadoJogo(vitoriaGrupo: false)
+            gameOver()
+            navegarParaResultadoJogoView(vitoriaGrupo: false)
+            HapticManager.instance.notification(type: .error)
         }
     }
     
     //chama a tela de resultado
-    func navegarParaResultadoJogoView(vitoriaGrupo : Bool) {
+    func navegarParaResultadoJogoView(vitoriaGrupo: Bool) {
         resultado = ResultadoJogo(vitoriaGrupo: vitoriaGrupo, textDesafio: textDesafio)
         DispatchQueue.main.async { [weak self] in
             self?.viewState = .result
