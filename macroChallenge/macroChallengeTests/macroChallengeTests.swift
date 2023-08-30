@@ -35,6 +35,18 @@ final class macroChallengeTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
+    func test_verifyAllButtonsArePressed_allButtons2() {
+        var result = false
+        
+        for i in 1...20 {
+            sut.sendData(buttonId: i)
+            result = sut.verifyAllButtonsArePressed()
+        }
+        XCTAssertFalse(result)
+        
+    }
+    
+    
     //teste de sendData(): buttonStates antes tem que estar vazio e depois com valor. Inclusive ele não está sobreescrevendo valores.
     func test_sendData() {
 //        sut.buttonStates
