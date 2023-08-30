@@ -25,7 +25,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     @Published var menuSheetContent: AnyView?
     @Published var showMenuSheet = false
     @Published var viewState: ViewState = .menu
-    @Published var players: [Player] = []
+  //  @Published var players: [Player] = []
     @Published var MaxIDGame: Int = 0
     @Published var isHost: Bool = false
     private var randomHostNumber: Int = 0
@@ -35,7 +35,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     var textDesafio : String = ""
     var horarios : [Int] = []
     var playersIDHistory: [Int] = []
-    var randomThemes = Theme.themes
     var myGame: GKMatchDelegate?
     var otherPlayer: GKPlayer?
     var localPlayer = GKLocalPlayer.local
@@ -44,7 +43,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         return windowScene?.windows.first?.rootViewController
     }
-    
     
     //MARK: AUTENTICANDO USUARIO
     
@@ -82,8 +80,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         resetGame()
         
         let request = GKMatchRequest()
-        request.minPlayers = 4
-        request.maxPlayers = 4
+        request.minPlayers = 2
+        request.maxPlayers = 5
         // request.inviteMessage = "Playzinha?"
         
         let matchmakingVC = GKMatchmakerViewController(matchRequest: request)
@@ -148,14 +146,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             }
         }
     }
-    
-    func determineGameView() {
-        DispatchQueue.main.async { [weak self] in
-            self?.viewState = .game
-        }
-    }
-    
-    
+
     //MARK: Verifica se todos os botões foram pressionados e se são true (vitóriaGrupo = true)
     func verifyAllButtonsArePressed() {
         let allButtonsAreTrue = buttonStates.allSatisfy({ (key: Int, value: Bool) in
@@ -236,25 +227,38 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     
     func sendDataTheme(){
-        let dict = ["tipo" : "tema",
-                    "tema" : "\(currentTheme!.name)"]
-        
-        do {
-            let data = try JSONEncoder().encode(dict)
-            try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
-        } catch {
-            print("SEND THEMEDATA FAILED")
-        }
-        
-    }
+        guard let themeName = currentTheme?.name else {
+              print("Current theme is nil.")
+              return
+          }
+          
+          let dict = [
+              "tipo": "tema",
+              "tema": themeName
+          ]
+          
+          do {
+              let data = try JSONEncoder().encode(dict)
+              try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
+          } catch {
+              print("SEND THEMEDATA FAILED")
+          }
+      }
     
     func onThemePicked(_ theme: String) {
-        currentTheme = Theme.themes.first (where: { t in
-            return t.name == theme
-        })
+        print("o valor do tema ao clicar \(theme)")
         
-        sendDataTheme()
-        determineGameView()
+        if let selectedTheme = Theme.themes.first(where: { $0.name == theme }) {
+            print("o valor do tema no if let \(selectedTheme)")
+            
+            DispatchQueue.main.async {
+                self.currentTheme = selectedTheme
+                self.sendDataTheme()
+                self.viewState = .game
+            }
+        } else {
+            print("Tema não encontrado!")
+        }
     }
     
     //MARK: RECEBER DADOS
@@ -300,7 +304,7 @@ extension Manager: GKMatchDelegate {
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         guard state == .disconnected else { return }
 
-        let alert = UIAlertController(title: "Player disconnected", message: "The other player disconnected from the game.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Jogador desconectado", message: "O outro jogador desconectou do jogo.", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
             self.gameMatch?.disconnect()
@@ -338,7 +342,7 @@ extension Manager: GKMatchDelegate {
                 currentTheme = Theme.themes.first (where: { t in
                     return t.name == newData["tema"]
                 })
-                determineGameView()
+                self.viewState = .game
                 return
             }
         } catch {

@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
-
+import AVFoundation
 
 struct CountTimer: View {
     @EnvironmentObject private var matchManager: Manager
-    @State var timeRemaining = 4 // Tempo em segundos (2 minutos e 30 segundos)
-    let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
+    @State var timeRemaining = 3 // Tempo em segundos (2 minutos e 30 segundos)
     var timeIsUp: () -> Void
+    let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
     
     var body: some View {
         ZStack {
@@ -37,7 +37,7 @@ struct CountTimer: View {
         }
     }
     
-    func startTimer() {
+     func startTimer() {
         DispatchQueue.global().async {
             while timeRemaining > 0 {
                 Thread.sleep(forTimeInterval: 1)

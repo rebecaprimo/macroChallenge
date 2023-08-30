@@ -16,11 +16,11 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if viewState == .menu {
-                MenuView(viewState: $viewState, themes: themes)
+                MenuView(viewState: $viewState)
             } else if viewState == .game {
-                GameView(viewState: $viewState).environmentObject(manager)
+                GameView(viewState: $viewState)//.environmentObject(manager)
             } else if viewState == .themeSelection {
-                ThemeView(themes: themes, viewState: $viewState).environmentObject(manager) // Injete o Manager aqui
+                ThemeView(themes: Theme.themes, viewState: $viewState)//.environmentObject(manager) // Injete o Manager aqui
 
             } else if viewState == .waitingRoom {
                 AgentsView()

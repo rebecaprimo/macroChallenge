@@ -46,6 +46,7 @@ struct ThemeView: View {
                     HStack {
                         Button {
                             manager.onThemePicked(currentTheme.name)
+//                            manager.determineGameView()
                             print("valor da variavel: \(currentTheme.name)")
                         } label: {
                             Image("okButton")

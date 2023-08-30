@@ -11,7 +11,6 @@ struct MenuView: View {
     // objeto observável da classe Manager que gerencia o Gamekit
     @EnvironmentObject var matchManager: Manager
     @Binding var viewState: ViewState
-    var themes: [Theme]
 
     @State private var showGameView = false // add o estado para mostrar a Sheet
 
