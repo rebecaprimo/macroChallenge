@@ -94,7 +94,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     
     func gameOver() {
-
         isGameOver = true
         gameMatch?.disconnect()
         gameMatch?.delegate = nil
@@ -123,9 +122,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     //        print("cheguei na funcao startgame")
     //    }
     
+    
     // MARK: JOGO
-    
-    
     func determineOrderPlayers(_ dataString: String) {
         let hostNumberString = dataString.replacingOccurrences(of: "$IDPlayer:", with: "")
         print("host number string: \(hostNumberString)")
@@ -149,11 +147,11 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         }
     }
     
-//    func determineGameView() {
-//        DispatchQueue.main.async { [weak self] in
-//            self?.viewState = .game
-//        }
-//    }
+    func determineGameView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewState = .game
+        }
+    }
     
     
     //MARK: Verifica se todos os botões foram pressionados e se são true (vitóriaGrupo = true)
@@ -250,30 +248,29 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         
     }
     
-//    func onThemePicked(_ theme: String) {
-//        currentTheme = Theme.themes.first (where: { t in
-//            return t.name == theme
-//        })
-//
-//        sendDataTheme()
-//        self.viewState = .game
-//    }
-    
     func onThemePicked(_ theme: String) {
-            print("o valor do tema ao clicar \(theme)")
-            
-            if let selectedTheme = Theme.themes.first(where: { $0.name == theme }) {
-                print("o valor do tema no if let \(selectedTheme)")
-                
-                DispatchQueue.main.async {
-                    self.currentTheme = selectedTheme
-                    self.sendDataTheme()
-                    self.viewState = .game
-                }
-            } else {
-                print("Tema não encontrado!")
-            }
-        }
+        currentTheme = Theme.themes.first (where: { t in
+            return t.name == theme
+        })
+        sendDataTheme()
+        determineGameView()
+    }
+    
+//    func onThemePicked(_ theme: String) {
+//            print("o valor do tema ao clicar \(theme)")
+//
+//            if let selectedTheme = Theme.themes.first(where: { $0.name == theme }) {
+//                print("o valor do tema no if let \(selectedTheme)")
+//
+//                DispatchQueue.main.async {
+//                    self.currentTheme = selectedTheme
+//                    self.sendDataTheme()
+//                    self.viewState = .game
+//                }
+//            } else {
+//                print("Tema não encontrado!")
+//            }
+//        }
     
     //MARK: RECEBER DADOS
     
@@ -356,7 +353,7 @@ extension Manager: GKMatchDelegate {
                 currentTheme = Theme.themes.first (where: { t in
                     return t.name == newData["tema"]
                 })
-                self.viewState = .game
+                determineGameView()
                 return
             }
         } catch {
