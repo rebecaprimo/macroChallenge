@@ -33,7 +33,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
 
     var resultado : ResultadoJogo?
     var textDesafio : String = ""
-    var horarios : [Int] = []
+//    var horarios : [Int] = []
     var playersIDHistory: [Int] = []
     var randomThemes = Theme.themes
     var myGame: GKMatchDelegate?
@@ -111,7 +111,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         otherPlayer = nil
         buttonStates.removeAll()
         playersIDHistory.removeAll()
-        horarios.removeAll()
+//        horarios.removeAll()
     }
     
     
@@ -132,6 +132,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             playersIDHistory.append(hostNumber)
             
             if ((gameMatch?.players.count)! + 1 == playersIDHistory.count) {
+                textDesafio = calcularElementoPorSomaNumArray(self.playersIDHistory, ResultadoJogo.desafios) as! String
                 let maxHostID = playersIDHistory.max()!
                 if (randomHostNumber == maxHostID) {
                     isHost = true
@@ -195,22 +196,22 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     
     // cada player manda o seu horario local
-    func sendDataHorarioInicial() {
-        let horarioAtual = pegarHorarioAtual()
-        horarios.append(horarioAtual)
-        let dict = ["tipo" : "horarioInicial",
-                    "horario" : "\(horarioAtual)"]
-        print("sending horario inicial")
-        
-        do {
-            let data = try JSONEncoder().encode(dict)
-            print(data)
-            try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
-            //try gameMatch?.sendData(toAllPlayers: messageData, with: mode)
-        } catch {
-            print("SEND DATA Horario Inicial FAILED")
-        }
-    }
+//    func sendDataHorarioInicial() {
+//        let horarioAtual = pegarHorarioAtual()
+//        horarios.append(horarioAtual)
+//        let dict = ["tipo" : "horarioInicial",
+//                    "horario" : "\(horarioAtual)"]
+//        print("sending horario inicial")
+//
+//        do {
+//            let data = try JSONEncoder().encode(dict)
+//            print(data)
+//            try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
+//            //try gameMatch?.sendData(toAllPlayers: messageData, with: mode)
+//        } catch {
+//            print("SEND DATA Horario Inicial FAILED")
+//        }
+//    }
     
     func generateAndSendPlayerID() {
         randomHostNumber = Int.random(in: 1...999_999)
@@ -287,14 +288,26 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     
     //    MARK: funções para calcular horários para id da partida
     
-    func pegarHorarioAtual() -> Int {
-        return Int(Date().timeIntervalSince1970*1_000_000)
-    }
+//    Isto é velho
+//    func pegarHorarioAtual() -> Int {
+//        return Int(Date().timeIntervalSince1970*1_000_000)
+//    }
     
-    func calcularElementoPorHorarios(_ horarios: [Int], _ array: [Any]) -> Any {
+//     Isto é velho
+//    func calcularElementoPorHorarios(_ horarios: [Int], _ array: [Any]) -> Any {
+//        var sum = 0
+//        for horario in horarios {
+//            sum += horario
+//        }
+//
+//        let indice = sum % array.count
+//        return array[indice]
+//    }
+    
+    func calcularElementoPorSomaNumArray(_ numeros: [Int], _ array: [Any]) -> Any {
         var sum = 0
-        for horario in horarios {
-            sum += horario
+        for numero in numeros {
+            sum += numero
         }
         
         let indice = sum % array.count
@@ -341,14 +354,14 @@ extension Manager: GKMatchDelegate {
                 gameOver()
                 navegarParaResultadoJogoView(vitoriaGrupo: vitoria)
                 return
-            } else if (newData["tipo"] == "horarioInicial") {
-                let horario = Int(newData["horario"]!)!
-                horarios.append(horario)
-                print(horario)
-                if (match.players.count + 1 == horarios.count) {
-                    textDesafio = calcularElementoPorHorarios(horarios, ResultadoJogo.desafios) as! String
-                }
-                return
+//            } else if (newData["tipo"] == "horarioInicial") {
+//                let horario = Int(newData["horario"]!)!
+//                horarios.append(horario)
+//                print(horario)
+//                if (match.players.count + 1 == horarios.count) {
+//                    textDesafio = calcularElementoPorHorarios(horarios, ResultadoJogo.desafios) as! String
+//                }
+//                return
             } else if (newData["tipo"] == "tema") {
                 currentTheme = Theme.themes.first (where: { t in
                     return t.name == newData["tema"]
@@ -397,7 +410,7 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         vc?.delegate = self
         let rootViewController = UIApplication.shared.delegate?.window?!.rootViewController
         rootViewController?.present(vc!, animated: true)
-        sendDataHorarioInicial()
+//        sendDataHorarioInicial()
         generateAndSendPlayerID()
     }
     
@@ -408,7 +421,7 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         gameMatch = match
         gameMatch?.delegate = self
         print("Match found, starting game...")
-        sendDataHorarioInicial()
+//        sendDataHorarioInicial()
         generateAndSendPlayerID()
         
         viewController.dismiss(animated: true)
