@@ -9,9 +9,13 @@ import SwiftUI
 
 struct FaleView: View {
     var body: some View {
-        Text("")
-            .navigationTitle("Fale conosco")
-            .navigationBarTitleDisplayMode(.inline)
+        ZStack {
+            Image("fundoC")
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+        }
+        .navigationBarTitle("Fale conosco", displayMode: .inline)
+        .font(.custom("specialagent", size: 20))
     }
 }
 
