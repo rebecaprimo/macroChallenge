@@ -37,12 +37,15 @@ final class macroChallengeTests: XCTestCase {
     
     func test_verifyAllButtonsArePressed_allButtons2() {
         var result = false
+        var i = 1, n = 20
         
-        for i in 1...20 {
+        while (i <= n) {
             sut.sendData(buttonId: i)
             result = sut.verifyAllButtonsArePressed()
+            i = i + 1
         }
         XCTAssertFalse(result)
+        
         
     }
     
