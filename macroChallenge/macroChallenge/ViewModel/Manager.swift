@@ -33,7 +33,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
 
     var resultado : ResultadoJogo?
     var textDesafio : String = ""
-//    var horarios : [Int] = []
     var playersIDHistory: [Int] = []
     var randomThemes = Theme.themes
     var myGame: GKMatchDelegate?
@@ -62,8 +61,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
                 
                 return
             }
-            
-            
+                        
             if localPlayer.isAuthenticated {
                 if localPlayer.isMultiplayerGamingRestricted {
                     authenticationState = .restricted
@@ -84,7 +82,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         let request = GKMatchRequest()
         request.minPlayers = 2
         request.maxPlayers = 5
-        // request.inviteMessage = "Playzinha?"
+        request.inviteMessage = "Vamos jogar BOMB?"
         
         let matchmakingVC = GKMatchmakerViewController(matchRequest: request)
         matchmakingVC?.matchmakerDelegate = self
@@ -111,18 +109,8 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         otherPlayer = nil
         buttonStates.removeAll()
         playersIDHistory.removeAll()
-//        horarios.removeAll()
     }
-    
-    
-    //MARK: INICIO DO JOGO
-    //
-    //    func startGame(newMatch: GKMatch) {
-    //        inGame = true
-    //        print("cheguei na funcao startgame")
-    //    }
-    
-    
+
     // MARK: JOGO
     func determineOrderPlayers(_ dataString: String) {
         let hostNumberString = dataString.replacingOccurrences(of: "$IDPlayer:", with: "")
@@ -180,8 +168,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     
     //MARK: ENVIA O DADO PARA OS OUTROS JOGADORES
-    
-    //envia dados de resultado para o Game Center
+ 
     func sendDataResultadoJogo(vitoriaGrupo : Bool) {
         let dict = ["tipo" : "resultado",
                     "vitoriaGrupo" : "\(vitoriaGrupo)"]
@@ -194,24 +181,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
             print("SEND DATA RESULTADO JOGO FAILED")
         }
     }
-    
-    // cada player manda o seu horario local
-//    func sendDataHorarioInicial() {
-//        let horarioAtual = pegarHorarioAtual()
-//        horarios.append(horarioAtual)
-//        let dict = ["tipo" : "horarioInicial",
-//                    "horario" : "\(horarioAtual)"]
-//        print("sending horario inicial")
-//
-//        do {
-//            let data = try JSONEncoder().encode(dict)
-//            print(data)
-//            try gameMatch?.sendData(toAllPlayers: data, with: .reliable)
-//            //try gameMatch?.sendData(toAllPlayers: messageData, with: mode)
-//        } catch {
-//            print("SEND DATA Horario Inicial FAILED")
-//        }
-//    }
     
     func generateAndSendPlayerID() {
         randomHostNumber = Int.random(in: 1...999_999)
@@ -256,22 +225,7 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
         sendDataTheme()
         determineGameView()
     }
-    
-//    func onThemePicked(_ theme: String) {
-//            print("o valor do tema ao clicar \(theme)")
-//
-//            if let selectedTheme = Theme.themes.first(where: { $0.name == theme }) {
-//                print("o valor do tema no if let \(selectedTheme)")
-//
-//                DispatchQueue.main.async {
-//                    self.currentTheme = selectedTheme
-//                    self.sendDataTheme()
-//                    self.viewState = .game
-//                }
-//            } else {
-//                print("Tema não encontrado!")
-//            }
-//        }
+
     
     //MARK: RECEBER DADOS
     
@@ -287,22 +241,6 @@ class Manager: NSObject, ObservableObject, UINavigationControllerDelegate {
     }
     
     //    MARK: funções para calcular horários para id da partida
-    
-//    Isto é velho
-//    func pegarHorarioAtual() -> Int {
-//        return Int(Date().timeIntervalSince1970*1_000_000)
-//    }
-    
-//     Isto é velho
-//    func calcularElementoPorHorarios(_ horarios: [Int], _ array: [Any]) -> Any {
-//        var sum = 0
-//        for horario in horarios {
-//            sum += horario
-//        }
-//
-//        let indice = sum % array.count
-//        return array[indice]
-//    }
     
     func calcularElementoPorSomaNumArray(_ numeros: [Int], _ array: [Any]) -> Any {
         var sum = 0
@@ -335,7 +273,6 @@ extension Manager: GKMatchDelegate {
         })
         
         DispatchQueue.main.async {
-//            self.resetGame()
             self.rootViewController?.present(alert, animated: true)
         }
     }
@@ -354,14 +291,6 @@ extension Manager: GKMatchDelegate {
                 gameOver()
                 navegarParaResultadoJogoView(vitoriaGrupo: vitoria)
                 return
-//            } else if (newData["tipo"] == "horarioInicial") {
-//                let horario = Int(newData["horario"]!)!
-//                horarios.append(horario)
-//                print(horario)
-//                if (match.players.count + 1 == horarios.count) {
-//                    textDesafio = calcularElementoPorHorarios(horarios, ResultadoJogo.desafios) as! String
-//                }
-//                return
             } else if (newData["tipo"] == "tema") {
                 currentTheme = Theme.themes.first (where: { t in
                     return t.name == newData["tema"]
@@ -410,7 +339,6 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         vc?.delegate = self
         let rootViewController = UIApplication.shared.delegate?.window?!.rootViewController
         rootViewController?.present(vc!, animated: true)
-//        sendDataHorarioInicial()
         generateAndSendPlayerID()
     }
     
@@ -421,7 +349,6 @@ extension Manager: GKInviteEventListener ,GKLocalPlayerListener, GKMatchmakerVie
         gameMatch = match
         gameMatch?.delegate = self
         print("Match found, starting game...")
-//        sendDataHorarioInicial()
         generateAndSendPlayerID()
         
         viewController.dismiss(animated: true)
