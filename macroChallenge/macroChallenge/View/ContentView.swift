@@ -21,7 +21,6 @@ struct ContentView: View {
                 GameView(viewState: $viewState).environmentObject(manager)
             } else if viewState == .themeSelection {
                 ThemeView(themes: themes, viewState: $viewState).environmentObject(manager) // Injete o Manager aqui
-
             } else if viewState == .waitingRoom {
                 AgentsView()
             } else if viewState == .result {

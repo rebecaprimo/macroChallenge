@@ -37,7 +37,7 @@ struct MenuView: View {
                         Spacer(minLength: 255)
                         
                         NavigationLink(destination: ConfigView(viewState: $viewState)) {
-                            Image("confHome")
+                            Image("info")
                                 .resizable()
                                 .frame(width: 40, height: 40)
                                 .padding(.trailing)

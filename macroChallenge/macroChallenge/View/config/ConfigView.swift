@@ -23,7 +23,7 @@ struct ConfigView: View {
             }
             .padding(.top, 100)
         }
-        .navigationBarTitle("Menu")
+        .navigationBarTitle("Informações")
         .font(.custom("SpecialElite-Regular", size: 20))
         .navigationBarTitleDisplayMode(.inline)
     }
