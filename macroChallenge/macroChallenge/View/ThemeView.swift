@@ -40,6 +40,7 @@ struct ThemeView: View {
                             ForEach(themes) { theme in
                                 Text(theme.name).tag(theme)
                                     .foregroundColor(.black)
+                                    .font(.custom("SpecialElite-Regular", size: 20))
                             }
                         }.pickerStyle(.wheel)
                     }.position(x: geometry.size.width / 2, y: geometry.size.height / 1.5)
