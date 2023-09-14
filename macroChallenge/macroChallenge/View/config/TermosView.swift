@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TermosView: View {
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         ZStack {
             Image("jogar")
@@ -44,5 +45,19 @@ struct TermosView: View {
         }
         .navigationTitle("Termos de uso")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                  
+                    dismiss.callAsFunction()
+                }) {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 19, weight: .heavy))
+                        .foregroundColor(.black)
+                }
+            }
+        }
     }
 }
+
