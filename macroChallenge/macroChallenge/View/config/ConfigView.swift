@@ -17,12 +17,11 @@ struct ConfigView: View {
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 Separator()
-                RectangleButton(title: "Tutorial", view: TutorialView())
                 RectangleButton(title: "Privacidade", view: PoliticaView())
                 RectangleButton(title: "Termos de uso", view: TermosView())
-                //RectangleButton(title: "Fale conosco", view: FaleView())
+                Spacer()
             }
-            .padding(.top, 30)
+            .padding(.top, 100)
         }
         .navigationBarTitle("Menu")
         .font(.custom("SpecialElite-Regular", size: 20))
