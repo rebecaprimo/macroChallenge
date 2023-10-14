@@ -8,7 +8,8 @@ Recursos Principais:
   - Multiplayer em tempo real  
   - Narrativa envolvente  
   - Desafios intrigantes  
-  - Ação acelerada  
+  - Ação acelerada
+
 Agora disponível na App Store! ➡️ [B.O.M.B.](https://apps.apple.com/br/app/b-o-m-b/id6461695756?l=en-GB)
 
 ## Desenvolvedores
