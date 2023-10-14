@@ -5,11 +5,11 @@ B.O.M.B é um emocionante jogo multiplayer que convida você e seus amigos para 
 Plataforma: iOS (iPad e iPhone)
 Gênero: Jogo de Ação e Estratégia
 Recursos Principais:
-Multiplayer em tempo real
-Narrativa envolvente
-Desafios intrigantes
-Ação acelerada
-Disponibilidade: Agora disponível na App Store! ➡️ [B.O.M.B.](https://apps.apple.com/br/app/b-o-m-b/id6461695756?l=en-GB)
+- Multiplayer em tempo real
+- Narrativa envolvente
+- Desafios intrigantes
+- Ação acelerada
+Agora disponível na App Store! ➡️ [B.O.M.B.](https://apps.apple.com/br/app/b-o-m-b/id6461695756?l=en-GB)
 
 ## Desenvolvedores
 
